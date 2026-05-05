@@ -6,7 +6,7 @@
     "version": "${version}",
     "logoFile": "logo.png",
     "mcversion": "${mcversion}",
-    "url": "https://github.com/Elite-Modding-Team/NewCrimsonRevelations",
+    "url": "https://github.com/Thaumic-Modding-Team/NewCrimsonRevelations",
     "authorList": [
       "IcarussOne",
       "J. Carver"
