@@ -3,7 +3,7 @@ package mod.icarus.crimsonrevelations.enchants;
 import com.invadermonky.thaumicapi.api.ThaumicAPI;
 import thaumcraft.common.lib.enchantment.EnumInfusionEnchantment;
 
-public class CREnchantments {
+public class InfusionEnchantments {
     public static EnumInfusionEnchantment BEHEADING = ThaumicAPI.registerInfusionEnchantment(
             "BEHEADING", 5, "CR_BEHEADING_INFUSION", "weapon");
 

@@ -34,7 +34,7 @@ public class InfusionEnchantmentBeheading {
         Random random = entity.world.rand;
 
         if (entity.getAttackingEntity() != null) {
-            int level = EnumInfusionEnchantment.getInfusionEnchantmentLevel(entity.getAttackingEntity().getHeldItemMainhand(), CREnchantments.BEHEADING);
+            int level = EnumInfusionEnchantment.getInfusionEnchantmentLevel(entity.getAttackingEntity().getHeldItemMainhand(), InfusionEnchantments.BEHEADING);
 
             if (shouldDropHead(entity, level)) {
                 Collection<ItemStack> heads = getHeadDrop(event.getEntityLiving());
@@ -64,7 +64,7 @@ public class InfusionEnchantmentBeheading {
         Random random = entity.world.rand;
 
         if (entity.getAttackingEntity() != null && entity.world.getGameRules().getBoolean("keepInventory") && entity instanceof EntityPlayerMP) {
-            int level = EnumInfusionEnchantment.getInfusionEnchantmentLevel(entity.getAttackingEntity().getHeldItemMainhand(), CREnchantments.BEHEADING);
+            int level = EnumInfusionEnchantment.getInfusionEnchantmentLevel(entity.getAttackingEntity().getHeldItemMainhand(), InfusionEnchantments.BEHEADING);
 
             if (shouldDropHead(entity, level)) {
                 Collection<ItemStack> heads = getHeadDrop(entity);

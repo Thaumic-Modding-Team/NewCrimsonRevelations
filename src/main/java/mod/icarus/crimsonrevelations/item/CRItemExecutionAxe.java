@@ -1,6 +1,6 @@
 package mod.icarus.crimsonrevelations.item;
 
-import mod.icarus.crimsonrevelations.enchants.CREnchantments;
+import mod.icarus.crimsonrevelations.enchants.InfusionEnchantments;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -60,7 +60,7 @@ public class CRItemExecutionAxe extends CRItemAxe {
         if (this.isInCreativeTab(tab)) {
             ItemStack stack = new ItemStack(this);
 
-            EnumInfusionEnchantment.addInfusionEnchantment(stack, CREnchantments.BEHEADING, 2);
+            EnumInfusionEnchantment.addInfusionEnchantment(stack, InfusionEnchantments.BEHEADING, 2);
             items.add(stack);
         }
     }

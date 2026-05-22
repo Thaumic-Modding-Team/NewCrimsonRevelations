@@ -1,7 +1,7 @@
 package mod.icarus.crimsonrevelations.recipe;
 
 import mod.icarus.crimsonrevelations.config.CRConfigLists;
-import mod.icarus.crimsonrevelations.enchants.CREnchantments;
+import mod.icarus.crimsonrevelations.enchants.InfusionEnchantments;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ChameleonInfusionRecipe extends InfusionEnchantmentRecipe {
     public ChameleonInfusionRecipe(AspectList as, Object... components) {
-        super(CREnchantments.CHAMELEON, as, components);
+        super(InfusionEnchantments.CHAMELEON, as, components);
     }
 
     public ChameleonInfusionRecipe(InfusionEnchantmentRecipe recipe, ItemStack in) {

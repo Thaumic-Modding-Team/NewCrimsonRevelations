@@ -2,7 +2,7 @@ package mod.icarus.crimsonrevelations.init;
 
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.config.CRConfig;
-import mod.icarus.crimsonrevelations.enchants.CREnchantments;
+import mod.icarus.crimsonrevelations.enchants.InfusionEnchantments;
 import mod.icarus.crimsonrevelations.recipe.ChameleonInfusionRecipe;
 import mod.icarus.crimsonrevelations.recipe.VerdantCharmToRing;
 import mod.icarus.crimsonrevelations.recipe.VerdantRingToCharm;
@@ -273,7 +273,7 @@ public class CRRecipes {
                         CRItems.CRIMSON_FABRIC));
 
         ItemStack executionAxeStack = new ItemStack(CRItems.EXECUTION_AXE);
-        EnumInfusionEnchantment.addInfusionEnchantment(executionAxeStack, CREnchantments.BEHEADING, 2);
+        EnumInfusionEnchantment.addInfusionEnchantment(executionAxeStack, InfusionEnchantments.BEHEADING, 2);
         ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation(NewCrimsonRevelations.MODID, "execution_axe"),
                 new InfusionRecipe("CR_EXECUTION_AXE", executionAxeStack, 4,
                         new AspectList().add(Aspect.AVERSION, 75).add(Aspect.FIRE, 75).add(Aspect.DEATH, 25).add(Aspect.MAN, 25),
@@ -469,7 +469,7 @@ public class CRRecipes {
                         ThaumcraftApiHelper.makeCrystal(Aspect.AIR, 1)));
 
         // Infusion Enchantment Recipes
-        InfusionEnchantmentRecipe beheadingInfusion = new InfusionEnchantmentRecipe(CREnchantments.BEHEADING,
+        InfusionEnchantmentRecipe beheadingInfusion = new InfusionEnchantmentRecipe(InfusionEnchantments.BEHEADING,
                 new AspectList().add(Aspect.FIRE, 60).add(Aspect.AVERSION, 60),
                 new IngredientNBTTC(new ItemStack(Items.ENCHANTED_BOOK)),
                 new ItemStack(Items.SKULL, 1, 0));

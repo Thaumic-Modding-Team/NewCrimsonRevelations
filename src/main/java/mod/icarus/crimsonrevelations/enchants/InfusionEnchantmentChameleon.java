@@ -25,7 +25,7 @@ public class InfusionEnchantmentChameleon {
         if(player != null) {
             ItemStack heldStack = player.getHeldItemMainhand();
             if(!heldStack.isEmpty()) {
-                int chameleonLvl = EnumInfusionEnchantment.getInfusionEnchantmentLevel(heldStack, CREnchantments.CHAMELEON);
+                int chameleonLvl = EnumInfusionEnchantment.getInfusionEnchantmentLevel(heldStack, InfusionEnchantments.CHAMELEON);
                 if(chameleonLvl > 0 && KeyBindings.swapChameleonEnchants.isKeyDown()) {
                     CRPacketHandler.INSTANCE.sendToServer(new CRPacketCycleChameleon());
                 }

@@ -1,6 +1,6 @@
 package mod.icarus.crimsonrevelations.recipe;
 
-import mod.icarus.crimsonrevelations.enchants.CREnchantments;
+import mod.icarus.crimsonrevelations.enchants.InfusionEnchantments;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class VisAttunementInfusionRecipe extends InfusionEnchantmentRecipe {
     public VisAttunementInfusionRecipe(AspectList as, Object... components) {
-        super(CREnchantments.VIS_ATTUNEMENT, as, components);
+        super(InfusionEnchantments.VIS_ATTUNEMENT, as, components);
     }
 
     public VisAttunementInfusionRecipe(InfusionEnchantmentRecipe recipe, ItemStack in) {

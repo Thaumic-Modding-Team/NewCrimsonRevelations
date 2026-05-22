@@ -1,7 +1,7 @@
 package mod.icarus.crimsonrevelations.client.keybinds;
 
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
-import mod.icarus.crimsonrevelations.enchants.CREnchantments;
+import mod.icarus.crimsonrevelations.enchants.InfusionEnchantments;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +23,7 @@ public class KeyBindings {
                     EntityPlayer player = Minecraft.getMinecraft().player;
                     if(player != null) {
                         ItemStack heldStack = player.getHeldItemMainhand();
-                        return !heldStack.isEmpty() && EnumInfusionEnchantment.getInfusionEnchantmentLevel(heldStack, CREnchantments.CHAMELEON) > 0;
+                        return !heldStack.isEmpty() && EnumInfusionEnchantment.getInfusionEnchantmentLevel(heldStack, InfusionEnchantments.CHAMELEON) > 0;
                     }
                 } catch (Exception ignored) {}
                 return false;
@@ -35,7 +35,7 @@ public class KeyBindings {
                     EntityPlayer player = Minecraft.getMinecraft().player;
                     if(player != null && other.isActive()) {
                         ItemStack heldStack = player.getHeldItemMainhand();
-                        return !heldStack.isEmpty() && EnumInfusionEnchantment.getInfusionEnchantmentLevel(heldStack, CREnchantments.CHAMELEON) > 0;
+                        return !heldStack.isEmpty() && EnumInfusionEnchantment.getInfusionEnchantmentLevel(heldStack, InfusionEnchantments.CHAMELEON) > 0;
                     }
                 } catch (Exception ignored) {}
                 return false;

@@ -1,7 +1,7 @@
 package mod.icarus.crimsonrevelations.network.packets;
 
 import io.netty.buffer.ByteBuf;
-import mod.icarus.crimsonrevelations.enchants.CREnchantments;
+import mod.icarus.crimsonrevelations.enchants.InfusionEnchantments;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,7 +24,7 @@ public class CRPacketCycleChameleon implements IMessage, IMessageHandler<CRPacke
         FMLCommonHandler.instance().getWorldThread(ctx.netHandler).addScheduledTask(() -> {
             EntityPlayer player = ctx.getServerHandler().player;
             ItemStack heldStack = player.getHeldItemMainhand();
-            int level = EnumInfusionEnchantment.getInfusionEnchantmentLevel(heldStack, CREnchantments.CHAMELEON);
+            int level = EnumInfusionEnchantment.getInfusionEnchantmentLevel(heldStack, InfusionEnchantments.CHAMELEON);
             if(!heldStack.isEmpty() && level > 0) {
                 NBTTagCompound chameleonTag = this.getChameleonTag(heldStack);
 
