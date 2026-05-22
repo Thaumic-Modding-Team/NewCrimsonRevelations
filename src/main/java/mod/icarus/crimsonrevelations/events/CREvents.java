@@ -11,7 +11,6 @@ import mod.icarus.crimsonrevelations.init.CRSoundEvents;
 import mod.icarus.crimsonrevelations.item.CRItemManaBean;
 import mod.icarus.crimsonrevelations.item.armor.CRItemCometBoots;
 import mod.icarus.crimsonrevelations.item.armor.CRItemMeteorBoots;
-import mod.icarus.crimsonrevelations.util.PlayerMovementAbilityManager;
 import mod.icarus.crimsonrevelations.world.WorldGenManaPods;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,7 +18,6 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -35,14 +33,12 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -330,31 +326,6 @@ public class CREvents {
                     player.getCooldownTracker().setCooldown(CRItems.RUNIC_AMULET_EMERGENCY, 40 * 20);
                 }
             }
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOW)
-    public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        if (event.getEntityLiving() instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-
-            if (PlayerMovementAbilityManager.isValidSideForMovement(player)) {
-                PlayerMovementAbilityManager.tick(player);
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onJump(LivingEvent.LivingJumpEvent event) {
-        if (event.getEntityLiving() instanceof EntityPlayer && PlayerMovementAbilityManager.isValidSideForMovement((EntityPlayer) event.getEntityLiving())) {
-            PlayerMovementAbilityManager.onJump((EntityPlayer) event.getEntityLiving());
-        }
-    }
-
-    @SubscribeEvent
-    public static void onEntityJoinWorld(EntityJoinWorldEvent event) {
-        if (event.getEntity() instanceof EntityPlayer && PlayerMovementAbilityManager.isValidSideForMovement((EntityPlayer) event.getEntity())) {
-            PlayerMovementAbilityManager.onPlayerRecreation((EntityPlayer) event.getEntity());
         }
     }
 

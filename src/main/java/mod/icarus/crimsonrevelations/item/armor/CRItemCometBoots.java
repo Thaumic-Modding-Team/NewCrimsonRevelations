@@ -1,11 +1,10 @@
 package mod.icarus.crimsonrevelations.item.armor;
 
+import com.invadermonky.thaumicapi.handlers.PlayerMovementAbilityHandler;
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.config.CRConfig;
 import mod.icarus.crimsonrevelations.init.CRItems;
 import mod.icarus.crimsonrevelations.init.CRMaterials;
-import mod.icarus.crimsonrevelations.util.PlayerMovementAbilityManager;
-import mod.icarus.crimsonrevelations.util.PlayerMovementAbilityManager.MovementType;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentFrostWalker;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -39,7 +38,7 @@ public class CRItemCometBoots extends ItemArmor implements ISpecialArmor, IRecha
     protected static final String TEXTURE_PATH = new ResourceLocation(NewCrimsonRevelations.MODID, "textures/models/armor/comet_boots.png").toString();
 
     // Calculate attribute bonuses.    
-    protected static final BiFunction<EntityPlayer, MovementType, Float> MOVEMENT_FUNC = (player, type) -> {
+    protected static final BiFunction<EntityPlayer, PlayerMovementAbilityHandler.MovementType, Float> MOVEMENT_FUNC = (player, type) -> {
         float boost = 0;
         switch (type) {
             case DRY_GROUND:
@@ -158,13 +157,13 @@ public class CRItemCometBoots extends ItemArmor implements ISpecialArmor, IRecha
             stack.getTagCompound().setInteger("energyRemaining", current);
         }
 
-        if (PlayerMovementAbilityManager.isValidSideForMovement(player)) {
+        if (PlayerMovementAbilityHandler.isValidSideForMovement(player)) {
             boolean apply = !player.capabilities.isFlying && !player.isElytraFlying() && RechargeHelper.getCharge(stack) > 0;
 
-            if (apply && !PlayerMovementAbilityManager.playerHasAbility(player, MOVEMENT_FUNC, CONTINUE_FUNC)) {
-                PlayerMovementAbilityManager.put(player, MOVEMENT_FUNC, CONTINUE_FUNC);
-            } else if (!apply && PlayerMovementAbilityManager.playerHasAbility(player, MOVEMENT_FUNC, CONTINUE_FUNC)) {
-                PlayerMovementAbilityManager.remove(player, MOVEMENT_FUNC, CONTINUE_FUNC);
+            if (apply && !PlayerMovementAbilityHandler.playerHasAbility(player, MOVEMENT_FUNC, CONTINUE_FUNC)) {
+                PlayerMovementAbilityHandler.put(player, MOVEMENT_FUNC, CONTINUE_FUNC);
+            } else if (!apply && PlayerMovementAbilityHandler.playerHasAbility(player, MOVEMENT_FUNC, CONTINUE_FUNC)) {
+                PlayerMovementAbilityHandler.remove(player, MOVEMENT_FUNC, CONTINUE_FUNC);
             }
         }
     }
