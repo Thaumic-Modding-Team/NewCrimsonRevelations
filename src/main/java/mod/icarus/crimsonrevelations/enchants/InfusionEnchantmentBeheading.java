@@ -1,28 +1,20 @@
-package mod.icarus.crimsonrevelations.events;
+package mod.icarus.crimsonrevelations.enchants;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
-import mod.icarus.crimsonrevelations.client.keybinds.KeyBindings;
-import mod.icarus.crimsonrevelations.init.CREnchantments;
-import mod.icarus.crimsonrevelations.init.CRRegistry;
-import mod.icarus.crimsonrevelations.network.CRPacketHandler;
-import mod.icarus.crimsonrevelations.network.packets.CRPacketCycleChameleon;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import thaumcraft.common.lib.enchantment.EnumInfusionEnchantment;
 
 import java.util.ArrayList;
@@ -32,7 +24,10 @@ import java.util.Random;
 import java.util.function.Function;
 
 @Mod.EventBusSubscriber(modid = NewCrimsonRevelations.MODID)
-public class CRInfusionEvents {
+public class InfusionEnchantmentBeheading {
+    public static final Multimap<Class<? extends EntityLivingBase>, Function<EntityLivingBase, ItemStack>> headDrops = ArrayListMultimap.create();
+    public static final Multimap<Class<? extends EntityLivingBase>, ItemStack> headDropsRaw = ArrayListMultimap.create();
+
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onHeadDrop(LivingDropsEvent event) {
         EntityLivingBase entity = event.getEntityLiving();
@@ -90,34 +85,10 @@ public class CRInfusionEvents {
         }
     }
 
-    @SideOnly(Side.CLIENT)
-    @SubscribeEvent
-    public static void onKeyInput(InputEvent.KeyInputEvent event) {
-        EntityPlayer player = Minecraft.getMinecraft().player;
-        if(player != null) {
-            ItemStack heldStack = player.getHeldItemMainhand();
-            if(!heldStack.isEmpty()) {
-                int chameleonLvl = EnumInfusionEnchantment.getInfusionEnchantmentLevel(heldStack, CREnchantments.CHAMELEON);
-                if(chameleonLvl > 0 && KeyBindings.swapChameleonEnchants.isKeyDown()) {
-                    CRPacketHandler.INSTANCE.sendToServer(new CRPacketCycleChameleon());
-                }
-            }
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    @SubscribeEvent
-    public static void onItemTooltip(ItemTooltipEvent event) {
-        ItemStack stack = event.getItemStack();
-        if(!stack.isEmpty() && GuiScreen.isShiftKeyDown()) {
-            //TODO: Add shift tooltip with chameleon enchantment lists.
-        }
-    }
-
     public static Collection<ItemStack> getHeadDrop(EntityLivingBase entity) {
         Collection<ItemStack> drops = new ArrayList<>();
 
-        for (Map.Entry<Class<? extends EntityLivingBase>, Function<EntityLivingBase, ItemStack>> entry : CRRegistry.headDrops.entries()) {
+        for (Map.Entry<Class<? extends EntityLivingBase>, Function<EntityLivingBase, ItemStack>> entry : headDrops.entries()) {
             if (entry.getKey().isAssignableFrom(entity.getClass())) {
                 ItemStack stack = entry.getValue().apply(entity);
 
@@ -143,5 +114,44 @@ public class CRInfusionEvents {
 
     private static boolean shouldDropHead(Entity entity, int level) {
         return level > 0 && level > entity.world.rand.nextInt(10);
+    }
+
+    /**
+     * Registers a beheading head drop for all entities that extend the given class
+     *
+     * @param clazz Entity class
+     * @param head  Head that drops from that entity
+     */
+    public static void registerHeadDropForAll(Class<? extends EntityLivingBase> clazz, ItemStack head) {
+        for (EntityEntry entry : ForgeRegistries.ENTITIES) {
+            Class<? extends Entity> entityClass = entry.getEntityClass();
+
+            if (clazz.isAssignableFrom(entityClass)) {
+                registerHeadDrop((Class<? extends EntityLivingBase>) entityClass, head);
+            }
+        }
+    }
+
+    /**
+     * Registers a beheading head drop for an entity
+     *
+     * @param clazz    Entity class
+     * @param callback Callback function, takes entity as a parameter and returns an item stack
+     */
+    public static void registerHeadDrop(Class<? extends EntityLivingBase> clazz, Function<EntityLivingBase, ItemStack> callback) {
+        headDrops.put(clazz, callback);
+    }
+
+    /**
+     * Registers a beheading head drop for an entity
+     *
+     * @param clazz Entity class
+     * @param head  Head that drops from that entity
+     */
+    public static void registerHeadDrop(Class<? extends EntityLivingBase> clazz, ItemStack head) {
+        final ItemStack safeStack = head.copy();
+
+        registerHeadDrop(clazz, e -> safeStack);
+        headDropsRaw.put(clazz, head);
     }
 }

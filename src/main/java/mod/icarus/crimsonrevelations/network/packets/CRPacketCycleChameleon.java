@@ -1,7 +1,7 @@
 package mod.icarus.crimsonrevelations.network.packets;
 
 import io.netty.buffer.ByteBuf;
-import mod.icarus.crimsonrevelations.init.CREnchantments;
+import mod.icarus.crimsonrevelations.enchants.CREnchantments;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

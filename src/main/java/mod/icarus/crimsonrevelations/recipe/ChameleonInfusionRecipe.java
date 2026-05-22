@@ -1,15 +1,11 @@
 package mod.icarus.crimsonrevelations.recipe;
 
-import mod.icarus.crimsonrevelations.config.CRConfig;
 import mod.icarus.crimsonrevelations.config.CRConfigLists;
-import mod.icarus.crimsonrevelations.init.CREnchantments;
+import mod.icarus.crimsonrevelations.enchants.CREnchantments;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.items.IVisDiscountGear;
 import thaumcraft.common.lib.crafting.InfusionEnchantmentRecipe;
 
 import java.util.List;

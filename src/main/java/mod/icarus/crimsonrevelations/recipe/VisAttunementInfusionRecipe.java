@@ -1,6 +1,6 @@
 package mod.icarus.crimsonrevelations.recipe;
 
-import mod.icarus.crimsonrevelations.init.CREnchantments;
+import mod.icarus.crimsonrevelations.enchants.CREnchantments;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

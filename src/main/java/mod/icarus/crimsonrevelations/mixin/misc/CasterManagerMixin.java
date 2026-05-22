@@ -2,7 +2,7 @@ package mod.icarus.crimsonrevelations.mixin.misc;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import mod.icarus.crimsonrevelations.init.CREnchantments;
+import mod.icarus.crimsonrevelations.enchants.CREnchantments;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;

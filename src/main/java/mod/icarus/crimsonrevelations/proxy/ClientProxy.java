@@ -17,8 +17,15 @@ public class ClientProxy extends CommonProxy {
 
     public void init() {
         super.init();
+        this.registerColorHandlers();
         KeyBindings.init();
+    }
 
+    public void postInit() {
+        super.postInit();
+    }
+
+    private void registerColorHandlers() {
         IItemColor itemColorHandler = (stack, tintIndex) -> {
             if (tintIndex == 1 && stack.getItem() instanceof IDyeableGear) {
                 return ((IDyeableGear) stack.getItem()).getDyedColor(stack);
@@ -42,9 +49,5 @@ public class ClientProxy extends CommonProxy {
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemColorHandler, CRItems.CRIMSON_RANGER_LEGGINGS);
 
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemManaBeanColorHandler, CRItems.MANA_BEAN);
-    }
-
-    public void postInit() {
-        super.postInit();
     }
 }

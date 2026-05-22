@@ -1,7 +1,7 @@
 package mod.icarus.crimsonrevelations.client.keybinds;
 
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
-import mod.icarus.crimsonrevelations.init.CREnchantments;
+import mod.icarus.crimsonrevelations.enchants.CREnchantments;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;

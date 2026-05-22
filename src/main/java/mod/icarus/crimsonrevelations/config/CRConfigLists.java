@@ -1,6 +1,6 @@
 package mod.icarus.crimsonrevelations.config;
 
-import mod.icarus.crimsonrevelations.init.CRRegistry;
+import mod.icarus.crimsonrevelations.enchants.InfusionEnchantmentBeheading;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -117,7 +117,7 @@ public class CRConfigLists {
             List<ItemDrop> drops = entry.getValue();
             if (entityRL.equals("minecraft:player")) {
                 // EntityPlayerMP is the one that shows in the living drop event rather than EntityPlayer
-                CRRegistry.registerHeadDrop(EntityPlayerMP.class, entity -> {
+                InfusionEnchantmentBeheading.registerHeadDrop(EntityPlayerMP.class, entity -> {
                     List<ItemStack> dropStacks = new ArrayList<>();
                     for (ItemDrop drop : drops) {
                         ItemStack stack = new ItemStack(drop.item, drop.maxQuantity, drop.metadata);
@@ -149,9 +149,9 @@ public class CRConfigLists {
                 for (ItemDrop drop : drops) {
                     ItemStack headStack = new ItemStack(drop.item, drop.maxQuantity, drop.metadata);
                     if (drop.subtypes) {
-                        CRRegistry.registerHeadDropForAll((Class<? extends EntityLivingBase>) entityClass, headStack);
+                        InfusionEnchantmentBeheading.registerHeadDropForAll((Class<? extends EntityLivingBase>) entityClass, headStack);
                     } else {
-                        CRRegistry.registerHeadDrop((Class<? extends EntityLivingBase>) entityClass, headStack);
+                        InfusionEnchantmentBeheading.registerHeadDrop((Class<? extends EntityLivingBase>) entityClass, headStack);
                     }
                 }
             }

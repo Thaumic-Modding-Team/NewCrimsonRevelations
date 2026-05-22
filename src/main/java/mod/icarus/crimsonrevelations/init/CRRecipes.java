@@ -2,6 +2,7 @@ package mod.icarus.crimsonrevelations.init;
 
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.config.CRConfig;
+import mod.icarus.crimsonrevelations.enchants.CREnchantments;
 import mod.icarus.crimsonrevelations.recipe.ChameleonInfusionRecipe;
 import mod.icarus.crimsonrevelations.recipe.VerdantCharmToRing;
 import mod.icarus.crimsonrevelations.recipe.VerdantRingToCharm;
