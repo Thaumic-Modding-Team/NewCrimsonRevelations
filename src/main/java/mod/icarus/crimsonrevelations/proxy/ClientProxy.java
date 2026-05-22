@@ -11,10 +11,12 @@ import net.minecraft.item.Item;
 
 public class ClientProxy extends CommonProxy {
     public void preInit() {
+        super.preInit();
         CRRenderRegistry.preInit();
     }
 
     public void init() {
+        super.init();
         KeyBindings.init();
 
         IItemColor itemColorHandler = (stack, tintIndex) -> {
@@ -43,5 +45,6 @@ public class ClientProxy extends CommonProxy {
     }
 
     public void postInit() {
+        super.postInit();
     }
 }
