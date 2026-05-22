@@ -25,7 +25,12 @@ public class NewCrimsonRevelations {
     public static final String MODID = Tags.MOD_ID;
     public static final String NAME = "New Crimson Revelations";
     public static final String VERSION = Tags.VERSION;
-    public static final String DEPENDENCIES = "required-after:mixinbooter;required-after:configanytime@[3.0,);required-after:thaumcraft@[1.12.2-6.1.BETA26,);after:thaumcraftfix;after:thaumicaugmentation";
+    public static final String DEPENDENCIES = "required-after:configanytime@[3.0,)" +
+            ";required-after:thaumcraft" +
+            ";required-after:thaumicapi" +
+            ";after:thaumcraftfix" +
+            ";after:thaumicaugmentation";
+
     public static final CreativeTabs tabCR = new CRCreativeTabs(CreativeTabs.CREATIVE_TAB_ARRAY.length, "CrimsonRevelationsTab");
 
     @Mod.Instance

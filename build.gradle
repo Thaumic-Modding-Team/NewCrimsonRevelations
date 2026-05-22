@@ -116,6 +116,9 @@ dependencies {
     // ConfigAnytime
     implementation rfg.deobf('com.cleanroommc:configanytime:3.0')
 
+    // Thaumic API
+    implementation rfg.deobf('curse.maven:thaumicapi-1533287:8066628')
+
     // Thaumcraft, Baubles, and addons
     implementation rfg.deobf('curse.maven:thaumcraft-223628:2629023')
     implementation rfg.deobf('curse.maven:baubles-227083:2518667')
