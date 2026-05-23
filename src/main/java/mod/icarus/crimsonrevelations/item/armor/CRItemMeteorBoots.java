@@ -30,6 +30,7 @@ import thaumcraft.api.items.IVisDiscountGear;
 import thaumcraft.api.items.RechargeHelper;
 import thaumcraft.common.lib.SoundsTC;
 
+import javax.annotation.Nonnull;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
@@ -81,7 +82,7 @@ public class CRItemMeteorBoots extends ItemArmor implements ISpecialArmor, IRech
     }
 
     @Override
-    public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
+    public void damageArmor(EntityLivingBase entity, @Nonnull ItemStack stack, DamageSource source, int damage, int slot) {
         if (source != DamageSource.FALL || source != DamageSource.HOT_FLOOR || source != DamageSource.IN_FIRE
                 || source != DamageSource.ON_FIRE) {
             stack.damageItem(damage, entity);
@@ -94,7 +95,7 @@ public class CRItemMeteorBoots extends ItemArmor implements ISpecialArmor, IRech
     }
 
     @Override
-    public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
+    public int getArmorDisplay(EntityPlayer player, @Nonnull ItemStack stack, int slot) {
         return 0;
     }
 
@@ -104,29 +105,29 @@ public class CRItemMeteorBoots extends ItemArmor implements ISpecialArmor, IRech
     }
 
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+    public String getArmorTexture(@Nonnull ItemStack stack, @Nonnull Entity entity, @Nonnull EntityEquipmentSlot slot, @Nonnull String type) {
         return TEXTURE_PATH;
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list) {
         if (tab == NewCrimsonRevelations.tabCR || tab == CreativeTabs.SEARCH) {
             ItemStack base = new ItemStack(this, 1, 0);
-            items.add(base);
+            list.add(base);
             ItemStack charged = base.copy();
             RechargeHelper.rechargeItemBlindly(charged, null, getMaxCharge(charged, null));
-            items.add(charged);
+            list.add(charged);
         }
     }
 
     @Override
-    public IRarity getForgeRarity(ItemStack stack) {
+    public IRarity getForgeRarity(@Nonnull ItemStack stack) {
         return CRRarities.RARITY_FIREY;
     }
 
     // TODO: Make damage affected by fall distance?
     @Override
-    public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
+    public void onArmorTick(@Nonnull World world, EntityPlayer player, @Nonnull ItemStack stack) {
         boolean hasCharge = RechargeHelper.getCharge(stack) > 1;
         double motion = Math.abs(player.motionX) + Math.abs(player.motionZ) + Math.abs(player.motionY);
 

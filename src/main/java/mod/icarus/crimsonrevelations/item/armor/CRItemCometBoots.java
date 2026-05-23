@@ -31,6 +31,7 @@ import thaumcraft.api.items.IRechargable;
 import thaumcraft.api.items.IVisDiscountGear;
 import thaumcraft.api.items.RechargeHelper;
 
+import javax.annotation.Nonnull;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
@@ -70,7 +71,7 @@ public class CRItemCometBoots extends ItemArmor implements ISpecialArmor, IRecha
     }
 
     @Override
-    public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
+    public void damageArmor(EntityLivingBase entity, @Nonnull ItemStack stack, DamageSource source, int damage, int slot) {
         if (source != DamageSource.FALL || source != DamageSource.HOT_FLOOR || source != DamageSource.IN_FIRE
                 || source != DamageSource.ON_FIRE) {
             stack.damageItem(damage, entity);
@@ -83,7 +84,7 @@ public class CRItemCometBoots extends ItemArmor implements ISpecialArmor, IRecha
     }
 
     @Override
-    public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
+    public int getArmorDisplay(EntityPlayer player, @Nonnull ItemStack stack, int slot) {
         return 0;
     }
 
@@ -93,28 +94,28 @@ public class CRItemCometBoots extends ItemArmor implements ISpecialArmor, IRecha
     }
 
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+    public String getArmorTexture(@Nonnull ItemStack stack, @Nonnull Entity entity, @Nonnull EntityEquipmentSlot slot, @Nonnull String type) {
         return TEXTURE_PATH;
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list) {
         if (tab == NewCrimsonRevelations.tabCR || tab == CreativeTabs.SEARCH) {
             ItemStack base = new ItemStack(this, 1, 0);
-            items.add(base);
+            list.add(base);
             ItemStack charged = base.copy();
             RechargeHelper.rechargeItemBlindly(charged, null, getMaxCharge(charged, null));
-            items.add(charged);
+            list.add(charged);
         }
     }
 
     @Override
-    public IRarity getForgeRarity(ItemStack stack) {
+    public IRarity getForgeRarity(@Nonnull ItemStack stack) {
         return EnumRarity.RARE;
     }
 
     @Override
-    public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
+    public void onArmorTick(@Nonnull World world, EntityPlayer player, @Nonnull ItemStack stack) {
         ItemStack boots = player.getItemStackFromSlot(EntityEquipmentSlot.FEET);
         double motion = Math.abs(player.motionX) + Math.abs(player.motionZ) + Math.abs(player.motionY);
 
@@ -176,8 +177,8 @@ public class CRItemCometBoots extends ItemArmor implements ISpecialArmor, IRecha
         return EnumChargeDisplay.PERIODIC;
     }
 
-    public float getAdjustedFallDamage(ItemStack bootStack, float damage) {
-        if (bootStack.getItem() == CRItems.COMET_BOOTS && RechargeHelper.getCharge(bootStack) > 0) {
+    public float getAdjustedFallDamage(ItemStack stack, float damage) {
+        if (stack.getItem() == CRItems.COMET_BOOTS && RechargeHelper.getCharge(stack) > 0) {
             damage = Math.max(0, damage / 5.0F - 1.0F);
         }
         return damage;

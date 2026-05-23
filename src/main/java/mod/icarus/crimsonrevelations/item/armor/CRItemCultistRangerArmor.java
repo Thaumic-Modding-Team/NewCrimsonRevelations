@@ -19,6 +19,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.items.IVisDiscountGear;
 import thaumcraft.api.items.IWarpingGear;
 
+import javax.annotation.Nonnull;
+
 public class CRItemCultistRangerArmor extends CRItemArmorDyeable implements IVisDiscountGear, IWarpingGear {
     protected static final String TEXTURE_PATH = new ResourceLocation(NewCrimsonRevelations.MODID, "textures/models/armor/cultist_ranger_armor.png").toString();
     protected static final String TEXTURE_PATH_DYED = new ResourceLocation(NewCrimsonRevelations.MODID, "textures/models/armor/cultist_ranger_armor_dyed.png").toString();
@@ -26,13 +28,13 @@ public class CRItemCultistRangerArmor extends CRItemArmorDyeable implements IVis
     ModelBiped model1 = null;
     ModelBiped model2 = null;
 
-    public CRItemCultistRangerArmor(EntityEquipmentSlot equipmentSlot) {
-        super(CRMaterials.ARMOR_CULTIST_RANGER, 4, equipmentSlot);
+    public CRItemCultistRangerArmor(EntityEquipmentSlot slot) {
+        super(CRMaterials.ARMOR_CULTIST_RANGER, 4, slot);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
+    public ModelBiped getArmorModel(@Nonnull EntityLivingBase entity, @Nonnull ItemStack stack, @Nonnull EntityEquipmentSlot slot, @Nonnull ModelBiped bipedModel) {
         if (this.model1 == null) {
             this.model1 = new ModelCultistRangerArmor(0.5F);
         }
@@ -41,13 +43,13 @@ public class CRItemCultistRangerArmor extends CRItemArmorDyeable implements IVis
             this.model2 = new ModelCultistRangerArmor(1.0F);
         }
 
-        EntityEquipmentSlot type = ((ItemArmor) itemStack.getItem()).armorType;
+        EntityEquipmentSlot type = ((ItemArmor) stack.getItem()).armorType;
         ModelBiped model = (type == EntityEquipmentSlot.LEGS) ? this.model1 : this.model2;
-        return CRRenderRegistry.getCustomArmorModel(entityLiving, itemStack, armorSlot, model);
+        return CRRenderRegistry.getCustomArmorModel(entity, stack, slot, model);
     }
 
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+    public String getArmorTexture(@Nonnull ItemStack stack, @Nonnull Entity entity, @Nonnull EntityEquipmentSlot slot, @Nonnull String type) {
         // If dye is never used on it, it'll use a dyeless texture instead with the original crimson cult colors
         if (this.getDyedColor(stack) != getDefaultDyedColorForMeta(stack.getMetadata())) {
             return type == null ? TEXTURE_PATH_DYED : TEXTURE_PATH_DYED_OVERLAY;
@@ -57,7 +59,7 @@ public class CRItemCultistRangerArmor extends CRItemArmorDyeable implements IVis
     }
 
     @Override
-    public IRarity getForgeRarity(ItemStack stack) {
+    public IRarity getForgeRarity(@Nonnull ItemStack stack) {
         return EnumRarity.RARE;
     }
 

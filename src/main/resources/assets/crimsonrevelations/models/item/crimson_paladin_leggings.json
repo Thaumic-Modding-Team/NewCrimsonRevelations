@@ -2,5 +2,13 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "crimsonrevelations:items/crimson_paladin_leggings"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "dyed": 1
+      },
+      "model": "crimsonrevelations:item/crimson_paladin_leggings_dyed"
+    }
+  ]
 }

@@ -44,6 +44,10 @@ public class ClientProxy extends CommonProxy {
             return 16777215;
         };
 
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemColorHandler, CRItems.CRIMSON_ARCHER_CHESTPLATE);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemColorHandler, CRItems.CRIMSON_ARCHER_LEGGINGS);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemColorHandler, CRItems.CRIMSON_PALADIN_CHESTPLATE);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemColorHandler, CRItems.CRIMSON_PALADIN_LEGGINGS);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemColorHandler, CRItems.CRIMSON_RANGER_CHESTPLATE);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemColorHandler, CRItems.CRIMSON_RANGER_HELMET);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemColorHandler, CRItems.CRIMSON_RANGER_LEGGINGS);

@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "crimsonrevelations:items/crimson_archer_chestplate_dyed_overlay",
+    "layer1": "crimsonrevelations:items/crimson_archer_chestplate_dyed"
+  }
+}

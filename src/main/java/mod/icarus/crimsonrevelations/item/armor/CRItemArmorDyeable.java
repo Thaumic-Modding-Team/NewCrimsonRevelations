@@ -22,6 +22,7 @@ import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class CRItemArmorDyeable extends ItemArmor implements IDyeableGear {
         super(material, renderIndex, equipmentSlot);
         this.addPropertyOverride(new ResourceLocation("dyed"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
-            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+            public float apply(@Nonnull ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity) {
                 if (getDyedColor(stack) != getDefaultDyedColorForMeta(stack.getMetadata())) {
                     return 1.0F;
                 }
@@ -68,27 +69,27 @@ public class CRItemArmorDyeable extends ItemArmor implements IDyeableGear {
     }
 
     @Override
-    public boolean hasColor(ItemStack stack) {
+    public boolean hasColor(@Nonnull ItemStack stack) {
         return this.getDyedColor(stack) != getDefaultDyedColorForMeta(stack.getMetadata()) ? true : false;
     }
 
     @Override
-    public int getColor(ItemStack stack) {
+    public int getColor(@Nonnull ItemStack stack) {
         return getDyedColor(stack);
     }
 
     @Override
-    public void removeColor(ItemStack stack) {
+    public void removeColor(@Nonnull ItemStack stack) {
         setDyedColor(stack, getDefaultDyedColorForMeta(stack.getMetadata()));
     }
 
     @Override
-    public void setColor(ItemStack stack, int color) {
+    public void setColor(@Nonnull ItemStack stack, int color) {
         setDyedColor(stack, color);
     }
 
     @Override
-    public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
+    public EnumActionResult onItemUseFirst(EntityPlayer player, World world, @Nonnull BlockPos pos, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ, @Nonnull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         IBlockState state = world.getBlockState(pos);
 
@@ -105,7 +106,7 @@ public class CRItemArmorDyeable extends ItemArmor implements IDyeableGear {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag tooltip) {
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> list, @Nonnull ITooltipFlag tooltip) {
         int color = getDyedColor(stack);
 
         // If it's dyed, show it on the tooltip
