@@ -17,17 +17,17 @@ public class CRTileManaPod extends TileThaumcraft implements IAspectContainer {
     public Aspect aspect = null;
 
     @Override
-    public void readSyncNBT(NBTTagCompound nbt) {
-        this.aspect = Aspect.getAspect(nbt.getString("Aspect"));
+    public void readSyncNBT(NBTTagCompound compound) {
+        this.aspect = Aspect.getAspect(compound.getString("Aspect"));
     }
 
     @Override
-    public NBTTagCompound writeSyncNBT(NBTTagCompound nbt) {
+    public NBTTagCompound writeSyncNBT(NBTTagCompound compound) {
         if (this.aspect != null) {
-            nbt.setString("Aspect", this.aspect.getTag());
+            compound.setString("Aspect", this.aspect.getTag());
         }
 
-        return nbt;
+        return compound;
     }
 
     public void checkGrowth() {

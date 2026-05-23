@@ -14,14 +14,12 @@ import javax.annotation.Nonnull;
 
 public class CRItemRunicBauble extends CRItemBauble implements IBauble {
     BaubleType type;
-    EnumRarity rarity;
     int amount;
 
-    public CRItemRunicBauble(BaubleType type, EnumRarity rarity, int amount) {
-        super(type, rarity);
+    public CRItemRunicBauble(BaubleType type, int amount) {
+        super(type);
         this.maxStackSize = 1;
         this.type = type;
-        this.rarity = rarity;
         this.amount = amount;
     }
 

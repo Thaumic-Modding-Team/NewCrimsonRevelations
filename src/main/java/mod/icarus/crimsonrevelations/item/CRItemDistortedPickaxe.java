@@ -1,6 +1,5 @@
 package mod.icarus.crimsonrevelations.item;
 
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import thaumcraft.api.ThaumcraftMaterials;
 import thaumcraft.api.items.ItemsTC;
@@ -9,7 +8,7 @@ import javax.annotation.Nonnull;
 
 public class CRItemDistortedPickaxe extends CRItemPickaxe {
     public CRItemDistortedPickaxe() {
-        super(ThaumcraftMaterials.TOOLMAT_ELEMENTAL, EnumRarity.RARE);
+        super(ThaumcraftMaterials.TOOLMAT_ELEMENTAL);
         this.setHarvestLevel("pickaxe", 5);
     }
 

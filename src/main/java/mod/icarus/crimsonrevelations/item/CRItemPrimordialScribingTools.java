@@ -6,7 +6,6 @@ import mod.icarus.crimsonrevelations.util.ResearchHelperNCR;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
@@ -37,7 +36,7 @@ import java.util.List;
 
 public class CRItemPrimordialScribingTools extends CRItem implements IScribeTools {
     public CRItemPrimordialScribingTools() {
-        super(EnumRarity.EPIC);
+        super();
         this.maxStackSize = 1;
         this.setMaxDamage(200);
         this.setHasSubtypes(false);

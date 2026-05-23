@@ -7,15 +7,13 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemArrow;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.event.ForgeEventFactory;
 
 import javax.annotation.Nonnull;
@@ -26,18 +24,18 @@ public class CRItemBow extends ItemBow {
     public float velocityMult;
     public float inaccuracy;
     public float drawTimeMult;
-    public EnumRarity rarity;
+    public IRarity rarity;
     public Ingredient repairMaterial;
 
-    public CRItemBow(int durability, float damageMult, float velocityMult, float drawTimeMult, float inaccuracy, EnumRarity rarity, Ingredient repairMaterial) {
+    public CRItemBow(int durability, float damageMult, float velocityMult, float drawTimeMult, float inaccuracy, Ingredient repairMaterial) {
         this.maxStackSize = 1;
         this.setMaxDamage(durability);
         this.damageMult = damageMult;
         this.velocityMult = velocityMult;
         this.drawTimeMult = drawTimeMult;
         this.inaccuracy = inaccuracy;
-        this.rarity = rarity;
         this.repairMaterial = repairMaterial;
+        this.setRarity(EnumRarity.COMMON);
         this.addPropertyOverride(new ResourceLocation("pull"), (ItemStack bow, World world, EntityLivingBase entity) -> {
             if (entity == null) {
                 return 0.0F;
@@ -125,9 +123,14 @@ public class CRItemBow extends ItemBow {
         }
     }
 
+    public Item setRarity(@Nonnull IRarity rarity) {
+        this.rarity = rarity;
+        return this;
+    }
+
     @Override
-    public EnumRarity getForgeRarity(@Nonnull ItemStack stack) {
-        return rarity;
+    public IRarity getForgeRarity(@Nonnull ItemStack stack) {
+        return this.rarity;
     }
 
     @Override

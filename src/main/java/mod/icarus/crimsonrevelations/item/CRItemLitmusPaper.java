@@ -1,7 +1,6 @@
 package mod.icarus.crimsonrevelations.item;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
@@ -20,7 +19,7 @@ import java.util.Objects;
 
 public class CRItemLitmusPaper extends CRItem {
     public CRItemLitmusPaper() {
-        super(EnumRarity.UNCOMMON);
+        super();
     }
 
     @Override

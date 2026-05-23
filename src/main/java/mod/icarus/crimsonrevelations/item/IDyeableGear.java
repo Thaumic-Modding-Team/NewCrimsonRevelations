@@ -3,9 +3,9 @@ package mod.icarus.crimsonrevelations.item;
 import net.minecraft.item.ItemStack;
 
 public interface IDyeableGear {
-    public int getDyedColor(ItemStack stack);
+    int getDyedColor(ItemStack stack);
 
-    public void setDyedColor(ItemStack stack, int color);
+    void setDyedColor(ItemStack stack, int color);
 
-    public int getDefaultDyedColorForMeta(int meta);
+    int getDefaultDyedColorForMeta(int meta);
 }

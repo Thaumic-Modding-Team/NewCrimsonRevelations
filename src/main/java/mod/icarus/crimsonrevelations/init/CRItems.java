@@ -99,11 +99,11 @@ public class CRItems {
         final IForgeRegistry<Item> registry = event.getRegistry();
 
         registry.registerAll(
-                CRRegistry.setup(new CRItem(EnumRarity.UNCOMMON), "crimson_fabric"),
-                CRRegistry.setup(new CRItem(EnumRarity.UNCOMMON), "embellished_crimson_fabric"),
-                CRRegistry.setup(new CRItem(EnumRarity.UNCOMMON), "crimson_plate"),
-                CRRegistry.setup(new CRItemSword(CRMaterials.TOOL_CULTIST, EnumRarity.UNCOMMON), "crimson_sword"),
-                CRRegistry.setup(new CRItemExecutionAxe(), "execution_axe"),
+                CRRegistry.setup(new CRItem().setRarity(EnumRarity.UNCOMMON), "crimson_fabric"),
+                CRRegistry.setup(new CRItem().setRarity(EnumRarity.UNCOMMON), "embellished_crimson_fabric"),
+                CRRegistry.setup(new CRItem().setRarity(EnumRarity.UNCOMMON), "crimson_plate"),
+                CRRegistry.setup(new CRItemSword(CRMaterials.TOOL_CULTIST).setRarity(EnumRarity.UNCOMMON), "crimson_sword"),
+                CRRegistry.setup(new CRItemExecutionAxe(), "execution_axe").setRarity(EnumRarity.RARE),
 
                 CRRegistry.setup(new CRItemAncientCultistArmor(EntityEquipmentSlot.HEAD), "ancient_crimson_helmet"),
                 CRRegistry.setup(new CRItemAncientCultistArmor(EntityEquipmentSlot.CHEST), "ancient_crimson_chestplate"),
@@ -118,49 +118,49 @@ public class CRItems {
                 CRRegistry.setup(new CRItemCultistRangerArmor(EntityEquipmentSlot.CHEST), "crimson_ranger_chestplate"),
                 CRRegistry.setup(new CRItemCultistRangerArmor(EntityEquipmentSlot.LEGS), "crimson_ranger_leggings"),
 
-                CRRegistry.setup(new CRItemBoneBow(), "bone_bow"),
-                CRRegistry.setup(new CRItemArrow(EnumRarity.UNCOMMON), "aer_arrow"),
-                CRRegistry.setup(new CRItemArrow(EnumRarity.UNCOMMON), "aqua_arrow"),
-                CRRegistry.setup(new CRItemArrow(EnumRarity.UNCOMMON), "ignis_arrow"),
-                CRRegistry.setup(new CRItemArrow(EnumRarity.UNCOMMON), "ordo_arrow"),
-                CRRegistry.setup(new CRItemArrow(EnumRarity.UNCOMMON), "perditio_arrow"),
-                CRRegistry.setup(new CRItemArrow(EnumRarity.UNCOMMON), "terra_arrow"),
+                CRRegistry.setup(new CRItemBoneBow().setRarity(EnumRarity.RARE), "bone_bow"),
+                CRRegistry.setup(new CRItemArrow().setRarity(EnumRarity.UNCOMMON), "aer_arrow"),
+                CRRegistry.setup(new CRItemArrow().setRarity(EnumRarity.UNCOMMON), "aqua_arrow"),
+                CRRegistry.setup(new CRItemArrow().setRarity(EnumRarity.UNCOMMON), "ignis_arrow"),
+                CRRegistry.setup(new CRItemArrow().setRarity(EnumRarity.UNCOMMON), "ordo_arrow"),
+                CRRegistry.setup(new CRItemArrow().setRarity(EnumRarity.UNCOMMON), "perditio_arrow"),
+                CRRegistry.setup(new CRItemArrow().setRarity(EnumRarity.UNCOMMON), "terra_arrow"),
 
-                CRRegistry.setup(new CRItemRunicBauble(BaubleType.RING, EnumRarity.COMMON, 1), "protection_ring"),
-                CRRegistry.setup(new CRItemRunicBauble(BaubleType.RING, EnumRarity.UNCOMMON, 5), "runic_ring"),
-                CRRegistry.setup(new CRItemRunicBauble(BaubleType.AMULET, EnumRarity.UNCOMMON, 8), "runic_amulet"),
-                CRRegistry.setup(new CRItemRunicBauble(BaubleType.BELT, EnumRarity.UNCOMMON, 10), "runic_girdle"),
-                CRRegistry.setup(new CRItemRunicBauble(BaubleType.RING, EnumRarity.RARE, 4), "runic_ring_charged"),
-                CRRegistry.setup(new CRItemRunicBauble(BaubleType.RING, EnumRarity.RARE, 4), "runic_ring_regen"),
-                CRRegistry.setup(new CRItemRunicBauble(BaubleType.AMULET, EnumRarity.RARE, 7), "runic_amulet_emergency"),
-                CRRegistry.setup(new CRItemRunicBauble(BaubleType.BELT, EnumRarity.RARE, 9), "runic_girdle_kinetic"),
+                CRRegistry.setup(new CRItemRunicBauble(BaubleType.RING, 1), "protection_ring"),
+                CRRegistry.setup(new CRItemRunicBauble(BaubleType.RING, 5).setRarity(EnumRarity.UNCOMMON), "runic_ring"),
+                CRRegistry.setup(new CRItemRunicBauble(BaubleType.AMULET, 8).setRarity(EnumRarity.UNCOMMON), "runic_amulet"),
+                CRRegistry.setup(new CRItemRunicBauble(BaubleType.BELT, 10).setRarity(EnumRarity.UNCOMMON), "runic_girdle"),
+                CRRegistry.setup(new CRItemRunicBauble(BaubleType.RING, 4).setRarity(EnumRarity.RARE), "runic_ring_charged"),
+                CRRegistry.setup(new CRItemRunicBauble(BaubleType.RING, 4).setRarity(EnumRarity.RARE), "runic_ring_regen"),
+                CRRegistry.setup(new CRItemRunicBauble(BaubleType.AMULET, 7).setRarity(EnumRarity.RARE), "runic_amulet_emergency"),
+                CRRegistry.setup(new CRItemRunicBauble(BaubleType.BELT, 9).setRarity(EnumRarity.RARE), "runic_girdle_kinetic"),
                 CRRegistry.setup(new CRItemVerdantRing(), "verdant_ring"),
 
                 CRRegistry.setup(new CRItemCometBoots(), "comet_boots"),
                 CRRegistry.setup(new CRItemMeteorBoots(), "meteor_boots"),
 
-                CRRegistry.setup(new CRItemTechnomancerScribingTools(), "technomancer_scribing_tools"),
-                CRRegistry.setup(new CRItemKnowledgeScribingTools(), "knowledge_scribing_tools"),
-                CRRegistry.setup(new CRItemSanitationScribingTools(), "sanitation_scribing_tools"),
-                CRRegistry.setup(new CRItemPrimordialScribingTools(), "primordial_scribing_tools"),
+                CRRegistry.setup(new CRItemTechnomancerScribingTools(), "technomancer_scribing_tools").setRarity(EnumRarity.RARE),
+                CRRegistry.setup(new CRItemKnowledgeScribingTools(), "knowledge_scribing_tools").setRarity(CRRarities.RARITY_KNOWLEDGE),
+                CRRegistry.setup(new CRItemSanitationScribingTools(), "sanitation_scribing_tools").setRarity(EnumRarity.RARE),
+                CRRegistry.setup(new CRItemPrimordialScribingTools(), "primordial_scribing_tools").setRarity(EnumRarity.EPIC),
 
                 CRRegistry.setup(new CRItemManaBean(), "mana_bean")
         );
 
         if (CRConfig.distortion_pickaxe.enableDistortionPickaxe) {
-            registry.register(CRRegistry.setup(new CRItemDistortedPickaxe(), "distortion_pickaxe"));
+            registry.register(CRRegistry.setup(new CRItemDistortedPickaxe().setRarity(EnumRarity.RARE), "distortion_pickaxe"));
         }
 
         if (CRConfig.nutrition_ring.enableNutritionRing) {
-            registry.register(CRRegistry.setup(new CRItemBauble(BaubleType.RING, EnumRarity.RARE), "nutrition_ring"));
+            registry.register(CRRegistry.setup(new CRItemBauble(BaubleType.RING).setRarity(EnumRarity.RARE), "nutrition_ring"));
         }
 
         if (CRConfig.purifying_shovel.enablePurifyingShovel) {
-            registry.register(CRRegistry.setup(new CRItemPurifyingShovel(), "purifying_shovel"));
+            registry.register(CRRegistry.setup(new CRItemPurifyingShovel().setRarity(EnumRarity.RARE), "purifying_shovel"));
         }
 
         if (CRConfig.thaumic_litmus_paper.enableThaumicLitmusPaper) {
-            registry.register(CRRegistry.setup(new CRItemLitmusPaper(), "thaumic_litmus_paper"));
+            registry.register(CRRegistry.setup(new CRItemLitmusPaper().setRarity(EnumRarity.UNCOMMON), "thaumic_litmus_paper"));
         }
 
         // Item Blocks

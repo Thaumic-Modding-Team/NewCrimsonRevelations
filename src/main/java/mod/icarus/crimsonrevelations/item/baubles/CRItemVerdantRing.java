@@ -18,6 +18,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.items.IRechargable;
@@ -46,7 +47,7 @@ public class CRItemVerdantRing extends Item implements IBauble, IRechargable {
     }
 
     @Override
-    public EnumRarity getForgeRarity(@Nonnull ItemStack stack) {
+    public IRarity getForgeRarity(@Nonnull ItemStack stack) {
         return EnumRarity.RARE;
     }
 

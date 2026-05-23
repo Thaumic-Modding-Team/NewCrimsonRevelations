@@ -7,7 +7,6 @@ import mod.icarus.crimsonrevelations.network.packets.CRPacketFXArcBolt;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -28,7 +27,7 @@ import javax.annotation.Nonnull;
 
 public class CRItemPurifyingShovel extends CRItemShovel {
     public CRItemPurifyingShovel() {
-        super(ThaumcraftMaterials.TOOLMAT_ELEMENTAL, EnumRarity.RARE);
+        super(ThaumcraftMaterials.TOOLMAT_ELEMENTAL);
     }
 
     @Override

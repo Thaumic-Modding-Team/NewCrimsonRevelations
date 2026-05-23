@@ -2,7 +2,6 @@ package mod.icarus.crimsonrevelations.item;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,7 +20,7 @@ import javax.annotation.Nullable;
 // As Scribing Tools mainly check for durability, we'll need to have it be affected by vis charge.
 public class CRItemTechnomancerScribingTools extends CRItem implements IScribeTools, IRechargable {
     public CRItemTechnomancerScribingTools() {
-        super(EnumRarity.RARE);
+        super();
         this.maxStackSize = 1;
         this.setMaxDamage(400);
         this.setHasSubtypes(false);

@@ -4,7 +4,6 @@ import mod.icarus.crimsonrevelations.config.CRConfig;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -35,7 +34,7 @@ import java.util.List;
 
 public class CRItemSanitationScribingTools extends CRItem implements IScribeTools {
     public CRItemSanitationScribingTools() {
-        super(EnumRarity.RARE);
+        super();
         this.maxStackSize = 1;
         this.setMaxDamage(60);
         this.setHasSubtypes(false);

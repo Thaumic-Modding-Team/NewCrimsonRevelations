@@ -8,7 +8,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
@@ -21,7 +20,7 @@ import javax.annotation.Nonnull;
 
 public class CRItemExecutionAxe extends CRItemAxe {
     public CRItemExecutionAxe() {
-        super(ThaumcraftMaterials.TOOLMAT_ELEMENTAL, EnumRarity.RARE, 10.0F, 1.2F);
+        super(ThaumcraftMaterials.TOOLMAT_ELEMENTAL, 10.0F, 1.2F);
     }
 
     @Override

@@ -1,13 +1,11 @@
 package mod.icarus.crimsonrevelations.item;
 
 import mod.icarus.crimsonrevelations.config.CRConfig;
-import mod.icarus.crimsonrevelations.init.CRRarities;
 import mod.icarus.crimsonrevelations.util.ResearchHelperNCR;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,7 +18,6 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -38,7 +35,7 @@ import java.util.List;
 
 public class CRItemKnowledgeScribingTools extends CRItem implements IScribeTools {
     public CRItemKnowledgeScribingTools() {
-        super(EnumRarity.RARE);
+        super();
         this.maxStackSize = 1;
         this.setMaxDamage(60);
         this.setHasSubtypes(false);
@@ -124,11 +121,6 @@ public class CRItemKnowledgeScribingTools extends CRItem implements IScribeTools
     @Override
     public boolean hasEffect(ItemStack stack) {
         return stack.getItemDamage() >= stack.getMaxDamage() && !getDepletedState(stack);
-    }
-
-    @Override
-    public IRarity getForgeRarity(@Nonnull ItemStack stack) {
-        return CRRarities.RARITY_KNOWLEDGE;
     }
 
     @SideOnly(Side.CLIENT)

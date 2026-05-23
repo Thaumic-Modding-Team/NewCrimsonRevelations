@@ -11,13 +11,11 @@ import net.minecraft.item.ItemStack;
 
 public class CRItemBauble extends CRItem implements IBauble {
     BaubleType type;
-    EnumRarity rarity;
 
-    public CRItemBauble(BaubleType type, EnumRarity rarity) {
-        super(rarity);
+    public CRItemBauble(BaubleType type) {
+        super();
         this.maxStackSize = 1;
         this.type = type;
-        this.rarity = rarity;
     }
     
     @Override

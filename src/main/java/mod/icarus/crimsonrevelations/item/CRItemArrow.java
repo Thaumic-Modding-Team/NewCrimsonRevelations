@@ -9,24 +9,31 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntitySpectralArrow;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import thaumcraft.common.lib.SoundsTC;
 
 import javax.annotation.Nonnull;
 
 public class CRItemArrow extends ItemArrow {
-    EnumRarity rarity;
+    IRarity rarity;
 
-    public CRItemArrow(EnumRarity rarity) {
+    public CRItemArrow() {
         super();
+        this.setRarity(EnumRarity.COMMON);
+    }
+
+    public Item setRarity(@Nonnull IRarity rarity) {
         this.rarity = rarity;
+        return this;
     }
 
     @Override
-    public EnumRarity getForgeRarity(@Nonnull ItemStack stack) {
-        return rarity;
+    public IRarity getForgeRarity(@Nonnull ItemStack stack) {
+        return this.rarity;
     }
 
     @Override
