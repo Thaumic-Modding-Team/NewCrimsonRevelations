@@ -1,7 +1,6 @@
 package mod.icarus.crimsonrevelations.init;
 
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
-import mod.icarus.crimsonrevelations.config.CRConfig;
 import mod.icarus.crimsonrevelations.entity.EntityCultistArcher;
 import mod.icarus.crimsonrevelations.entity.boss.EntityOvergrownTaintacle;
 import mod.icarus.crimsonrevelations.entity.projectile.EntityPrimalArrow;
@@ -9,19 +8,15 @@ import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.BehaviorProjectileDispense;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import thaumcraft.common.entities.monster.EntityBrainyZombie;
-import thaumcraft.common.entities.monster.EntityGiantBrainyZombie;
 import thaumcraft.common.lib.SoundsTC;
 
 @EventBusSubscriber(modid = NewCrimsonRevelations.MODID)
@@ -99,9 +94,7 @@ public class CREntities {
     }
 
     public static void registerEntitySpawns() {
-        if (CRConfig.furious_zombie.enableFuriousZombieSpawning) {
-            EntityRegistry.addSpawn(EntityGiantBrainyZombie.class, CRConfig.furious_zombie.spawnWeight, 1, 1, EnumCreatureType.MONSTER, CRRegistry.getEntityBiomes(EntityBrainyZombie.class));
-        }
+        // TODO: New mobs go here
     }
 
     public static void registerEntity(String name, Class<? extends Entity> clazz, int id, int trackingRange, int updateFrequency, boolean sendVelocityUpdates, int eggColor1, int eggColor2) {

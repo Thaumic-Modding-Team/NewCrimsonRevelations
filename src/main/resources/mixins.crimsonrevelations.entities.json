@@ -7,7 +7,6 @@
     "EntityCultistClericMixin",
     "EntityCultistKnightMixin",
     "EntityCultistPortalLesserMixin",
-    "EntityGiantBrainyZombieMixin",
     "EntityInhabitedZombieMixin"
   ],
   "client": [],

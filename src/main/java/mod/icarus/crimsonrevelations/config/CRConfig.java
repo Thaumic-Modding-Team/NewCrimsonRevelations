@@ -19,9 +19,6 @@ public class CRConfig {
     @Config.Comment("Ethereal Bloom")
     public static EtherealBloomSettings ethereal_bloom = new EtherealBloomSettings();
 
-    @Config.Comment("Furious Zombie")
-    public static FuriousZombieSettings furious_zombie = new FuriousZombieSettings();
-
     @Config.Comment("Infusion Enchantments")
     public static InfusionEnchantmentSettings infusion_enchants = new InfusionEnchantmentSettings();
 
@@ -112,24 +109,6 @@ public class CRConfig {
         @Config.Name("Enable Ethereal Bloom")
         @Config.Comment("Enables the Ethereal Bloom. [default: true]")
         public boolean enableEtherealBloom = true;
-    }
-
-    public static class FuriousZombieSettings {
-        @Config.Name("Spawning")
-        @Config.Comment("Enables Furious Zombies to spawn naturally. [default: true]")
-        @Config.RequiresMcRestart
-        public boolean enableFuriousZombieSpawning = true;
-
-        @Config.Name("Underground Spawning")
-        @Config.Comment("Enables Furious Zombies to spawn naturally underground. [default: false]")
-        @Config.RequiresMcRestart
-        public boolean enableUndergroundSpawning = false;
-
-        @Config.Name("Spawn Weight")
-        @Config.Comment("Default spawn weight of Furious Zombies. [default: 5]")
-        @Config.RangeInt(min = 0, max = 99999)
-        @Config.RequiresMcRestart
-        public int spawnWeight = 5;
     }
 
     public static class InfusionEnchantmentSettings {
