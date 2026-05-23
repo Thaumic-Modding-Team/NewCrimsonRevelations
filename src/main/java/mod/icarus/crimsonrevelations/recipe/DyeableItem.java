@@ -8,13 +8,14 @@ import net.minecraft.item.crafting.RecipesArmorDyes;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.DyeUtils;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Optional;
 
 // Courtesy of TheCodex6824
 public class DyeableItem extends RecipesArmorDyes {
     @Override
-    public boolean matches(InventoryCrafting inv, World worldIn) {
+    public boolean matches(InventoryCrafting inv, @Nonnull World world) {
         boolean hasDyedItem = false;
         boolean hasDye = false;
 
@@ -72,7 +73,7 @@ public class DyeableItem extends RecipesArmorDyes {
 
             for (ItemStack d : dyes) {
                 Optional<EnumDyeColor> colorValue = DyeUtils.colorFromStack(d);
-                if(colorValue.isPresent()) {
+                if (colorValue.isPresent()) {
                     float[] dyeColor = colorValue.get().getColorComponentValues();
                     totalComponents[0] += dyeColor[0];
                     totalComponents[1] += dyeColor[1];

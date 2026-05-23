@@ -5,6 +5,8 @@ import net.minecraft.item.ItemStack;
 import thaumcraft.api.ThaumcraftMaterials;
 import thaumcraft.api.items.ItemsTC;
 
+import javax.annotation.Nonnull;
+
 public class CRItemDistortedPickaxe extends CRItemPickaxe {
     public CRItemDistortedPickaxe() {
         super(ThaumcraftMaterials.TOOLMAT_ELEMENTAL, EnumRarity.RARE);
@@ -12,7 +14,7 @@ public class CRItemDistortedPickaxe extends CRItemPickaxe {
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack stack1, ItemStack stack2) {
+    public boolean getIsRepairable(@Nonnull ItemStack stack1, ItemStack stack2) {
         return stack2.isItemEqual(new ItemStack(ItemsTC.ingots, 1, 0)) || super.getIsRepairable(stack1, stack2);
     }
 }

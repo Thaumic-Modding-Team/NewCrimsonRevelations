@@ -10,6 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import thaumcraft.common.blocks.world.taint.ITaintBlock;
 
+// TODO: Needs a rework
 public class CRTileEtherealBloom extends TileEntity implements ITickable {
     public int counter = 0;
     public int rad;

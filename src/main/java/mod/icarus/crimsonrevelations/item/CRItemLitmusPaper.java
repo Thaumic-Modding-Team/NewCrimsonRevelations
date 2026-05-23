@@ -15,13 +15,16 @@ import thaumcraft.api.capabilities.IPlayerWarp;
 import thaumcraft.api.capabilities.ThaumcraftCapabilities;
 import thaumcraft.common.lib.SoundsTC;
 
+import javax.annotation.Nonnull;
+import java.util.Objects;
+
 public class CRItemLitmusPaper extends CRItem {
     public CRItemLitmusPaper() {
         super(EnumRarity.UNCOMMON);
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         IPlayerWarp warp = ThaumcraftCapabilities.getWarp(player);
         int permWarp = warp.get(IPlayerWarp.EnumWarpType.PERMANENT);
@@ -43,7 +46,7 @@ public class CRItemLitmusPaper extends CRItem {
 
         player.playSound(SoundsTC.erase, 0.7F, 1.0F);
         player.getCooldownTracker().setCooldown(this, 200);
-        player.addStat(StatList.getObjectUseStats(this));
+        player.addStat(Objects.requireNonNull(StatList.getObjectUseStats(this)));
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 }

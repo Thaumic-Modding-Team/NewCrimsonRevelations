@@ -15,6 +15,7 @@ import thaumcraft.api.items.IRechargable;
 import thaumcraft.api.items.IScribeTools;
 import thaumcraft.api.items.RechargeHelper;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 // As Scribing Tools mainly check for durability, we'll need to have it be affected by vis charge.
@@ -26,7 +27,7 @@ public class CRItemTechnomancerScribingTools extends CRItem implements IScribeTo
         this.setHasSubtypes(false);
         this.addPropertyOverride(new ResourceLocation("depleted"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
-            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+            public float apply(@Nonnull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
                 if (RechargeHelper.getCharge(stack) > 0) {
                     return 1.0F;
                 } else if (RechargeHelper.getCharge(stack) <= 0) {
@@ -39,7 +40,7 @@ public class CRItemTechnomancerScribingTools extends CRItem implements IScribeTo
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
         if (isInCreativeTab(tab)) {
             ItemStack base = new ItemStack(this);
             base.setItemDamage(base.getMaxDamage());
@@ -51,7 +52,7 @@ public class CRItemTechnomancerScribingTools extends CRItem implements IScribeTo
     }
 
     @Override
-    public void setDamage(ItemStack stack, int meta) {
+    public void setDamage(@Nonnull ItemStack stack, int meta) {
         super.setDamage(stack, meta);
 
         if (!stack.hasTagCompound()) {
@@ -79,7 +80,7 @@ public class CRItemTechnomancerScribingTools extends CRItem implements IScribeTo
     }
 
     @Override
-    public int getRGBDurabilityForDisplay(ItemStack stack) {
+    public int getRGBDurabilityForDisplay(@Nonnull ItemStack stack) {
         return 0x39BDFF;
     }
 }

@@ -8,6 +8,8 @@ import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.util.math.MathHelper;
 import thaumcraft.client.renderers.models.gear.ModelCustomArmor;
 
+import javax.annotation.Nonnull;
+
 public class ModelCultistRangerArmor extends ModelCustomArmor {
     public ModelRenderer Helmet;
     public ModelRenderer[] Mask;
@@ -502,7 +504,7 @@ public class ModelCultistRangerArmor extends ModelCustomArmor {
         }
     }
 
-    public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+    public void render(@Nonnull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
         GlStateManager.pushMatrix();
 

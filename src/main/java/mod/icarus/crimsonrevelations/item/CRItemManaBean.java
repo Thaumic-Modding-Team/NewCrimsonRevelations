@@ -39,6 +39,7 @@ import thaumcraft.api.blocks.BlocksTC;
 import thaumcraft.api.capabilities.IPlayerKnowledge;
 import thaumcraft.api.research.ResearchCategory;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
@@ -67,13 +68,13 @@ public class CRItemManaBean extends ItemFood implements IEssentiaContainerItem {
     }
 
     @Override
-    public int getMaxItemUseDuration(ItemStack stack) {
+    public int getMaxItemUseDuration(@Nonnull ItemStack stack) {
         return this.itemUseDuration;
     }
 
     // Apply various random effects from a configurable list after eating
     @Override
-    protected void onFoodEaten(ItemStack stack, World world, EntityPlayer player) {
+    protected void onFoodEaten(@Nonnull ItemStack stack, World world, @Nonnull EntityPlayer player) {
         if (!world.isRemote) {
             Potion effect = CRConfigLists.manaBeanEffects.get(world.rand.nextInt(CRConfigLists.manaBeanEffects.size()));
 
@@ -99,7 +100,7 @@ public class CRItemManaBean extends ItemFood implements IEssentiaContainerItem {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list) {
         if (tab == NewCrimsonRevelations.tabCR || tab == CreativeTabs.SEARCH) {
 
             for (Aspect tag : Aspect.aspects.values()) {
@@ -108,7 +109,6 @@ public class CRItemManaBean extends ItemFood implements IEssentiaContainerItem {
                 list.add(stack);
             }
         }
-
     }
 
     // Get aspect colors
@@ -124,7 +124,7 @@ public class CRItemManaBean extends ItemFood implements IEssentiaContainerItem {
 
     // Add aspect count to our beans (5 by default)
     @Override
-    public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
+    public void onUpdate(@Nonnull ItemStack stack, World world, @Nonnull Entity entity, int itemSlot, boolean isSelected) {
         if (!world.isRemote && !stack.hasTagCompound()) {
             setAspects(stack, (new AspectList()).add(displayAspects[this.rand.nextInt(displayAspects.length)], CRConfig.mana_beans.aspectCount));
         }
@@ -133,7 +133,7 @@ public class CRItemManaBean extends ItemFood implements IEssentiaContainerItem {
     }
 
     @Override
-    public void onCreated(ItemStack stack, World world, EntityPlayer player) {
+    public void onCreated(ItemStack stack, @Nonnull World world, @Nonnull EntityPlayer player) {
         if (!stack.hasTagCompound()) {
             setAspects(stack, (new AspectList()).add(displayAspects[this.rand.nextInt(displayAspects.length)], CRConfig.mana_beans.aspectCount));
         }
@@ -166,13 +166,13 @@ public class CRItemManaBean extends ItemFood implements IEssentiaContainerItem {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public String getItemStackDisplayName(ItemStack stack) {
+    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
         return (getAspects(stack) != null && !(getAspects(stack)).aspects.isEmpty()) ?
                 (String.format(super.getItemStackDisplayName(stack), getAspects(stack).getAspects()[0].getName())) : I18n.format(getTranslationKey(stack) + ".default.name");
     }
 
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!player.canPlayerEdit(pos, facing, player.getHeldItem(hand)) || facing.getIndex() != 0) {
             return EnumActionResult.FAIL;
         }

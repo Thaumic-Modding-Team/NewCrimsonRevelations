@@ -41,6 +41,7 @@ import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 @SuppressWarnings("deprecation")
 @EventBusSubscriber(modid = NewCrimsonRevelations.MODID)
@@ -164,7 +165,7 @@ public class CRItems {
 
         // Item Blocks
         ForgeRegistries.BLOCKS.getValues().stream()
-                .filter(block -> block.getRegistryName().getNamespace().equals(NewCrimsonRevelations.MODID))
+                .filter(block -> Objects.requireNonNull(block.getRegistryName()).getNamespace().equals(NewCrimsonRevelations.MODID))
                 .filter(block -> !(block instanceof BlockDoor)) // Doors should not have an item block registered
                 .filter(block -> !(block instanceof BlockSlab)) // Slabs should not have an item block registered
                 .filter(block -> !(block instanceof CRBlockManaPod)) // Mana Pods should not have an item block registered
@@ -187,7 +188,7 @@ public class CRItems {
     public static void onRegisterModelsEvent(@Nonnull final ModelRegistryEvent event) {
         // Item Models
         for (final Item item : ForgeRegistries.ITEMS.getValues()) {
-            if (item.getRegistryName().getNamespace().equals(NewCrimsonRevelations.MODID)) {
+            if (Objects.requireNonNull(item.getRegistryName()).getNamespace().equals(NewCrimsonRevelations.MODID)) {
                 ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
             }
         }

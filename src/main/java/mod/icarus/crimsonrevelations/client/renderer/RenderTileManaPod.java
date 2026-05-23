@@ -9,11 +9,14 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.Thaumcraft;
 import thaumcraft.api.aspects.Aspect;
 
 import java.awt.*;
 
+@SideOnly(Side.CLIENT)
 public class RenderTileManaPod extends TileEntitySpecialRenderer<CRTileManaPod> {
     private static final ResourceLocation POD_0_TEX = new ResourceLocation(Thaumcraft.MODID, "textures/models/manapod_0.png");
     private static final ResourceLocation POD_2_TEX = new ResourceLocation(Thaumcraft.MODID, "textures/models/manapod_2.png");

@@ -6,6 +6,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Cleanup and remove
 public class TCVec3Pool {
     private final int truncateArrayResetThreshold;
     private final int minimumSize;

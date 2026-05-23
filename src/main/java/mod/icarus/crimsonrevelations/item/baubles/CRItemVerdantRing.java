@@ -24,6 +24,7 @@ import thaumcraft.api.items.IRechargable;
 import thaumcraft.api.items.RechargeHelper;
 import thaumcraft.api.potions.PotionFluxTaint;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class CRItemVerdantRing extends Item implements IBauble, IRechargable {
         setMaxDamage(0);
         addPropertyOverride(new ResourceLocation("type"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
-            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+            public float apply(@Nonnull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
                 if (stack.getItem() instanceof CRItemVerdantRing && stack.hasTagCompound()) {
                     return stack.getTagCompound().getByte("type");
                 }
@@ -45,7 +46,7 @@ public class CRItemVerdantRing extends Item implements IBauble, IRechargable {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack itemstack) {
+    public EnumRarity getForgeRarity(@Nonnull ItemStack stack) {
         return EnumRarity.RARE;
     }
 
@@ -55,21 +56,21 @@ public class CRItemVerdantRing extends Item implements IBauble, IRechargable {
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list) {
         if (tab == NewCrimsonRevelations.tabCR || tab == CreativeTabs.SEARCH) {
-            items.add(new ItemStack(this));
+            list.add(new ItemStack(this));
             ItemStack ring1 = new ItemStack(this);
             ring1.setTagInfo("type", new NBTTagByte((byte) 1));
-            items.add(ring1);
+            list.add(ring1);
             ItemStack ring2 = new ItemStack(this);
             ring2.setTagInfo("type", new NBTTagByte((byte) 2));
-            items.add(ring2);
+            list.add(ring2);
         }
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flag) {
         if (stack.hasTagCompound() && stack.getTagCompound().getByte("type") == 1) {
             tooltip.add(TextFormatting.GOLD + new TextComponentTranslation("item.verdant_charm.life.text").getFormattedText());
         }

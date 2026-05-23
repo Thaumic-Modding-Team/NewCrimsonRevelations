@@ -31,6 +31,7 @@ import thaumcraft.api.research.ResearchCategory;
 import thaumcraft.client.fx.FXDispatcher;
 import thaumcraft.common.lib.potions.PotionWarpWard;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class CRItemPrimordialScribingTools extends CRItem implements IScribeTool
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(@Nonnull World world, EntityPlayer player, @Nonnull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         ResearchCategory[] categories = ResearchHelperNCR.getResearchCategories();
         int observationProgress = IPlayerKnowledge.EnumKnowledgeType.OBSERVATION.getProgression();
@@ -107,7 +108,7 @@ public class CRItemPrimordialScribingTools extends CRItem implements IScribeTool
     }
 
     @Override
-    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+    public boolean isBookEnchantable(@Nonnull ItemStack stack, @Nonnull ItemStack book) {
         return false;
     }
 
@@ -119,7 +120,7 @@ public class CRItemPrimordialScribingTools extends CRItem implements IScribeTool
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flag) {
         if (stack.getItemDamage() >= stack.getMaxDamage()) {
             tooltip.add(new TextComponentTranslation("tooltip.crimsonrevelations.scribing_tools.active").getFormattedText());
         }

@@ -24,13 +24,15 @@ import thaumcraft.common.lib.SoundsTC;
 import thaumcraft.common.lib.potions.PotionInfectiousVisExhaust;
 import thaumcraft.common.lib.potions.PotionThaumarhia;
 
+import javax.annotation.Nonnull;
+
 public class CRItemPurifyingShovel extends CRItemShovel {
     public CRItemPurifyingShovel() {
         super(ThaumcraftMaterials.TOOLMAT_ELEMENTAL, EnumRarity.RARE);
     }
 
     @Override
-    public float getDestroySpeed(ItemStack stack, IBlockState state) {
+    public float getDestroySpeed(@Nonnull ItemStack stack, IBlockState state) {
         if (state.getMaterial() == ThaumcraftMaterials.MATERIAL_TAINT) {
             return efficiency * 1.5F;
         }
@@ -39,12 +41,12 @@ public class CRItemPurifyingShovel extends CRItemShovel {
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack stack1, ItemStack stack2) {
+    public boolean getIsRepairable(@Nonnull ItemStack stack1, ItemStack stack2) {
         return stack2.isItemEqual(new ItemStack(ItemsTC.ingots, 1, 0)) || super.getIsRepairable(stack1, stack2);
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(@Nonnull World world, EntityPlayer player, @Nonnull EnumHand hand) {
         if (player.isSneaking() && CRConfig.purifying_shovel.enableSpecial && (player.isPotionActive(PotionFluxTaint.instance) || player.isPotionActive(PotionInfectiousVisExhaust.instance) ||
                 player.isPotionActive(PotionThaumarhia.instance) || player.isPotionActive(PotionVisExhaust.instance))) {
             player.swingArm(hand);
@@ -81,7 +83,7 @@ public class CRItemPurifyingShovel extends CRItemShovel {
     }
 
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(@Nonnull EntityPlayer player, @Nonnull World world, BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
         int purified = 0;
 
         for (int ex = pos.getX() - 5; ex < pos.getX() + 6; ex++) {

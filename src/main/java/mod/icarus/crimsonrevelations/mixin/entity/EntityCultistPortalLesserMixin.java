@@ -20,6 +20,7 @@ import thaumcraft.common.entities.monster.cult.EntityCultistKnight;
 import thaumcraft.common.entities.monster.cult.EntityCultistPortalLesser;
 import thaumcraft.common.lib.SoundsTC;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 @Mixin(value = EntityCultistPortalLesser.class, remap = false)
@@ -29,7 +30,7 @@ public class EntityCultistPortalLesserMixin extends EntityMob {
     }
 
     @Override
-    protected int getExperiencePoints(EntityPlayer player) {
+    protected int getExperiencePoints(@Nonnull EntityPlayer player) {
         return 40;
     }
 

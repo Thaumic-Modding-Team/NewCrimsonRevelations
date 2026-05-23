@@ -15,8 +15,8 @@ public class VisAttunementInfusionRecipe extends InfusionEnchantmentRecipe {
         super(InfusionEnchantments.VIS_ATTUNEMENT, as, components);
     }
 
-    public VisAttunementInfusionRecipe(InfusionEnchantmentRecipe recipe, ItemStack in) {
-        super(recipe, in);
+    public VisAttunementInfusionRecipe(InfusionEnchantmentRecipe recipe, ItemStack stack) {
+        super(recipe, stack);
     }
 
     @Override

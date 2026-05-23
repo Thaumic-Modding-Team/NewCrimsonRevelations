@@ -17,13 +17,15 @@ import net.minecraft.world.World;
 import thaumcraft.api.ThaumcraftMaterials;
 import thaumcraft.common.lib.enchantment.EnumInfusionEnchantment;
 
+import javax.annotation.Nonnull;
+
 public class CRItemExecutionAxe extends CRItemAxe {
     public CRItemExecutionAxe() {
         super(ThaumcraftMaterials.TOOLMAT_ELEMENTAL, EnumRarity.RARE, 10.0F, 1.2F);
     }
 
     @Override
-    public boolean onBlockDestroyed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityLivingBase entity) {
+    public boolean onBlockDestroyed(@Nonnull ItemStack stack, @Nonnull World world, @Nonnull IBlockState state, @Nonnull BlockPos pos, @Nonnull EntityLivingBase entity) {
         if (entity instanceof EntityPlayer && state.getBlock().canHarvestBlock(world, pos, (EntityPlayer) entity)) {
             double j = 1.2D;
 
@@ -40,7 +42,7 @@ public class CRItemExecutionAxe extends CRItemAxe {
 
 
     @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, @Nonnull EntityLivingBase attacker) {
         int timer = 10; // In seconds
         int fire_aspect = 5 * EnchantmentHelper.getFireAspectModifier(attacker); // Fire Aspect
 
@@ -50,18 +52,18 @@ public class CRItemExecutionAxe extends CRItemAxe {
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack stack1, ItemStack stack2) {
+    public boolean getIsRepairable(@Nonnull ItemStack stack1, ItemStack stack2) {
         return stack2.isItemEqual(new ItemStack(Items.BLAZE_POWDER)) || super.getIsRepairable(stack1, stack2);
     }
 
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list) {
         if (this.isInCreativeTab(tab)) {
             ItemStack stack = new ItemStack(this);
 
             EnumInfusionEnchantment.addInfusionEnchantment(stack, InfusionEnchantments.BEHEADING, 2);
-            items.add(stack);
+            list.add(stack);
         }
     }
 }

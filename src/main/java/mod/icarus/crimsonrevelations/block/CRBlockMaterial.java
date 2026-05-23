@@ -9,6 +9,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class CRBlockMaterial extends Block {
     public CRBlockMaterial(Material material, MapColor mapColor, float hardness, float resistance, SoundType soundType) {
         super(material, mapColor);
@@ -24,7 +26,7 @@ public class CRBlockMaterial extends Block {
     }
 
     @Override
-    public boolean isFireSource(World world, BlockPos pos, EnumFacing side) {
+    public boolean isFireSource(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing side) {
         return this == CRBlocks.MAGIC_TALLOW_BLOCK;
     }
 }

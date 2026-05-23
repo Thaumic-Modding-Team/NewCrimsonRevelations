@@ -8,6 +8,8 @@ import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.util.math.MathHelper;
 import thaumcraft.client.renderers.models.gear.ModelCustomArmor;
 
+import javax.annotation.Nonnull;
+
 public class ModelCultistArcherArmor extends ModelCustomArmor {
     public ModelRenderer GauntletstrapR1;
     public ModelRenderer GauntletstrapR2;
@@ -59,16 +61,16 @@ public class ModelCultistArcherArmor extends ModelCustomArmor {
     public ModelRenderer BackpanelR3;
     public ModelRenderer BackpanelR4;
 
-    public ModelRenderer FrontclothR1;
-    private ModelRenderer FrontclothR2;
-    private ModelRenderer FrontclothL1;
-    private ModelRenderer FrontclothL2;
-    private ModelRenderer ClothBackR1;
-    private ModelRenderer ClothBackR2;
-    private ModelRenderer ClothBackR3;
-    private ModelRenderer ClothBackL1;
-    private ModelRenderer ClothBackL2;
-    private ModelRenderer ClothBackL3;
+    public final ModelRenderer FrontclothR1;
+    private final ModelRenderer FrontclothR2;
+    private final ModelRenderer FrontclothL1;
+    private final ModelRenderer FrontclothL2;
+    private final ModelRenderer ClothBackR1;
+    private final ModelRenderer ClothBackR2;
+    private final ModelRenderer ClothBackR3;
+    private final ModelRenderer ClothBackL1;
+    private final ModelRenderer ClothBackL2;
+    private final ModelRenderer ClothBackL3;
 
     public ModelRenderer MbeltB;
 
@@ -481,7 +483,7 @@ public class ModelCultistArcherArmor extends ModelCustomArmor {
         }
     }
 
-    public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+    public void render(@Nonnull Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
         GlStateManager.pushMatrix();
 

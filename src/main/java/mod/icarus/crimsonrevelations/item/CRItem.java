@@ -4,6 +4,8 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nonnull;
+
 public class CRItem extends Item {
     EnumRarity rarity;
 
@@ -13,7 +15,7 @@ public class CRItem extends Item {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
+    public EnumRarity getForgeRarity(@Nonnull ItemStack stack) {
         return rarity;
     }
 }

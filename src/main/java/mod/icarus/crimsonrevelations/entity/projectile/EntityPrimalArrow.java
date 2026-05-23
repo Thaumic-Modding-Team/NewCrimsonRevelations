@@ -30,6 +30,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
+import javax.annotation.Nonnull;
+
 public class EntityPrimalArrow extends EntityArrow implements IEntityAdditionalSpawnData {
     private static final DataParameter<Integer> ARROW_TYPE = EntityDataManager.createKey(EntityPrimalArrow.class, DataSerializers.VARINT);
     private Item item;
@@ -59,15 +61,15 @@ public class EntityPrimalArrow extends EntityArrow implements IEntityAdditionalS
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(ARROW_TYPE, Integer.valueOf(0));
+        this.dataManager.register(ARROW_TYPE, 0);
     }
 
     public int getArrowType() {
-        return this.dataManager.get(ARROW_TYPE).intValue();
+        return this.dataManager.get(ARROW_TYPE);
     }
 
     public void setArrowType(int type) {
-        this.dataManager.set(ARROW_TYPE, Integer.valueOf(type));
+        this.dataManager.set(ARROW_TYPE, type);
     }
 
     @Override
@@ -163,12 +165,7 @@ public class EntityPrimalArrow extends EntityArrow implements IEntityAdditionalS
             this.posX += this.motionX;
             this.posY += this.motionY;
             this.posZ += this.motionZ;
-            float hVelocity = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
             this.rotationYaw = (float) (MathHelper.atan2(this.motionX, this.motionZ) * (180D / Math.PI));
-
-            for (this.rotationPitch = (float) (MathHelper.atan2(this.motionY, hVelocity) * (180D / Math.PI)); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
-                ;
-            }
 
             while (this.rotationPitch - this.prevRotationPitch >= 180.0F) {
                 this.prevRotationPitch += 360.0F;
@@ -277,8 +274,8 @@ public class EntityPrimalArrow extends EntityArrow implements IEntityAdditionalS
     }
 
     @Override
-    protected void onHit(RayTraceResult raytraceResultIn) {
-        Entity entity = raytraceResultIn.entityHit;
+    protected void onHit(RayTraceResult raytraceResult) {
+        Entity entity = raytraceResult.entityHit;
 
         if (entity != null) {
             int fireDuration = this.getFireDuration();
@@ -335,16 +332,16 @@ public class EntityPrimalArrow extends EntityArrow implements IEntityAdditionalS
                 }
             }
         } else {
-            BlockPos blockpos = raytraceResultIn.getBlockPos();
+            BlockPos blockpos = raytraceResult.getBlockPos();
             this.xTile = blockpos.getX();
             this.yTile = blockpos.getY();
             this.zTile = blockpos.getZ();
             IBlockState iblockstate = this.world.getBlockState(blockpos);
             this.inTile = iblockstate.getBlock();
             this.inData = this.inTile.getMetaFromState(iblockstate);
-            this.motionX = (float) (raytraceResultIn.hitVec.x - this.posX);
-            this.motionY = (float) (raytraceResultIn.hitVec.y - this.posY);
-            this.motionZ = (float) (raytraceResultIn.hitVec.z - this.posZ);
+            this.motionX = (float) (raytraceResult.hitVec.x - this.posX);
+            this.motionY = (float) (raytraceResult.hitVec.y - this.posY);
+            this.motionZ = (float) (raytraceResult.hitVec.z - this.posZ);
             float f2 = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
             this.posX -= this.motionX / (double) f2 * 0.05D;
             this.posY -= this.motionY / (double) f2 * 0.05D;
@@ -380,13 +377,13 @@ public class EntityPrimalArrow extends EntityArrow implements IEntityAdditionalS
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound compound) {
+    public void writeEntityToNBT(@Nonnull NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setInteger("arrowType", getArrowType());
     }
 
     @Override
-    public void readEntityFromNBT(NBTTagCompound compound) {
+    public void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         setArrowType(compound.getInteger("arrowType"));
     }

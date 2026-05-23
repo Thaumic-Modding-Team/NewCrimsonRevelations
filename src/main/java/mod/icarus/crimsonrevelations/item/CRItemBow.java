@@ -18,6 +18,9 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
+import javax.annotation.Nonnull;
+import java.util.Objects;
+
 public class CRItemBow extends ItemBow {
     public float damageMult;
     public float velocityMult;
@@ -47,31 +50,31 @@ public class CRItemBow extends ItemBow {
     }
 
     @Override
-    public void onPlayerStoppedUsing(ItemStack itemStack, World world, EntityLivingBase entityLiving, int timeInUse) {
-        if (entityLiving instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entityLiving;
-            boolean isInfinityEnchant = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, itemStack) > 0;
-            ItemStack stack = this.findAmmo(player);
+    public void onPlayerStoppedUsing(@Nonnull ItemStack stack, @Nonnull World world, @Nonnull EntityLivingBase entity, int timeInUse) {
+        if (entity instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) entity;
+            boolean isInfinityEnchant = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
+            ItemStack ammo = this.findAmmo(player);
 
             float chargeDivider = 1 * drawTimeMult;
 
-            int charge = (int) ((this.getMaxItemUseDuration(itemStack) - timeInUse) / chargeDivider);
-            charge = ForgeEventFactory.onArrowLoose(itemStack, world, player, charge, !stack.isEmpty() || isInfinityEnchant);
+            int charge = (int) ((this.getMaxItemUseDuration(stack) - timeInUse) / chargeDivider);
+            charge = ForgeEventFactory.onArrowLoose(stack, world, player, charge, !stack.isEmpty() || isInfinityEnchant);
             if (charge < 0) return;
 
-            if ((!stack.isEmpty() || isInfinityEnchant)) {
-                if (stack.isEmpty()) {
-                    stack = new ItemStack(Items.ARROW);
+            if ((!ammo.isEmpty() || isInfinityEnchant)) {
+                if (ammo.isEmpty()) {
+                    ammo = new ItemStack(Items.ARROW);
                 }
 
                 float arrowVelocity = getArrowVelocity(charge);
 
                 if ((double) arrowVelocity >= 0.1D) {
-                    boolean arrowInfinite = player.capabilities.isCreativeMode || (stack.getItem() instanceof ItemArrow && ((ItemArrow) stack.getItem()).isInfinite(stack, itemStack, player));
+                    boolean arrowInfinite = player.capabilities.isCreativeMode || (ammo.getItem() instanceof ItemArrow && ((ItemArrow) ammo.getItem()).isInfinite(ammo, stack, player));
 
                     if (!world.isRemote) {
-                        ItemArrow itemArrow = (ItemArrow) (stack.getItem() instanceof ItemArrow ? stack.getItem() : Items.ARROW);
-                        EntityArrow entityArrow = itemArrow.createArrow(world, stack, player);
+                        ItemArrow itemArrow = (ItemArrow) (ammo.getItem() instanceof ItemArrow ? ammo.getItem() : Items.ARROW);
+                        EntityArrow entityArrow = itemArrow.createArrow(world, ammo, player);
                         entityArrow = this.customizeArrow(entityArrow);
                         entityArrow.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, (arrowVelocity * 3.0F) * velocityMult, inaccuracy);
 
@@ -81,25 +84,25 @@ public class CRItemBow extends ItemBow {
 
                         entityArrow.setDamage(entityArrow.getDamage() * damageMult);
 
-                        int power = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, itemStack);
+                        int power = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
 
                         if (power > 0) {
                             entityArrow.setDamage(entityArrow.getDamage() + (double) power * 0.5D + 0.5D);
                         }
 
-                        int punch = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, itemStack);
+                        int punch = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
 
                         if (punch > 0) {
                             entityArrow.setKnockbackStrength(punch);
                         }
 
-                        if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, itemStack) > 0) {
+                        if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0) {
                             entityArrow.setFire(100);
                         }
 
-                        itemStack.damageItem(1, player);
+                        stack.damageItem(1, player);
 
-                        if (arrowInfinite || player.capabilities.isCreativeMode && (stack.getItem() == Items.SPECTRAL_ARROW || stack.getItem() == Items.TIPPED_ARROW)) {
+                        if (arrowInfinite || player.capabilities.isCreativeMode && (ammo.getItem() == Items.SPECTRAL_ARROW || ammo.getItem() == Items.TIPPED_ARROW)) {
                             entityArrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
                         }
 
@@ -112,23 +115,23 @@ public class CRItemBow extends ItemBow {
                         stack.shrink(1);
 
                         if (stack.isEmpty()) {
-                            player.inventory.deleteStack(stack);
+                            player.inventory.deleteStack(ammo);
                         }
                     }
 
-                    player.addStat(StatList.getObjectUseStats(this));
+                    player.addStat(Objects.requireNonNull(StatList.getObjectUseStats(this)));
                 }
             }
         }
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
+    public EnumRarity getForgeRarity(@Nonnull ItemStack stack) {
         return rarity;
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    public boolean getIsRepairable(@Nonnull ItemStack toRepair, @Nonnull ItemStack repair) {
         return repairMaterial.test(repair) || super.getIsRepairable(toRepair, repair);
     }
 }

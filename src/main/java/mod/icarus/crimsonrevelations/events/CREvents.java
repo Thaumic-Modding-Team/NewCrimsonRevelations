@@ -55,6 +55,7 @@ import thaumcraft.common.world.biomes.BiomeGenMagicalForest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
@@ -304,7 +305,7 @@ public class CREvents {
                         }
                     }
 
-                    player.addStat(StatList.getObjectUseStats(CRItems.RUNIC_GIRDLE_KINETIC));
+                    player.addStat(Objects.requireNonNull(StatList.getObjectUseStats(CRItems.RUNIC_GIRDLE_KINETIC)));
                     player.getCooldownTracker().setCooldown(CRItems.RUNIC_GIRDLE_KINETIC, 20 * 20);
                 }
 
@@ -313,7 +314,7 @@ public class CREvents {
                     player.world.playSound(null, player.posX, player.posY, player.posZ, CRSoundEvents.RUNIC_BAUBLE_REGEN, SoundCategory.PLAYERS, 1.5F, 1.0F);
                     player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 6 * 20, 1, true, true));
 
-                    player.addStat(StatList.getObjectUseStats(CRItems.RUNIC_RING_REGEN));
+                    player.addStat(Objects.requireNonNull(StatList.getObjectUseStats(CRItems.RUNIC_RING_REGEN)));
                     player.getCooldownTracker().setCooldown(CRItems.RUNIC_RING_REGEN, 20 * 20);
                 }
 
@@ -322,7 +323,7 @@ public class CREvents {
                     player.world.playSound(null, player.posX, player.posY, player.posZ, CRSoundEvents.RUNIC_BAUBLE_EMERGENCY, SoundCategory.PLAYERS, 1.0F, 1.0F);
                     player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 40 * 20, 1, true, true));
 
-                    player.addStat(StatList.getObjectUseStats(CRItems.RUNIC_AMULET_EMERGENCY));
+                    player.addStat(Objects.requireNonNull(StatList.getObjectUseStats(CRItems.RUNIC_AMULET_EMERGENCY)));
                     player.getCooldownTracker().setCooldown(CRItems.RUNIC_AMULET_EMERGENCY, 40 * 20);
                 }
             }

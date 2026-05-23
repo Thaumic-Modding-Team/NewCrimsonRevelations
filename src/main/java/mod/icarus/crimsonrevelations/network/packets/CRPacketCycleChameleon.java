@@ -14,10 +14,12 @@ import thaumcraft.common.lib.enchantment.EnumInfusionEnchantment;
 
 public class CRPacketCycleChameleon implements IMessage, IMessageHandler<CRPacketCycleChameleon, IMessage> {
     @Override
-    public void fromBytes(ByteBuf buf) {}
+    public void fromBytes(ByteBuf buf) {
+    }
 
     @Override
-    public void toBytes(ByteBuf buf) {}
+    public void toBytes(ByteBuf buf) {
+    }
 
     @Override
     public IMessage onMessage(CRPacketCycleChameleon message, MessageContext ctx) {
@@ -25,7 +27,7 @@ public class CRPacketCycleChameleon implements IMessage, IMessageHandler<CRPacke
             EntityPlayer player = ctx.getServerHandler().player;
             ItemStack heldStack = player.getHeldItemMainhand();
             int level = EnumInfusionEnchantment.getInfusionEnchantmentLevel(heldStack, InfusionEnchantments.CHAMELEON);
-            if(!heldStack.isEmpty() && level > 0) {
+            if (!heldStack.isEmpty() && level > 0) {
                 NBTTagCompound chameleonTag = this.getChameleonTag(heldStack);
 
                 int currSlot = chameleonTag.getInteger("currSlot");
@@ -49,14 +51,14 @@ public class CRPacketCycleChameleon implements IMessage, IMessageHandler<CRPacke
 
     private NBTTagList stripEnchants(ItemStack stack) {
         NBTTagList enchants = stack.getEnchantmentTagList();
-        if(stack.getTagCompound() != null) {
+        if (stack.getTagCompound() != null) {
             stack.getTagCompound().removeTag("ench");
         }
         return enchants;
     }
 
     private void setEnchants(ItemStack stack, NBTTagList enchants) {
-        if(!enchants.isEmpty()) {
+        if (!enchants.isEmpty()) {
             stack.setTagInfo("ench", enchants);
         }
     }

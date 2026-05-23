@@ -10,6 +10,8 @@ import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.util.NonNullList;
 import thaumcraft.common.lib.SoundsTC;
 
+import javax.annotation.Nonnull;
+
 public class CRItemRunicBauble extends CRItemBauble implements IBauble {
     BaubleType type;
     EnumRarity rarity;
@@ -34,11 +36,11 @@ public class CRItemRunicBauble extends CRItemBauble implements IBauble {
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list) {
         if (this.isInCreativeTab(tab)) {
             ItemStack stack = new ItemStack(this);
             stack.setTagInfo("TC.RUNIC", new NBTTagByte((byte) amount));
-            items.add(stack);
+            list.add(stack);
         }
     }
 }

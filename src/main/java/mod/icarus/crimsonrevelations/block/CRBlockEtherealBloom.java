@@ -17,6 +17,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class CRBlockEtherealBloom extends BlockBush {
@@ -29,9 +30,9 @@ public class CRBlockEtherealBloom extends BlockBush {
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-        CRTileEtherealBloom tile = (CRTileEtherealBloom) worldIn.getTileEntity(pos);
+    public void onBlockPlacedBy(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityLivingBase placer, @Nonnull ItemStack stack) {
+        super.onBlockPlacedBy(world, pos, state, placer, stack);
+        CRTileEtherealBloom tile = (CRTileEtherealBloom) world.getTileEntity(pos);
 
         if (tile != null) {
             tile.growthCounter = 0;
@@ -49,22 +50,22 @@ public class CRBlockEtherealBloom extends BlockBush {
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state) {
+    public boolean hasTileEntity(@Nonnull IBlockState state) {
         return true;
     }
 
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
+    public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
         return new CRTileEtherealBloom();
     }
 
     @Override
-    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+    public EnumPlantType getPlantType(@Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
         return EnumPlantType.Cave;
     }
 
     @Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
+    public EnumBlockRenderType getRenderType(@Nonnull IBlockState state) {
         return EnumBlockRenderType.INVISIBLE;
     }
 
@@ -74,23 +75,23 @@ public class CRBlockEtherealBloom extends BlockBush {
     }
 
     @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
         return BUSH_AABB;
     }
 
     @Override
     @Nullable
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+    public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
         return NULL_AABB;
     }
 
     @Override
-    public boolean isOpaqueCube(IBlockState state) {
+    public boolean isOpaqueCube(@Nonnull IBlockState state) {
         return false;
     }
 
     @Override
-    public boolean isFullCube(IBlockState state) {
+    public boolean isFullCube(@Nonnull IBlockState state) {
         return false;
     }
 }

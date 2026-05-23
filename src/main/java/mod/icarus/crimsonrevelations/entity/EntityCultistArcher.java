@@ -30,6 +30,7 @@ import thaumcraft.common.entities.ai.combat.AICultistHurtByTarget;
 import thaumcraft.common.entities.monster.EntityEldritchGuardian;
 import thaumcraft.common.entities.monster.cult.EntityCultist;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class EntityCultistArcher extends EntityCultist implements IRangedAttackMob {
@@ -70,9 +71,9 @@ public class EntityCultistArcher extends EntityCultist implements IRangedAttackM
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new AICultistHurtByTarget(this, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<EntityEldritchGuardian>(this, EntityEldritchGuardian.class, true));
-        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<AbstractIllager>(this, AbstractIllager.class, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityEldritchGuardian.class, true));
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, AbstractIllager.class, true));
     }
 
     @Override
@@ -98,12 +99,12 @@ public class EntityCultistArcher extends EntityCultist implements IRangedAttackM
 
     @Nullable
     @Override
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
-        livingdata = super.onInitialSpawn(difficulty, livingdata);
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData data) {
+        data = super.onInitialSpawn(difficulty, data);
         this.setEquipmentBasedOnDifficulty(difficulty);
         this.setEnchantmentBasedOnDifficulty(difficulty);
         this.setCombatTask();
-        return livingdata;
+        return data;
     }
 
     @Override
@@ -135,7 +136,7 @@ public class EntityCultistArcher extends EntityCultist implements IRangedAttackM
     }
 
     @Override
-    public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
+    public void attackEntityWithRangedAttack(@Nonnull EntityLivingBase target, float distanceFactor) {
         EntityArrow entityarrow = this.getArrow(distanceFactor);
 
         if (this.getHeldItemMainhand().getItem() instanceof ItemBow) {
@@ -164,7 +165,7 @@ public class EntityCultistArcher extends EntityCultist implements IRangedAttackM
     }
 
     @Override
-    public void setItemStackToSlot(EntityEquipmentSlot slot, ItemStack stack) {
+    public void setItemStackToSlot(@Nonnull EntityEquipmentSlot slot, @Nonnull ItemStack stack) {
         super.setItemStackToSlot(slot, stack);
 
         if (!this.world.isRemote && slot == EntityEquipmentSlot.MAINHAND) {

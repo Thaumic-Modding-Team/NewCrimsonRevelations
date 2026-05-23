@@ -32,6 +32,7 @@ import thaumcraft.api.research.ResearchCategory;
 import thaumcraft.client.fx.FXDispatcher;
 import thaumcraft.common.lib.SoundsTC;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class CRItemKnowledgeScribingTools extends CRItem implements IScribeTools
         this.setHasSubtypes(false);
         this.addPropertyOverride(new ResourceLocation("depleted"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
-            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+            public float apply(@Nonnull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
                 if (stack.getItemDamage() >= stack.getMaxDamage() && !getDepletedState(stack)) {
                     return 1.0F;
                 } else if (stack.getItemDamage() >= stack.getMaxDamage() && getDepletedState(stack)) {
@@ -68,7 +69,7 @@ public class CRItemKnowledgeScribingTools extends CRItem implements IScribeTools
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(@Nonnull World world, EntityPlayer player, @Nonnull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         ResearchCategory[] categories = ResearchHelperNCR.getResearchCategories();
         int observationProgress = IPlayerKnowledge.EnumKnowledgeType.OBSERVATION.getProgression();
@@ -115,7 +116,7 @@ public class CRItemKnowledgeScribingTools extends CRItem implements IScribeTools
     }
 
     @Override
-    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+    public boolean isBookEnchantable(@Nonnull ItemStack stack, @Nonnull ItemStack book) {
         return false;
     }
 
@@ -126,13 +127,13 @@ public class CRItemKnowledgeScribingTools extends CRItem implements IScribeTools
     }
 
     @Override
-    public IRarity getForgeRarity(ItemStack stack) {
+    public IRarity getForgeRarity(@Nonnull ItemStack stack) {
         return CRRarities.RARITY_KNOWLEDGE;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flag) {
         if (stack.getItemDamage() >= stack.getMaxDamage() && !getDepletedState(stack)) {
             tooltip.add(new TextComponentTranslation("tooltip.crimsonrevelations.scribing_tools.active").getFormattedText());
         } else if (stack.getItemDamage() >= stack.getMaxDamage() && getDepletedState(stack)) {

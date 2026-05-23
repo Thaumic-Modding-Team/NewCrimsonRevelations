@@ -11,6 +11,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
 
+import javax.annotation.Nonnull;
+
 public class ModelCultistArcher extends ModelBiped {
     public ModelCultistArcher() {
         this(0.0F);
@@ -38,7 +40,7 @@ public class ModelCultistArcher extends ModelBiped {
     }
 
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entity) {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, @Nonnull Entity entity) {
         super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
         ItemStack stack = ((EntityLivingBase) entity).getHeldItemMainhand();
         EntityCultistArcher marksman = (EntityCultistArcher) entity;
@@ -68,9 +70,9 @@ public class ModelCultistArcher extends ModelBiped {
     }
 
     @Override
-    public void postRenderArm(float scale, EnumHandSide side) {
-        float f = side == EnumHandSide.RIGHT ? 1.0F : -1.0F;
-        ModelRenderer render = this.getArmForSide(side);
+    public void postRenderArm(float scale, @Nonnull EnumHandSide hand) {
+        float f = hand == EnumHandSide.RIGHT ? 1.0F : -1.0F;
+        ModelRenderer render = this.getArmForSide(hand);
         render.rotationPointX += f;
         render.postRender(scale);
         render.rotationPointX -= f;

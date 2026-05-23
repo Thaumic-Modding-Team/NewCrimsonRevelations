@@ -9,6 +9,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.client.renderers.models.entity.ModelTaintacle;
 
+import javax.annotation.Nonnull;
+
 @SideOnly(Side.CLIENT)
 public class RenderOvergrownTaintacle extends RenderLiving<EntityOvergrownTaintacle> {
     public static final ResourceLocation TEXTURES = new ResourceLocation(NewCrimsonRevelations.MODID, "textures/entity/overgrown_taintacle.png");
@@ -18,7 +20,7 @@ public class RenderOvergrownTaintacle extends RenderLiving<EntityOvergrownTainta
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityOvergrownTaintacle entity) {
+    protected ResourceLocation getEntityTexture(@Nonnull EntityOvergrownTaintacle entity) {
         return TEXTURES;
     }
 }

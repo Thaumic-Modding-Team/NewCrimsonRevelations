@@ -17,17 +17,17 @@ public class CRTileManaPod extends TileThaumcraft implements IAspectContainer {
     public Aspect aspect = null;
 
     @Override
-    public void readSyncNBT(NBTTagCompound nbttagcompound) {
-        this.aspect = Aspect.getAspect(nbttagcompound.getString("Aspect"));
+    public void readSyncNBT(NBTTagCompound nbt) {
+        this.aspect = Aspect.getAspect(nbt.getString("Aspect"));
     }
 
     @Override
-    public NBTTagCompound writeSyncNBT(NBTTagCompound nbttagcompound) {
+    public NBTTagCompound writeSyncNBT(NBTTagCompound nbt) {
         if (this.aspect != null) {
-            nbttagcompound.setString("Aspect", this.aspect.getTag());
+            nbt.setString("Aspect", this.aspect.getTag());
         }
 
-        return nbttagcompound;
+        return nbt;
     }
 
     public void checkGrowth() {
@@ -40,10 +40,10 @@ public class CRTileManaPod extends TileThaumcraft implements IAspectContainer {
 
         if (l > 2) {
             if (l == 3) {
-                AspectList al = new AspectList();
+                AspectList aspects = new AspectList();
 
                 if (this.aspect != null) {
-                    al.add(this.aspect, 1);
+                    aspects.add(this.aspect, 1);
                 }
 
                 for (int d = 2; d < 6; d++) {
@@ -54,37 +54,37 @@ public class CRTileManaPod extends TileThaumcraft implements IAspectContainer {
                     TileEntity tile = this.world.getTileEntity(new BlockPos(x, y, z));
 
                     if (tile instanceof CRTileManaPod && ((CRTileManaPod) tile).aspect != null) {
-                        al.add(((CRTileManaPod) tile).aspect, 1);
+                        aspects.add(((CRTileManaPod) tile).aspect, 1);
                     }
                 }
 
-                if (al.size() > 1) {
-                    Aspect[] aa = al.getAspects();
-                    ArrayList<Aspect> outlist = new ArrayList<>();
+                if (aspects.size() > 1) {
+                    Aspect[] aa = aspects.getAspects();
+                    ArrayList<Aspect> outList = new ArrayList<>();
 
                     for (int i = 0; i < aa.length; i++) {
-                        outlist.add(aa[i]);
+                        outList.add(aa[i]);
 
                         for (int j = 0; j < aa.length; j++) {
                             if (i != j) {
                                 Aspect combo = ResearchManager.getCombinationResult(aa[i], aa[j]);
 
                                 if (combo != null) {
-                                    outlist.add(combo);
-                                    outlist.add(combo);
+                                    outList.add(combo);
+                                    outList.add(combo);
                                 }
                             }
                         }
                     }
 
-                    if (!outlist.isEmpty()) {
-                        this.aspect = outlist.get(this.world.rand.nextInt(outlist.size()));
+                    if (!outList.isEmpty()) {
+                        this.aspect = outList.get(this.world.rand.nextInt(outList.size()));
                         markDirty();
                     }
                 }
 
-                if (al.size() >= 1 && this.aspect == null) {
-                    this.aspect = al.getAspectsSortedByAmount()[0];
+                if (aspects.size() >= 1 && this.aspect == null) {
+                    this.aspect = aspects.getAspectsSortedByAmount()[0];
                     markDirty();
                 }
             }
@@ -126,7 +126,7 @@ public class CRTileManaPod extends TileThaumcraft implements IAspectContainer {
     }
 
     @Override
-    public boolean takeFromContainer(AspectList ot) {
+    public boolean takeFromContainer(AspectList aspects) {
         return false;
     }
 
@@ -136,7 +136,7 @@ public class CRTileManaPod extends TileThaumcraft implements IAspectContainer {
     }
 
     @Override
-    public boolean doesContainerContain(AspectList ot) {
+    public boolean doesContainerContain(AspectList aspects) {
         return false;
     }
 

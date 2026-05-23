@@ -14,6 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import thaumcraft.common.lib.SoundsTC;
 
+import javax.annotation.Nonnull;
+
 public class CRItemArrow extends ItemArrow {
     EnumRarity rarity;
 
@@ -23,12 +25,12 @@ public class CRItemArrow extends ItemArrow {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
+    public EnumRarity getForgeRarity(@Nonnull ItemStack stack) {
         return rarity;
     }
 
     @Override
-    public EntityArrow createArrow(World world, ItemStack stack, EntityLivingBase shooter) {
+    public EntityArrow createArrow(@Nonnull World world, @Nonnull ItemStack stack, @Nonnull EntityLivingBase shooter) {
         if (this == CRItems.AER_ARROW) {
             EntityPrimalArrow aerArrow = new EntityPrimalArrow(world, shooter, CRItems.AER_ARROW);
             aerArrow.setArrowType(0);
@@ -65,7 +67,7 @@ public class CRItemArrow extends ItemArrow {
     }
 
     @Override
-    public boolean isInfinite(ItemStack stack, ItemStack item, EntityPlayer player) {
+    public boolean isInfinite(@Nonnull ItemStack stack, @Nonnull ItemStack item, @Nonnull EntityPlayer player) {
         int enchantLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, item);
 
         if (this == CRItems.AER_ARROW ||

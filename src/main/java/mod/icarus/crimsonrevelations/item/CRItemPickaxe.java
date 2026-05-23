@@ -4,6 +4,8 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nonnull;
+
 public class CRItemPickaxe extends ItemPickaxe {
     EnumRarity rarity;
 
@@ -13,7 +15,7 @@ public class CRItemPickaxe extends ItemPickaxe {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
+    public EnumRarity getForgeRarity(@Nonnull ItemStack stack) {
         return rarity;
     }
 }

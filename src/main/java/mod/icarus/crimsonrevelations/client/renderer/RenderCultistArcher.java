@@ -6,9 +6,14 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.Thaumcraft;
 import thaumcraft.common.entities.monster.cult.EntityCultist;
 
+import javax.annotation.Nonnull;
+
+@SideOnly(Side.CLIENT)
 public class RenderCultistArcher extends RenderBiped<EntityCultist> {
     private static final ResourceLocation TEXTURES = new ResourceLocation(Thaumcraft.MODID, "textures/entity/cultist.png");
 
@@ -19,7 +24,7 @@ public class RenderCultistArcher extends RenderBiped<EntityCultist> {
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(EntityCultist entity) {
+    protected ResourceLocation getEntityTexture(@Nonnull EntityCultist entity) {
         return TEXTURES;
     }
 }

@@ -30,6 +30,7 @@ import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.blocks.BlocksTC;
 import thaumcraft.api.internal.WorldCoordinates;
 
+import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -83,7 +84,7 @@ public class CRBlockManaPod extends Block implements IGrowable {
     }
 
     @Override
-    public int getMetaFromState(IBlockState state) {
+    public int getMetaFromState(@Nonnull IBlockState state) {
         return this.getAge(state);
     }
 
@@ -98,23 +99,23 @@ public class CRBlockManaPod extends Block implements IGrowable {
     }
 
     @Override
-    public boolean isFullCube(IBlockState state) {
+    public boolean isFullCube(@Nonnull IBlockState state) {
         return false;
     }
 
     @Override
-    public boolean isOpaqueCube(IBlockState state) {
+    public boolean isOpaqueCube(@Nonnull IBlockState state) {
         return false;
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        getBoundingBox(state, worldIn, pos);
-        return super.getCollisionBoundingBox(state, worldIn, pos);
+    public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+        getBoundingBox(state, world, pos);
+        return super.getCollisionBoundingBox(state, world, pos);
     }
 
     @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
         int l = getMetaFromState(state);
 
         switch (l) {
@@ -141,13 +142,13 @@ public class CRBlockManaPod extends Block implements IGrowable {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
-        getBoundingBox(state, worldIn, pos);
-        return super.getSelectedBoundingBox(state, worldIn, pos);
+    public AxisAlignedBB getSelectedBoundingBox(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos) {
+        getBoundingBox(state, world, pos);
+        return super.getSelectedBoundingBox(state, world, pos);
     }
 
     @Override
-    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+    public void updateTick(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand) {
         if (!canBlockStay(world, pos, state)) {
             dropBlockAsItem(world, pos, state, 0);
             world.setBlockToAir(pos);
@@ -176,7 +177,7 @@ public class CRBlockManaPod extends Block implements IGrowable {
     }
 
     @Override
-    public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing facing) {
+    public boolean canPlaceBlockOnSide(World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing) {
         Biome biome = world.getBiome(pos);
         boolean magicBiome = biome != null && BiomeDictionary.hasType(biome, BiomeDictionary.Type.MAGICAL);
         Block blockAbove = world.getBlockState(pos.up()).getBlock();
@@ -185,20 +186,20 @@ public class CRBlockManaPod extends Block implements IGrowable {
     }
 
     @Override
-    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+    public int getLightValue(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
         return getMetaFromState(state);
     }
 
     @Override
-    public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (!canBlockStay(par1World, pos, state)) {
-            dropBlockAsItem(par1World, pos, state, 0);
-            par1World.setBlockToAir(pos);
+    public void neighborChanged(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull Block block, @Nonnull BlockPos fromPos) {
+        if (!canBlockStay(world, pos, state)) {
+            dropBlockAsItem(world, pos, state, 0);
+            world.setBlockToAir(pos);
         }
     }
 
     @Override
-    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+    public void breakBlock(World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
         TileEntity tile = world.getTileEntity(pos);
 
         if (tile instanceof CRTileManaPod && ((CRTileManaPod) tile).aspect != null) {
@@ -209,7 +210,7 @@ public class CRBlockManaPod extends Block implements IGrowable {
     }
 
     @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
         int metadata = getMetaFromState(state);
 
         if (metadata >= 2) {
@@ -243,42 +244,42 @@ public class CRBlockManaPod extends Block implements IGrowable {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+    public ItemStack getItem(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
         return CRItems.MANA_BEAN.getDefaultInstance();
     }
 
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
         return Item.getItemById(0);
     }
 
     @Override
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
+    public boolean isPassable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
         return true;
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state) {
+    public boolean hasTileEntity(@Nonnull IBlockState state) {
         return true;
     }
 
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
+    public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
         return new CRTileManaPod();
     }
 
     @Override
-    public boolean canGrow(World world, BlockPos blockPos, IBlockState iBlockState, boolean b) {
+    public boolean canGrow(@Nonnull World world, @Nonnull BlockPos pos, IBlockState iBlockState, boolean b) {
         return iBlockState.getValue(AGE) < 8;
     }
 
     @Override
-    public boolean canUseBonemeal(World world, Random random, BlockPos blockPos, IBlockState iBlockState) {
+    public boolean canUseBonemeal(@Nonnull World world, @Nonnull Random random, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
         return false;
     }
 
     @Override
-    public void grow(World world, Random random, BlockPos pos, IBlockState state) {
+    public void grow(World world, @Nonnull Random random, @Nonnull BlockPos pos, IBlockState state) {
         world.setBlockState(pos, state.withProperty(AGE, state.getValue(AGE) + 1), 8);
     }
 }

@@ -29,6 +29,7 @@ import thaumcraft.client.fx.FXDispatcher;
 import thaumcraft.common.lib.SoundsTC;
 import thaumcraft.common.lib.potions.PotionWarpWard;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class CRItemSanitationScribingTools extends CRItem implements IScribeTool
         this.setHasSubtypes(false);
         this.addPropertyOverride(new ResourceLocation("depleted"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
-            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+            public float apply(@Nonnull ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity) {
                 if (stack.getItemDamage() >= stack.getMaxDamage() && !getDepletedState(stack)) {
                     return 1.0F;
                 } else if (stack.getItemDamage() >= stack.getMaxDamage() && getDepletedState(stack)) {
@@ -65,7 +66,7 @@ public class CRItemSanitationScribingTools extends CRItem implements IScribeTool
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(@Nonnull World world, EntityPlayer player, @Nonnull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         IPlayerWarp warp = ThaumcraftCapabilities.getWarp(player);
 
@@ -108,7 +109,7 @@ public class CRItemSanitationScribingTools extends CRItem implements IScribeTool
     }
 
     @Override
-    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+    public boolean isBookEnchantable(@Nonnull ItemStack stack, @Nonnull ItemStack book) {
         return false;
     }
 
@@ -120,7 +121,7 @@ public class CRItemSanitationScribingTools extends CRItem implements IScribeTool
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flag) {
         if (stack.getItemDamage() >= stack.getMaxDamage() && !getDepletedState(stack)) {
             tooltip.add(new TextComponentTranslation("tooltip.crimsonrevelations.scribing_tools.active").getFormattedText());
         } else if (stack.getItemDamage() >= stack.getMaxDamage() && getDepletedState(stack)) {

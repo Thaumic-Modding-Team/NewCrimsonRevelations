@@ -5,6 +5,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+// TODO: Cleanup and remove
 public class TCVec3 {
     public static final TCVec3Pool vec3dPool = new TCVec3Pool(-1, -1);
     public final TCVec3Pool myVec3LocalPool;
