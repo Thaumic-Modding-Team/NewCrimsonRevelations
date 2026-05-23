@@ -11,7 +11,6 @@ import mod.icarus.crimsonrevelations.item.armor.*;
 import mod.icarus.crimsonrevelations.item.baubles.CRItemBauble;
 import mod.icarus.crimsonrevelations.item.baubles.CRItemRunicBauble;
 import mod.icarus.crimsonrevelations.item.baubles.CRItemVerdantRing;
-import mod.icarus.crimsonrevelations.item.baubles.CRItemVoidGoggles;
 import mod.icarus.crimsonrevelations.tile.CRTileEtherealBloom;
 import mod.icarus.crimsonrevelations.tile.CRTileManaPod;
 import net.minecraft.block.BlockDoor;
@@ -88,9 +87,6 @@ public class CRItems {
     public static final CRItemArrow TERRA_ARROW = null;
     public static final CRItemVerdantRing VERDANT_RING = null;
 
-    // Unused
-    public static final CRItemVoidGoggles VOID_GOGGLES = null;
-
     // Optional Content
     public static final CRItemPickaxe DISTORTION_PICKAXE = null;
     public static final CRItemBauble NUTRITION_RING = null;
@@ -120,8 +116,6 @@ public class CRItems {
                 CRRegistry.setup(new CRItemCultistRangerArmor(EntityEquipmentSlot.HEAD), "crimson_ranger_helmet"),
                 CRRegistry.setup(new CRItemCultistRangerArmor(EntityEquipmentSlot.CHEST), "crimson_ranger_chestplate"),
                 CRRegistry.setup(new CRItemCultistRangerArmor(EntityEquipmentSlot.LEGS), "crimson_ranger_leggings"),
-
-                //CRRegistry.setup(new CRItemVoidGoggles(), "void_goggles"),
 
                 CRRegistry.setup(new CRItemBoneBow(), "bone_bow"),
                 CRRegistry.setup(new CRItemArrow(EnumRarity.UNCOMMON), "aer_arrow"),
