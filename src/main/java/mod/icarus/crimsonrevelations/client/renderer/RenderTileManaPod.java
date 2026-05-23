@@ -1,6 +1,5 @@
 package mod.icarus.crimsonrevelations.client.renderer;
 
-import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.client.model.ModelManaPod;
 import mod.icarus.crimsonrevelations.tile.CRTileManaPod;
 import net.minecraft.client.Minecraft;
@@ -10,13 +9,14 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import thaumcraft.Thaumcraft;
 import thaumcraft.api.aspects.Aspect;
 
 import java.awt.*;
 
 public class RenderTileManaPod extends TileEntitySpecialRenderer<CRTileManaPod> {
-    private static final ResourceLocation POD_0_TEX = new ResourceLocation(NewCrimsonRevelations.MODID, "textures/models/block/manapod_0.png");
-    private static final ResourceLocation POD_2_TEX = new ResourceLocation(NewCrimsonRevelations.MODID, "textures/models/block/manapod_2.png");
+    private static final ResourceLocation POD_0_TEX = new ResourceLocation(Thaumcraft.MODID, "textures/models/manapod_0.png");
+    private static final ResourceLocation POD_2_TEX = new ResourceLocation(Thaumcraft.MODID, "textures/models/manapod_2.png");
     private final ModelManaPod model = new ModelManaPod();
 
     @Override
