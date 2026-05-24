@@ -28,13 +28,17 @@ import thaumcraft.api.potions.PotionFluxTaint;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 
 
 public class ItemVerdantRing extends Item implements IBauble, IRechargable {
-    public ItemVerdantRing() {
-        maxStackSize = 1;
-        canRepair = false;
-        setMaxDamage(0);
+    public ItemVerdantRing(String unlocName) {
+        this.setRegistryName(NewCrimsonRevelations.MODID, unlocName);
+        this.setTranslationKey(Objects.requireNonNull(this.getRegistryName()).toString());
+        this.setCreativeTab(NewCrimsonRevelations.tabCR);
+        this.maxStackSize = 1;
+        this.canRepair = false;
+        this.setMaxDamage(0);
         addPropertyOverride(new ResourceLocation("type"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
             public float apply(@Nonnull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {

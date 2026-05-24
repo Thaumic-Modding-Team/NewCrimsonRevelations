@@ -1,10 +1,6 @@
 package mod.icarus.crimsonrevelations.registry;
 
 import baubles.api.BaubleType;
-import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
-import mod.icarus.crimsonrevelations.block.BlockManaPod;
-import mod.icarus.crimsonrevelations.client.renderer.tile.TileEtherealBloomTESR;
-import mod.icarus.crimsonrevelations.client.renderer.tile.TileManaPodTESR;
 import mod.icarus.crimsonrevelations.config.ConfigHandlerNCR;
 import mod.icarus.crimsonrevelations.item.armor.*;
 import mod.icarus.crimsonrevelations.item.base.*;
@@ -13,189 +9,123 @@ import mod.icarus.crimsonrevelations.item.bauble.ItemRunicBauble;
 import mod.icarus.crimsonrevelations.item.bauble.ItemVerdantRing;
 import mod.icarus.crimsonrevelations.item.misc.ItemManaBean;
 import mod.icarus.crimsonrevelations.item.tools.*;
-import mod.icarus.crimsonrevelations.tile.TileEtherealBloom;
-import mod.icarus.crimsonrevelations.tile.TileManaPod;
-import net.minecraft.block.BlockDoor;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
-import net.minecraftforge.registries.IForgeRegistry;
-import thaumcraft.Thaumcraft;
-import thaumcraft.api.ThaumcraftApiHelper;
-import thaumcraft.api.aspects.Aspect;
 
-import javax.annotation.Nonnull;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
-@SuppressWarnings("deprecation")
-@EventBusSubscriber(modid = NewCrimsonRevelations.MODID)
-@GameRegistry.ObjectHolder(NewCrimsonRevelations.MODID)
 public class ModItemsNCR {
-    public static final ItemArrowBase AER_ARROW = null;
-    public static final ItemAncientCultistArmor ANCIENT_CRIMSON_CHESTPLATE = null;
-    public static final ItemAncientCultistArmor ANCIENT_CRIMSON_HELMET = null;
-    public static final ItemAncientCultistArmor ANCIENT_CRIMSON_LEGGINGS = null;
-    public static final ItemArrowBase AQUA_ARROW = null;
-    public static final ItemBoneBow BONE_BOW = null;
-    public static final ItemCometBoots COMET_BOOTS = null;
-    public static final ItemCultistArcherArmor CRIMSON_ARCHER_CHESTPLATE = null;
-    public static final ItemCultistArcherArmor CRIMSON_ARCHER_HELMET = null;
-    public static final ItemCultistArcherArmor CRIMSON_ARCHER_LEGGINGS = null;
-    public static final ItemBase CRIMSON_FABRIC = null;
-    public static final ItemCultistPaladinArmor CRIMSON_PALADIN_CHESTPLATE = null;
-    public static final ItemCultistPaladinArmor CRIMSON_PALADIN_HELMET = null;
-    public static final ItemCultistPaladinArmor CRIMSON_PALADIN_LEGGINGS = null;
-    public static final ItemBase CRIMSON_PLATE = null;
-    public static final ItemCultistRangerArmor CRIMSON_RANGER_CHESTPLATE = null;
-    public static final ItemCultistRangerArmor CRIMSON_RANGER_HELMET = null;
-    public static final ItemCultistRangerArmor CRIMSON_RANGER_LEGGINGS = null;
-    public static final ItemSwordBase CRIMSON_SWORD = null;
-    public static final ItemBase EMBELLISHED_CRIMSON_FABRIC = null;
-    public static final ItemExecutionAxe EXECUTION_AXE = null;
-    public static final ItemArrowBase IGNIS_ARROW = null;
-    public static final ItemKnowledgeScribingTools KNOWLEDGE_SCRIBING_TOOLS = null;
-    public static final ItemManaBean MANA_BEAN = null;
-    public static final ItemMeteorBoots METEOR_BOOTS = null;
-    public static final ItemArrowBase ORDO_ARROW = null;
-    public static final ItemArrowBase PERDITIO_ARROW = null;
-    public static final ItemPrimordialScribingTools PRIMORDIAL_SCRIBING_TOOLS = null;
-    public static final ItemRunicBauble PROTECTION_RING = null;
-    public static final ItemRunicBauble RUNIC_AMULET = null;
-    public static final ItemRunicBauble RUNIC_AMULET_EMERGENCY = null;
-    public static final ItemRunicBauble RUNIC_GIRDLE = null;
-    public static final ItemRunicBauble RUNIC_GIRDLE_KINETIC = null;
-    public static final ItemRunicBauble RUNIC_RING = null;
-    public static final ItemRunicBauble RUNIC_RING_CHARGED = null;
-    public static final ItemRunicBauble RUNIC_RING_REGEN = null;
-    public static final ItemSanitationScribingTools SANITATION_SCRIBING_TOOLS = null;
-    public static final ItemTechnomancerScribingTools TECHNOMANCER_SCRIBING_TOOLS = null;
-    public static final ItemArrowBase TERRA_ARROW = null;
-    public static final ItemVerdantRing VERDANT_RING = null;
+    public static Item AER_ARROW;
+    public static ItemAncientCultistArmor ANCIENT_CRIMSON_CHESTPLATE;
+    public static ItemAncientCultistArmor ANCIENT_CRIMSON_HELMET;
+    public static ItemAncientCultistArmor ANCIENT_CRIMSON_LEGGINGS;
+    public static Item AQUA_ARROW;
+    public static Item BONE_BOW;
+    public static ItemCometBoots COMET_BOOTS ;
+    public static ItemCultistArcherArmor CRIMSON_ARCHER_CHESTPLATE;
+    public static ItemCultistArcherArmor CRIMSON_ARCHER_HELMET;
+    public static ItemCultistArcherArmor CRIMSON_ARCHER_LEGGINGS;
+    public static Item CRIMSON_FABRIC;
+    public static ItemCultistPaladinArmor CRIMSON_PALADIN_CHESTPLATE;
+    public static ItemCultistPaladinArmor CRIMSON_PALADIN_HELMET;
+    public static ItemCultistPaladinArmor CRIMSON_PALADIN_LEGGINGS;
+    public static Item CRIMSON_PLATE;
+    public static ItemCultistRangerArmor CRIMSON_RANGER_CHESTPLATE;
+    public static ItemCultistRangerArmor CRIMSON_RANGER_HELMET;
+    public static ItemCultistRangerArmor CRIMSON_RANGER_LEGGINGS;
+    public static Item CRIMSON_SWORD;
+    public static Item EMBELLISHED_CRIMSON_FABRIC;
+    public static Item EXECUTION_AXE;
+    public static Item IGNIS_ARROW;
+    public static Item KNOWLEDGE_SCRIBING_TOOLS;
+    public static ItemManaBean MANA_BEAN;
+    public static ItemMeteorBoots METEOR_BOOTS;
+    public static Item ORDO_ARROW ;
+    public static Item PERDITIO_ARROW;
+    public static Item PRIMORDIAL_SCRIBING_TOOLS;
+    public static Item PROTECTION_RING;
+    public static Item RUNIC_AMULET;
+    public static Item RUNIC_AMULET_EMERGENCY;
+    public static Item RUNIC_GIRDLE;
+    public static Item RUNIC_GIRDLE_KINETIC;
+    public static Item RUNIC_RING;
+    public static Item RUNIC_RING_CHARGED;
+    public static Item RUNIC_RING_REGEN;
+    public static Item SANITATION_SCRIBING_TOOLS;
+    public static Item TECHNOMANCER_SCRIBING_TOOLS ;
+    public static Item TERRA_ARROW;
+    public static ItemVerdantRing VERDANT_RING;
 
     // Optional Content
-    public static final ItemPickaxeBase DISTORTION_PICKAXE = null;
-    public static final ItemBaubleBase NUTRITION_RING = null;
-    public static final ItemPurifyingShovel PURIFYING_SHOVEL = null;
-    public static final ItemLitmusPaper THAUMIC_LITMUS_PAPER = null;
+    public static Item DISTORTION_PICKAXE;
+    public static Item NUTRITION_RING;
+    public static Item PURIFYING_SHOVEL;
+    public static Item THAUMIC_LITMUS_PAPER;
 
-    @SubscribeEvent
-    public static void registerItems(@Nonnull final RegistryEvent.Register<Item> event) {
-        final IForgeRegistry<Item> registry = event.getRegistry();
+    public static final List<Item> MOD_ITEMS = new ArrayList<>();
 
-        registry.registerAll(
-                RegistrarNCR.setup(new ItemBase().setRarity(EnumRarity.UNCOMMON), "crimson_fabric"),
-                RegistrarNCR.setup(new ItemBase().setRarity(EnumRarity.UNCOMMON), "embellished_crimson_fabric"),
-                RegistrarNCR.setup(new ItemBase().setRarity(EnumRarity.UNCOMMON), "crimson_plate"),
-                RegistrarNCR.setup(new ItemSwordBase(ModMaterialsNCR.TOOL_CULTIST).setRarity(EnumRarity.UNCOMMON), "crimson_sword"),
-                RegistrarNCR.setup(new ItemExecutionAxe(), "execution_axe").setRarity(EnumRarity.RARE),
+    public static void initItems() {
+        MOD_ITEMS.add(CRIMSON_FABRIC = new ItemBase("crimson_fabric").setRarity(EnumRarity.UNCOMMON));
+        MOD_ITEMS.add(EMBELLISHED_CRIMSON_FABRIC = new ItemBase("embellished_crimson_fabric").setRarity(EnumRarity.UNCOMMON));
+        MOD_ITEMS.add(CRIMSON_PLATE = new ItemBase("crimson_plate").setRarity(EnumRarity.UNCOMMON));
+        MOD_ITEMS.add(CRIMSON_SWORD = new ItemSwordBase("crimson_sword", ModMaterialsNCR.TOOL_CULTIST).setRarity(EnumRarity.UNCOMMON));
+        MOD_ITEMS.add(EXECUTION_AXE = new ItemExecutionAxe("execution_axe").setRarity(EnumRarity.RARE));
+        MOD_ITEMS.add(ANCIENT_CRIMSON_HELMET = new ItemAncientCultistArmor("ancient_crimson_helmet", EntityEquipmentSlot.HEAD));
+        MOD_ITEMS.add(ANCIENT_CRIMSON_CHESTPLATE = new ItemAncientCultistArmor("ancient_crimson_chestplate", EntityEquipmentSlot.CHEST));
+        MOD_ITEMS.add(ANCIENT_CRIMSON_LEGGINGS = new ItemAncientCultistArmor("ancient_crimson_leggings", EntityEquipmentSlot.LEGS));
+        MOD_ITEMS.add(CRIMSON_ARCHER_HELMET = new ItemCultistArcherArmor("crimson_archer_helmet", EntityEquipmentSlot.HEAD));
+        MOD_ITEMS.add(CRIMSON_ARCHER_CHESTPLATE = new ItemCultistArcherArmor("crimson_archer_chestplate", EntityEquipmentSlot.CHEST));
+        MOD_ITEMS.add(CRIMSON_ARCHER_LEGGINGS = new ItemCultistArcherArmor("crimson_archer_leggings", EntityEquipmentSlot.LEGS));
+        MOD_ITEMS.add(CRIMSON_PALADIN_HELMET = new ItemCultistPaladinArmor("crimson_paladin_helmet", EntityEquipmentSlot.HEAD));
+        MOD_ITEMS.add(CRIMSON_PALADIN_CHESTPLATE = new ItemCultistPaladinArmor("crimson_paladin_chestplate", EntityEquipmentSlot.CHEST));
+        MOD_ITEMS.add(CRIMSON_PALADIN_LEGGINGS = new ItemCultistPaladinArmor("crimson_paladin_leggings", EntityEquipmentSlot.LEGS));
+        MOD_ITEMS.add(CRIMSON_RANGER_HELMET = new ItemCultistRangerArmor("crimson_ranger_helmet", EntityEquipmentSlot.HEAD));
+        MOD_ITEMS.add(CRIMSON_RANGER_CHESTPLATE = new ItemCultistRangerArmor("crimson_ranger_chestplate", EntityEquipmentSlot.CHEST));
+        MOD_ITEMS.add(CRIMSON_RANGER_LEGGINGS = new ItemCultistRangerArmor("crimson_ranger_leggings", EntityEquipmentSlot.LEGS));
+        MOD_ITEMS.add(BONE_BOW = new ItemBoneBow("bone_bow").setRarity(EnumRarity.RARE));
+        MOD_ITEMS.add(AER_ARROW = new ItemArrowBase("aer_arrow").setRarity(EnumRarity.UNCOMMON));
+        MOD_ITEMS.add(AQUA_ARROW = new ItemArrowBase("aqua_arrow").setRarity(EnumRarity.UNCOMMON));
+        MOD_ITEMS.add(IGNIS_ARROW = new ItemArrowBase("ignis_arrow").setRarity(EnumRarity.UNCOMMON));
+        MOD_ITEMS.add(ORDO_ARROW = new ItemArrowBase("ordo_arrow").setRarity(EnumRarity.UNCOMMON));
+        MOD_ITEMS.add(PERDITIO_ARROW = new ItemArrowBase("perditio_arrow").setRarity(EnumRarity.UNCOMMON));
+        MOD_ITEMS.add(TERRA_ARROW = new ItemArrowBase("terra_arrow").setRarity(EnumRarity.UNCOMMON));
+        MOD_ITEMS.add(PROTECTION_RING = new ItemRunicBauble("protection_ring", BaubleType.RING, 1));
+        MOD_ITEMS.add(RUNIC_RING = new ItemRunicBauble("runic_ring", BaubleType.RING, 5).setRarity(EnumRarity.UNCOMMON));
+        MOD_ITEMS.add(RUNIC_AMULET = new ItemRunicBauble("runic_amulet", BaubleType.AMULET, 8).setRarity(EnumRarity.UNCOMMON));
+        MOD_ITEMS.add(RUNIC_GIRDLE = new ItemRunicBauble("runic_girdle", BaubleType.BELT, 10).setRarity(EnumRarity.UNCOMMON));
 
-                RegistrarNCR.setup(new ItemAncientCultistArmor(EntityEquipmentSlot.HEAD), "ancient_crimson_helmet"),
-                RegistrarNCR.setup(new ItemAncientCultistArmor(EntityEquipmentSlot.CHEST), "ancient_crimson_chestplate"),
-                RegistrarNCR.setup(new ItemAncientCultistArmor(EntityEquipmentSlot.LEGS), "ancient_crimson_leggings"),
-                RegistrarNCR.setup(new ItemCultistArcherArmor(EntityEquipmentSlot.HEAD), "crimson_archer_helmet"),
-                RegistrarNCR.setup(new ItemCultistArcherArmor(EntityEquipmentSlot.CHEST), "crimson_archer_chestplate"),
-                RegistrarNCR.setup(new ItemCultistArcherArmor(EntityEquipmentSlot.LEGS), "crimson_archer_leggings"),
-                RegistrarNCR.setup(new ItemCultistPaladinArmor(EntityEquipmentSlot.HEAD), "crimson_paladin_helmet"),
-                RegistrarNCR.setup(new ItemCultistPaladinArmor(EntityEquipmentSlot.CHEST), "crimson_paladin_chestplate"),
-                RegistrarNCR.setup(new ItemCultistPaladinArmor(EntityEquipmentSlot.LEGS), "crimson_paladin_leggings"),
-                RegistrarNCR.setup(new ItemCultistRangerArmor(EntityEquipmentSlot.HEAD), "crimson_ranger_helmet"),
-                RegistrarNCR.setup(new ItemCultistRangerArmor(EntityEquipmentSlot.CHEST), "crimson_ranger_chestplate"),
-                RegistrarNCR.setup(new ItemCultistRangerArmor(EntityEquipmentSlot.LEGS), "crimson_ranger_leggings"),
+        MOD_ITEMS.add(RUNIC_RING_CHARGED = new ItemRunicBauble("runic_ring_charged", BaubleType.RING, 4).setRarity(EnumRarity.RARE));
+        MOD_ITEMS.add(RUNIC_RING_REGEN = new ItemRunicBauble("runic_ring_regen", BaubleType.RING, 4).setRarity(EnumRarity.RARE));
+        MOD_ITEMS.add(RUNIC_AMULET_EMERGENCY = new ItemRunicBauble("runic_amulet_emergency", BaubleType.AMULET, 7).setRarity(EnumRarity.RARE));
+        MOD_ITEMS.add(RUNIC_GIRDLE_KINETIC = new ItemRunicBauble("runic_girdle_kinetic", BaubleType.BELT, 9).setRarity(EnumRarity.RARE));
+        MOD_ITEMS.add(VERDANT_RING = new ItemVerdantRing("verdant_ring"));
 
-                RegistrarNCR.setup(new ItemBoneBow().setRarity(EnumRarity.RARE), "bone_bow"),
-                RegistrarNCR.setup(new ItemArrowBase().setRarity(EnumRarity.UNCOMMON), "aer_arrow"),
-                RegistrarNCR.setup(new ItemArrowBase().setRarity(EnumRarity.UNCOMMON), "aqua_arrow"),
-                RegistrarNCR.setup(new ItemArrowBase().setRarity(EnumRarity.UNCOMMON), "ignis_arrow"),
-                RegistrarNCR.setup(new ItemArrowBase().setRarity(EnumRarity.UNCOMMON), "ordo_arrow"),
-                RegistrarNCR.setup(new ItemArrowBase().setRarity(EnumRarity.UNCOMMON), "perditio_arrow"),
-                RegistrarNCR.setup(new ItemArrowBase().setRarity(EnumRarity.UNCOMMON), "terra_arrow"),
+        MOD_ITEMS.add(COMET_BOOTS = new ItemCometBoots("comet_boots"));
+        MOD_ITEMS.add(METEOR_BOOTS = new ItemMeteorBoots("meteor_boots"));
 
-                RegistrarNCR.setup(new ItemRunicBauble(BaubleType.RING, 1), "protection_ring"),
-                RegistrarNCR.setup(new ItemRunicBauble(BaubleType.RING, 5).setRarity(EnumRarity.UNCOMMON), "runic_ring"),
-                RegistrarNCR.setup(new ItemRunicBauble(BaubleType.AMULET, 8).setRarity(EnumRarity.UNCOMMON), "runic_amulet"),
-                RegistrarNCR.setup(new ItemRunicBauble(BaubleType.BELT, 10).setRarity(EnumRarity.UNCOMMON), "runic_girdle"),
-                RegistrarNCR.setup(new ItemRunicBauble(BaubleType.RING, 4).setRarity(EnumRarity.RARE), "runic_ring_charged"),
-                RegistrarNCR.setup(new ItemRunicBauble(BaubleType.RING, 4).setRarity(EnumRarity.RARE), "runic_ring_regen"),
-                RegistrarNCR.setup(new ItemRunicBauble(BaubleType.AMULET, 7).setRarity(EnumRarity.RARE), "runic_amulet_emergency"),
-                RegistrarNCR.setup(new ItemRunicBauble(BaubleType.BELT, 9).setRarity(EnumRarity.RARE), "runic_girdle_kinetic"),
-                RegistrarNCR.setup(new ItemVerdantRing(), "verdant_ring"),
+        MOD_ITEMS.add(TECHNOMANCER_SCRIBING_TOOLS = new ItemTechnomancerScribingTools("technomancer_scribing_tools").setRarity(EnumRarity.RARE));
+        MOD_ITEMS.add(KNOWLEDGE_SCRIBING_TOOLS = new ItemKnowledgeScribingTools("knowledge_scribing_tools").setRarity(ModRaritiesNCR.RARITY_KNOWLEDGE));
+        MOD_ITEMS.add(SANITATION_SCRIBING_TOOLS = new ItemSanitationScribingTools("sanitation_scribing_tools").setRarity(EnumRarity.RARE));
+        MOD_ITEMS.add(PRIMORDIAL_SCRIBING_TOOLS = new ItemPrimordialScribingTools("primordial_scribing_tools").setRarity(EnumRarity.EPIC));
 
-                RegistrarNCR.setup(new ItemCometBoots(), "comet_boots"),
-                RegistrarNCR.setup(new ItemMeteorBoots(), "meteor_boots"),
-
-                RegistrarNCR.setup(new ItemTechnomancerScribingTools(), "technomancer_scribing_tools").setRarity(EnumRarity.RARE),
-                RegistrarNCR.setup(new ItemKnowledgeScribingTools(), "knowledge_scribing_tools").setRarity(ModRaritiesNCR.RARITY_KNOWLEDGE),
-                RegistrarNCR.setup(new ItemSanitationScribingTools(), "sanitation_scribing_tools").setRarity(EnumRarity.RARE),
-                RegistrarNCR.setup(new ItemPrimordialScribingTools(), "primordial_scribing_tools").setRarity(EnumRarity.EPIC),
-
-                RegistrarNCR.setup(new ItemManaBean(), "mana_bean")
-        );
+        MOD_ITEMS.add(MANA_BEAN = new ItemManaBean("mana_bean"));
 
         if (ConfigHandlerNCR.distortion_pickaxe.enableDistortionPickaxe) {
-            registry.register(RegistrarNCR.setup(new ItemDistortedPickaxe().setRarity(EnumRarity.RARE), "distortion_pickaxe"));
+            MOD_ITEMS.add(DISTORTION_PICKAXE = new ItemDistortionPickaxe("distortion_pickaxe").setRarity(EnumRarity.RARE));
         }
 
         if (ConfigHandlerNCR.nutrition_ring.enableNutritionRing) {
-            registry.register(RegistrarNCR.setup(new ItemBaubleBase(BaubleType.RING).setRarity(EnumRarity.RARE), "nutrition_ring"));
+            MOD_ITEMS.add(NUTRITION_RING = new ItemBaubleBase("nutrition_ring", BaubleType.RING).setRarity(EnumRarity.RARE));
         }
 
         if (ConfigHandlerNCR.purifying_shovel.enablePurifyingShovel) {
-            registry.register(RegistrarNCR.setup(new ItemPurifyingShovel().setRarity(EnumRarity.RARE), "purifying_shovel"));
+            MOD_ITEMS.add(PURIFYING_SHOVEL = new ItemPurifyingShovel("purifying_shovel").setRarity(EnumRarity.RARE));
         }
 
         if (ConfigHandlerNCR.thaumic_litmus_paper.enableThaumicLitmusPaper) {
-            registry.register(RegistrarNCR.setup(new ItemLitmusPaper().setRarity(EnumRarity.UNCOMMON), "thaumic_litmus_paper"));
+            MOD_ITEMS.add(THAUMIC_LITMUS_PAPER = new ItemLitmusPaper("thaumic_litmus_paper").setRarity(EnumRarity.UNCOMMON));
         }
-
-        // Item Blocks
-        ForgeRegistries.BLOCKS.getValues().stream()
-                .filter(block -> Objects.requireNonNull(block.getRegistryName()).getNamespace().equals(NewCrimsonRevelations.MODID))
-                .filter(block -> !(block instanceof BlockDoor)) // Doors should not have an item block registered
-                .filter(block -> !(block instanceof BlockSlab)) // Slabs should not have an item block registered
-                .filter(block -> !(block instanceof BlockManaPod)) // Mana Pods should not have an item block registered
-                .forEach(block -> registry.register(RegistrarNCR.setup(new ItemBlock(block), block.getRegistryName())));
-    }
-
-    @SubscribeEvent
-    public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
-        final IForgeRegistry<IRecipe> registry = event.getRegistry();
-
-        // Special recipes go here
-        registry.register(new ShapelessOreRecipe(new ResourceLocation(Thaumcraft.MODID, "inkwell"), KNOWLEDGE_SCRIBING_TOOLS, new ItemStack(KNOWLEDGE_SCRIBING_TOOLS, 1, OreDictionary.WILDCARD_VALUE),
-                ThaumcraftApiHelper.makeCrystal(Aspect.SENSES)).setRegistryName(NewCrimsonRevelations.MODID, "knowledge_scribing_tools_refill"));
-        registry.register(new ShapelessOreRecipe(new ResourceLocation(Thaumcraft.MODID, "inkwell"), SANITATION_SCRIBING_TOOLS, new ItemStack(SANITATION_SCRIBING_TOOLS, 1, OreDictionary.WILDCARD_VALUE),
-                ThaumcraftApiHelper.makeCrystal(Aspect.MIND)).setRegistryName(NewCrimsonRevelations.MODID, "sanitation_scribing_tools_refill"));
-    }
-
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public static void onRegisterModelsEvent(@Nonnull final ModelRegistryEvent event) {
-        // Item Models
-        for (final Item item : ForgeRegistries.ITEMS.getValues()) {
-            if (Objects.requireNonNull(item.getRegistryName()).getNamespace().equals(NewCrimsonRevelations.MODID)) {
-                ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
-            }
-        }
-
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEtherealBloom.class, new TileEtherealBloomTESR());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileManaPod.class, new TileManaPodTESR());
     }
 }

@@ -1,5 +1,6 @@
 package mod.icarus.crimsonrevelations.block;
 
+import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.registry.ModBlocksNCR;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -10,10 +11,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 public class BlockMaterial extends Block {
-    public BlockMaterial(Material material, MapColor mapColor, float hardness, float resistance, SoundType soundType) {
+    public BlockMaterial(String unlocName, Material material, MapColor mapColor, float hardness, float resistance, SoundType soundType) {
         super(material, mapColor);
+        this.setRegistryName(NewCrimsonRevelations.MODID, unlocName);
+        this.setTranslationKey(Objects.requireNonNull(this.getRegistryName()).toString());
+        this.setCreativeTab(NewCrimsonRevelations.tabCR);
         this.setHardness(hardness);
         this.setResistance(resistance);
         this.setSoundType(soundType);

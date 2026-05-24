@@ -20,8 +20,8 @@ import javax.annotation.Nullable;
 
 // As Scribing Tools mainly check for durability, we'll need to have it be affected by vis charge.
 public class ItemTechnomancerScribingTools extends ItemBase implements IScribeTools, IRechargable {
-    public ItemTechnomancerScribingTools() {
-        super();
+    public ItemTechnomancerScribingTools(String unlocName) {
+        super(unlocName);
         this.maxStackSize = 1;
         this.setMaxDamage(400);
         this.setHasSubtypes(false);

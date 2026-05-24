@@ -28,8 +28,8 @@ public class ItemCultistRangerArmor extends ItemArmorDyeable implements IVisDisc
     ModelBiped model1 = null;
     ModelBiped model2 = null;
 
-    public ItemCultistRangerArmor(EntityEquipmentSlot slot) {
-        super(ModMaterialsNCR.ARMOR_CULTIST_RANGER, 4, slot);
+    public ItemCultistRangerArmor(String unlocName, EntityEquipmentSlot slot) {
+        super(unlocName, ModMaterialsNCR.ARMOR_CULTIST_RANGER, 4, slot);
     }
 
     @SideOnly(Side.CLIENT)

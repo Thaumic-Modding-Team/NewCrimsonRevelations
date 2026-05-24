@@ -1,5 +1,6 @@
 package mod.icarus.crimsonrevelations.block;
 
+import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.config.ConfigHandlerNCR;
 import mod.icarus.crimsonrevelations.registry.ModItemsNCR;
 import mod.icarus.crimsonrevelations.item.misc.ItemManaBean;
@@ -32,6 +33,7 @@ import thaumcraft.api.internal.WorldCoordinates;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
@@ -54,8 +56,11 @@ public class BlockManaPod extends Block implements IGrowable {
     public static float W15 = 0.9375F;
     static HashMap<WorldCoordinates, Aspect> st = new HashMap<>();
 
-    public BlockManaPod() {
+    public BlockManaPod(String unlocName) {
         super(Material.PLANTS);
+        this.setRegistryName(NewCrimsonRevelations.MODID, unlocName);
+        this.setTranslationKey(Objects.requireNonNull(this.getRegistryName()).toString());
+        this.setCreativeTab(NewCrimsonRevelations.tabCR);
         this.setDefaultState(this.blockState.getBaseState().withProperty(this.getAgeProperty(), 0));
         setTickRandomly(true);
         this.setHardness(0.5F);

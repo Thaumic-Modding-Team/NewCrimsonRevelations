@@ -16,8 +16,8 @@ public class ItemRunicBauble extends ItemBaubleBase implements IBauble {
     BaubleType type;
     int amount;
 
-    public ItemRunicBauble(BaubleType type, int amount) {
-        super(type);
+    public ItemRunicBauble(String unlocName, BaubleType type, int amount) {
+        super(unlocName, type);
         this.maxStackSize = 1;
         this.type = type;
         this.amount = amount;

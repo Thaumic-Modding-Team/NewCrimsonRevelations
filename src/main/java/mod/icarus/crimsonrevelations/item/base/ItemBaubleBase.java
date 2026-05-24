@@ -10,8 +10,8 @@ import net.minecraft.item.ItemStack;
 public class ItemBaubleBase extends ItemBase implements IBauble {
     BaubleType type;
 
-    public ItemBaubleBase(BaubleType type) {
-        super();
+    public ItemBaubleBase(String unlocName, BaubleType type) {
+        super(unlocName);
         this.maxStackSize = 1;
         this.type = type;
     }

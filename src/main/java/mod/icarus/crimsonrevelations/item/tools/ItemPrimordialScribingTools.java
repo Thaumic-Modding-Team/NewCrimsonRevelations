@@ -36,8 +36,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemPrimordialScribingTools extends ItemBase implements IScribeTools {
-    public ItemPrimordialScribingTools() {
-        super();
+    public ItemPrimordialScribingTools(String unlocName) {
+        super(unlocName);
         this.maxStackSize = 1;
         this.setMaxDamage(200);
         this.setHasSubtypes(false);

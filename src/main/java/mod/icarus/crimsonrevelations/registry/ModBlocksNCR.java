@@ -19,30 +19,24 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
-@EventBusSubscriber(modid = NewCrimsonRevelations.MODID)
-@GameRegistry.ObjectHolder(NewCrimsonRevelations.MODID)
 public class ModBlocksNCR {
-    public static final BlockMaterial MAGIC_TALLOW_BLOCK = null;
-    public static final BlockManaPod MANA_POD = null;
+    public static Block MAGIC_TALLOW_BLOCK = null;
+    public static BlockManaPod MANA_POD = null;
 
     // Optional Content
-    public static final BlockEtherealBloom ETHEREAL_BLOOM = null;
+    public static BlockEtherealBloom ETHEREAL_BLOOM = null;
 
-    @SubscribeEvent
-    public static void registerBlocks(@Nonnull final RegistryEvent.Register<Block> event) {
-        final IForgeRegistry<Block> registry = event.getRegistry();
+    public static final List<Block> MOD_BLOCKS = new ArrayList<>();
 
-        registry.registerAll(
-                RegistrarNCR.setup(new BlockMaterial(Material.ROCK, MapColor.SAND, 4.0F, 15.0F, SoundType.STONE), "magic_tallow_block"),
-                RegistrarNCR.setup(new BlockManaPod(), "mana_pod")
-        );
+    public static void initBlocks() {
+        MOD_BLOCKS.add(MAGIC_TALLOW_BLOCK = new BlockMaterial("magic_tallow_block", Material.ROCK, MapColor.SAND, 4.0F, 15.0F, SoundType.STONE));
+        MOD_BLOCKS.add(MANA_POD = new BlockManaPod("mana_pod"));
 
         if (ConfigHandlerNCR.ethereal_bloom.enableEtherealBloom) {
-            registry.register(RegistrarNCR.setup(new BlockEtherealBloom(), "ethereal_bloom"));
-            GameRegistry.registerTileEntity(TileEtherealBloom.class, new ResourceLocation(NewCrimsonRevelations.MODID, "ethereal_bloom"));
+            MOD_BLOCKS.add(ETHEREAL_BLOOM = new BlockEtherealBloom("ethereal_bloom"));
         }
-
-        GameRegistry.registerTileEntity(TileManaPod.class, new ResourceLocation(NewCrimsonRevelations.MODID, "mana_pod"));
     }
 }

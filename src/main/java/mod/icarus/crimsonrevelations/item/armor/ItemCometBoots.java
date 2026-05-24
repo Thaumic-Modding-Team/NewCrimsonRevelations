@@ -32,6 +32,7 @@ import thaumcraft.api.items.IVisDiscountGear;
 import thaumcraft.api.items.RechargeHelper;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
@@ -66,8 +67,11 @@ public class ItemCometBoots extends ItemArmor implements ISpecialArmor, IRecharg
     protected static final Predicate<EntityPlayer> CONTINUE_FUNC = player ->
             player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() instanceof ItemCometBoots;
 
-    public ItemCometBoots() {
+    public ItemCometBoots(String unlocName) {
         super(ModMaterialsNCR.BOOTS_COMET, 4, EntityEquipmentSlot.FEET);
+        this.setRegistryName(NewCrimsonRevelations.MODID, unlocName);
+        this.setTranslationKey(Objects.requireNonNull(this.getRegistryName()).toString());
+        this.setCreativeTab(NewCrimsonRevelations.tabCR);
     }
 
     @Override

@@ -27,8 +27,8 @@ import thaumcraft.common.lib.potions.PotionThaumarhia;
 import javax.annotation.Nonnull;
 
 public class ItemPurifyingShovel extends ItemShovelBase {
-    public ItemPurifyingShovel() {
-        super(ThaumcraftMaterials.TOOLMAT_ELEMENTAL);
+    public ItemPurifyingShovel(String unlocName) {
+        super(unlocName, ThaumcraftMaterials.TOOLMAT_ELEMENTAL);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package mod.icarus.crimsonrevelations.block;
 
+import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.tile.TileEtherealBloom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -19,12 +20,16 @@ import net.minecraftforge.common.EnumPlantType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public class BlockEtherealBloom extends BlockBush {
     protected static final AxisAlignedBB BUSH_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 1.125D, 0.7D);
 
-    public BlockEtherealBloom() {
+    public BlockEtherealBloom(String unlocName) {
         super(Material.PLANTS);
+        this.setRegistryName(NewCrimsonRevelations.MODID, unlocName);
+        this.setTranslationKey(Objects.requireNonNull(this.getRegistryName()).toString());
+        this.setCreativeTab(NewCrimsonRevelations.tabCR);
         this.setSoundType(SoundType.PLANT);
         this.setLightLevel(0.8F);
     }

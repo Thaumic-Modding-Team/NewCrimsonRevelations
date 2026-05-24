@@ -10,9 +10,11 @@ import mod.icarus.crimsonrevelations.recipe.crafting.VisAttunementInfusionRecipe
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.ThaumcraftApiHelper;
@@ -25,10 +27,16 @@ import thaumcraft.common.lib.crafting.InfusionEnchantmentRecipe;
 import thaumcraft.common.lib.enchantment.EnumInfusionEnchantment;
 
 public class ModRecipesNCR {
-    public static void initArcaneCrafting() {
-        // defaultGroup is meant for recipe books and is not really needed here.
-        ResourceLocation defaultGroup = new ResourceLocation("");
+    // defaultGroup is meant for recipe books and is not really needed here.
+    private static final ResourceLocation defaultGroup = new ResourceLocation("");
 
+    public static void initRecipes(RegistryEvent.Register<IRecipe> event) {
+        initArcaneWorkbenchRecipes();
+        initCrucibleRecipes();
+        initInfusionRecipes();
+    }
+
+    public static void initArcaneWorkbenchRecipes() {
         ThaumcraftApi.addArcaneCraftingRecipe(new ResourceLocation(NewCrimsonRevelations.MODID, "embellished_crimson_fabric"), new ShapelessArcaneRecipe(
                 defaultGroup, "CRIMSON_REVELATIONS_BASE", 10,
                 new AspectList(),
@@ -228,7 +236,7 @@ public class ModRecipesNCR {
         ThaumcraftApi.addArcaneCraftingRecipe(new ResourceLocation(NewCrimsonRevelations.MODID, "verdant_ring_to_charm"), new VerdantRingToCharmRecipe());
     }
 
-    public static void initCrucible() {
+    public static void initCrucibleRecipes() {
         ThaumcraftApi.addCrucibleRecipe(new ResourceLocation(NewCrimsonRevelations.MODID, "ancientstone"),
                 new CrucibleRecipe("CR_ANCIENT_STONE", new ItemStack(BlocksTC.stoneAncient), new ItemStack(BlocksTC.stoneArcane), new AspectList().add(Aspect.ELDRITCH, 5)));
 
@@ -239,7 +247,7 @@ public class ModRecipesNCR {
         }
     }
 
-    public static void initInfusion() {
+    public static void initInfusionRecipes() {
         ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation(NewCrimsonRevelations.MODID, "bone_bow"),
                 new InfusionRecipe("CR_BONE_BOW", new ItemStack(ModItemsNCR.BONE_BOW), 2,
                         new AspectList().add(Aspect.AIR, 40).add(Aspect.FLIGHT, 40).add(Aspect.ENTROPY, 40),

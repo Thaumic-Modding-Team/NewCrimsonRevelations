@@ -42,10 +42,6 @@ public class CommonProxy {
         CompatHandlerNCR.init();
         ConfigLists.initLists();
         ModLootTablesNCR.init();
-
-        ModRecipesNCR.initArcaneCrafting();
-        ModRecipesNCR.initCrucible();
-        ModRecipesNCR.initInfusion();
     }
 
     public void postInit() {

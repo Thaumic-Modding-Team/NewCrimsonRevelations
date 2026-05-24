@@ -40,6 +40,7 @@ import thaumcraft.api.capabilities.IPlayerKnowledge;
 import thaumcraft.api.research.ResearchCategory;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
@@ -48,8 +49,11 @@ public class ItemManaBean extends ItemFood implements IEssentiaContainerItem {
     public final int itemUseDuration;
     Random rand;
 
-    public ItemManaBean() {
+    public ItemManaBean(String unlocName) {
         super(1, 0.5F, true);
+        this.setRegistryName(NewCrimsonRevelations.MODID, unlocName);
+        this.setTranslationKey(Objects.requireNonNull(this.getRegistryName()).toString());
+        this.setCreativeTab(NewCrimsonRevelations.tabCR);
         this.rand = new Random();
         this.itemUseDuration = 10;
         setHasSubtypes(true);

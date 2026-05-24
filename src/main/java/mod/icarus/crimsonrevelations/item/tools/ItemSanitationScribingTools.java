@@ -34,8 +34,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemSanitationScribingTools extends ItemBase implements IScribeTools {
-    public ItemSanitationScribingTools() {
-        super();
+    public ItemSanitationScribingTools(String unlocName) {
+        super(unlocName);
         this.maxStackSize = 1;
         this.setMaxDamage(60);
         this.setHasSubtypes(false);

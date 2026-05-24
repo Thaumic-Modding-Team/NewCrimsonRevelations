@@ -20,8 +20,8 @@ import thaumcraft.common.lib.enchantment.EnumInfusionEnchantment;
 import javax.annotation.Nonnull;
 
 public class ItemExecutionAxe extends ItemAxeBase {
-    public ItemExecutionAxe() {
-        super(ThaumcraftMaterials.TOOLMAT_ELEMENTAL, 10.0F, 1.2F);
+    public ItemExecutionAxe(String unlocName) {
+        super(unlocName, ThaumcraftMaterials.TOOLMAT_ELEMENTAL, 10.0F, 1.2F);
     }
 
     @Override

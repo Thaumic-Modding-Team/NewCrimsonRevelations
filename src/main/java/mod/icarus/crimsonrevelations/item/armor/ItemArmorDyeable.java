@@ -1,5 +1,6 @@
 package mod.icarus.crimsonrevelations.item.armor;
 
+import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.item.IDyeableGear;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.state.IBlockState;
@@ -25,10 +26,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 
 public class ItemArmorDyeable extends ItemArmor implements IDyeableGear {
-    public ItemArmorDyeable(ArmorMaterial material, int renderIndex, EntityEquipmentSlot equipmentSlot) {
+    public ItemArmorDyeable(String unlocName, ArmorMaterial material, int renderIndex, EntityEquipmentSlot equipmentSlot) {
         super(material, renderIndex, equipmentSlot);
+        this.setRegistryName(NewCrimsonRevelations.MODID, unlocName);
+        this.setTranslationKey(Objects.requireNonNull(this.getRegistryName()).toString());
+        this.setCreativeTab(NewCrimsonRevelations.tabCR);
         this.addPropertyOverride(new ResourceLocation("dyed"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
             public float apply(@Nonnull ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity) {

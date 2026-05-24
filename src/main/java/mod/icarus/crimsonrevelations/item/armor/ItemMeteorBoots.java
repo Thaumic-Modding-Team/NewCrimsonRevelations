@@ -31,6 +31,7 @@ import thaumcraft.api.items.RechargeHelper;
 import thaumcraft.common.lib.SoundsTC;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
@@ -65,8 +66,11 @@ public class ItemMeteorBoots extends ItemArmor implements ISpecialArmor, IRechar
     protected static final Predicate<EntityPlayer> CONTINUE_FUNC = player ->
             player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() instanceof ItemMeteorBoots;
 
-    public ItemMeteorBoots() {
+    public ItemMeteorBoots(String unlocName) {
         super(ModMaterialsNCR.BOOTS_METEOR, 4, EntityEquipmentSlot.FEET);
+        this.setRegistryName(NewCrimsonRevelations.MODID, unlocName);
+        this.setTranslationKey(Objects.requireNonNull(this.getRegistryName()).toString());
+        this.setCreativeTab(NewCrimsonRevelations.tabCR);
     }
 
     public static boolean getSmashingState(ItemStack stack) {

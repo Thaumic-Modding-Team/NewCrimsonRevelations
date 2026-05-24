@@ -9,9 +9,9 @@ import net.minecraft.item.crafting.Ingredient;
 import javax.annotation.Nonnull;
 
 public class ItemBoneBow extends ItemBowBase {
-    public ItemBoneBow() {
+    public ItemBoneBow(String unlocName) {
         // Durability, Damage Multiplier, Velocity Multiplier, Draw Time Multiplier, Inaccuracy, Rarity, Repair Material
-        super(512, 1.15F, 1.5F, 0.8F, 0.8F, Ingredient.fromStacks(new ItemStack(Items.BONE)));
+        super(unlocName, 512, 1.15F, 1.5F, 0.8F, 0.8F, Ingredient.fromStacks(new ItemStack(Items.BONE)));
     }
 
     @Override

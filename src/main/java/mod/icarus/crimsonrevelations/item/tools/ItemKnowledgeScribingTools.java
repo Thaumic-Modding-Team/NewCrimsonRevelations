@@ -35,8 +35,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemKnowledgeScribingTools extends ItemBase implements IScribeTools {
-    public ItemKnowledgeScribingTools() {
-        super();
+    public ItemKnowledgeScribingTools(String unlocName) {
+        super(unlocName);
         this.maxStackSize = 1;
         this.setMaxDamage(60);
         this.setHasSubtypes(false);

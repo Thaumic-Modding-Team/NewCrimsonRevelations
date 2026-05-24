@@ -7,9 +7,9 @@ import thaumcraft.api.items.ItemsTC;
 
 import javax.annotation.Nonnull;
 
-public class ItemDistortedPickaxe extends ItemPickaxeBase {
-    public ItemDistortedPickaxe() {
-        super(ThaumcraftMaterials.TOOLMAT_ELEMENTAL);
+public class ItemDistortionPickaxe extends ItemPickaxeBase {
+    public ItemDistortionPickaxe(String unlocName) {
+        super(unlocName, ThaumcraftMaterials.TOOLMAT_ELEMENTAL);
         this.setHarvestLevel("pickaxe", 5);
     }
 

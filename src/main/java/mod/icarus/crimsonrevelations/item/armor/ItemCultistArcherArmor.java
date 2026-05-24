@@ -25,8 +25,8 @@ public class ItemCultistArcherArmor extends ItemArmorDyeable {
     ModelBiped model1 = null;
     ModelBiped model2 = null;
 
-    public ItemCultistArcherArmor(EntityEquipmentSlot slot) {
-        super(ModMaterialsNCR.ARMOR_CULTIST_ARCHER, 4, slot);
+    public ItemCultistArcherArmor(String unlocName, EntityEquipmentSlot slot) {
+        super(unlocName, ModMaterialsNCR.ARMOR_CULTIST_ARCHER, 4, slot);
     }
 
     @SideOnly(Side.CLIENT)

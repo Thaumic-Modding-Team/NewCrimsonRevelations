@@ -1,5 +1,6 @@
 package mod.icarus.crimsonrevelations.item.base;
 
+import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.entity.projectile.EntityPrimalArrow;
 import mod.icarus.crimsonrevelations.registry.ModItemsNCR;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -16,12 +17,15 @@ import net.minecraftforge.common.IRarity;
 import thaumcraft.common.lib.SoundsTC;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 public class ItemArrowBase extends net.minecraft.item.ItemArrow {
     IRarity rarity;
 
-    public ItemArrowBase() {
-        super();
+    public ItemArrowBase(String unlocName) {
+        this.setRegistryName(NewCrimsonRevelations.MODID, unlocName);
+        this.setTranslationKey(Objects.requireNonNull(this.getRegistryName()).toString());
+        this.setCreativeTab(NewCrimsonRevelations.tabCR);
         this.setRarity(EnumRarity.COMMON);
     }
 

@@ -19,8 +19,8 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class ItemLitmusPaper extends ItemBase {
-    public ItemLitmusPaper() {
-        super();
+    public ItemLitmusPaper(String unlocName) {
+        super(unlocName);
     }
 
     @Override

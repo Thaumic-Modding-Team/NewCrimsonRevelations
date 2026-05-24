@@ -1,5 +1,6 @@
 package mod.icarus.crimsonrevelations.item.base;
 
+import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +28,10 @@ public class ItemBowBase extends ItemBow {
     public IRarity rarity;
     public Ingredient repairMaterial;
 
-    public ItemBowBase(int durability, float damageMult, float velocityMult, float drawTimeMult, float inaccuracy, Ingredient repairMaterial) {
+    public ItemBowBase(String unlocName, int durability, float damageMult, float velocityMult, float drawTimeMult, float inaccuracy, Ingredient repairMaterial) {
+        this.setRegistryName(NewCrimsonRevelations.MODID, unlocName);
+        this.setTranslationKey(Objects.requireNonNull(this.getRegistryName()).toString());
+        this.setCreativeTab(NewCrimsonRevelations.tabCR);
         this.maxStackSize = 1;
         this.setMaxDamage(durability);
         this.damageMult = damageMult;

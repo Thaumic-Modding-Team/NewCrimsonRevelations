@@ -1,5 +1,6 @@
 package mod.icarus.crimsonrevelations.item.armor;
 
+import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.client.model.equipment.armor.ModelCultistKnightArmor;
 import mod.icarus.crimsonrevelations.registry.ModMaterialsNCR;
 import mod.icarus.crimsonrevelations.registry.ModRenderRegistryNCR;
@@ -20,14 +21,18 @@ import thaumcraft.api.items.IVisDiscountGear;
 import thaumcraft.api.items.IWarpingGear;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 public class ItemAncientCultistArmor extends ItemArmor implements IVisDiscountGear, IWarpingGear {
     protected static final String TEXTURE_PATH = new ResourceLocation(Thaumcraft.MODID, "textures/entity/armor/zombie_plate_armor.png").toString();
     ModelBiped model1 = null;
     ModelBiped model2 = null;
 
-    public ItemAncientCultistArmor(EntityEquipmentSlot slot) {
+    public ItemAncientCultistArmor(String unlocName, EntityEquipmentSlot slot) {
         super(ModMaterialsNCR.ARMOR_ANCIENT_CULTIST, 4, slot);
+        this.setRegistryName(NewCrimsonRevelations.MODID, unlocName);
+        this.setTranslationKey(Objects.requireNonNull(this.getRegistryName()).toString());
+        this.setCreativeTab(NewCrimsonRevelations.tabCR);
     }
 
     @SideOnly(Side.CLIENT)

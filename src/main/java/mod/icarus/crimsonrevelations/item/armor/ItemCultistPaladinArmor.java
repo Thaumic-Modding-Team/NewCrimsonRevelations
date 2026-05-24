@@ -28,8 +28,8 @@ public class ItemCultistPaladinArmor extends ItemArmorDyeable implements IVisDis
     ModelBiped model1 = null;
     ModelBiped model2 = null;
 
-    public ItemCultistPaladinArmor(EntityEquipmentSlot slot) {
-        super(ModMaterialsNCR.ARMOR_CULTIST_PALADIN, 4, slot);
+    public ItemCultistPaladinArmor(String unlocName, EntityEquipmentSlot slot) {
+        super(unlocName, ModMaterialsNCR.ARMOR_CULTIST_PALADIN, 4, slot);
     }
 
     @SideOnly(Side.CLIENT)
