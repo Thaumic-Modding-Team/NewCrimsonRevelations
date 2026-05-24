@@ -125,6 +125,10 @@ dependencies {
     implementation rfg.deobf('curse.maven:thaumic-augmentation-319441:6047659')
     implementation rfg.deobf('curse.maven:thaumcraftfix-1069346:7288369')
     implementation rfg.deobf('curse.maven:thaumictweaker-1341797:7523519')
+    implementation rfg.deobf('curse.maven:magiculture-integrations-1064613:8120899')
+
+    // Botania
+    compileOnly rfg.deobf('curse.maven:botania-225643:3330934')
 
     // Dev environment only, needed to run Thaumcraft Fix with Forge 2847
     runtimeOnly 'com.cleanroommc:strip-latest-forge-requirements:1.0'

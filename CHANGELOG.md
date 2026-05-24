@@ -4,6 +4,7 @@
 This update cleans up and reworks a lot of code in the mod to prepare for the next major update. [ThaumicAPI](https://www.curseforge.com/minecraft/mc-mods/thaumicapi) was also integrated and is now required going forward.
 ### Added
 - Added default Tropicraft Legacy support for Beheading
+- Added Botania and Magiculture Integrations compat with Mana Pods
 ### Changed
 - Refactored the entire mod's code and cleaned up several classes
 - Updated `ru_ru.lang` courtesy of Quarkrus
