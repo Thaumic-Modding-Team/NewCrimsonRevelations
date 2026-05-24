@@ -6,7 +6,7 @@ import mod.icarus.crimsonrevelations.config.ConfigLists;
 import mod.icarus.crimsonrevelations.registry.ModBlocksNCR;
 import mod.icarus.crimsonrevelations.registry.ModItemsNCR;
 import mod.icarus.crimsonrevelations.tile.TileManaPod;
-import mod.icarus.crimsonrevelations.utils.ResearchHelperNCR;
+import mod.icarus.crimsonrevelations.utils.helpers.ResearchHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
@@ -80,7 +80,7 @@ public class ItemManaBean extends ItemFood implements IEssentiaContainerItem {
 
             // Chance for an eaten bean to grant theories and observations for research
             if (world.rand.nextDouble() <= ConfigHandlerNCR.mana_beans.researchChance) {
-                ResearchCategory[] rc = ResearchHelperNCR.getResearchCategories();
+                ResearchCategory[] rc = ResearchHelper.getResearchCategories();
                 int oProg = IPlayerKnowledge.EnumKnowledgeType.OBSERVATION.getProgression();
                 int tProg = IPlayerKnowledge.EnumKnowledgeType.THEORY.getProgression();
 

@@ -1,4 +1,4 @@
-package mod.icarus.crimsonrevelations.recipe;
+package mod.icarus.crimsonrevelations.recipe.crafting;
 
 import mod.icarus.crimsonrevelations.enchants.InfusionEnchantments;
 import net.minecraft.entity.player.EntityPlayer;

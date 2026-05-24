@@ -61,7 +61,7 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 @EventBusSubscriber(modid = NewCrimsonRevelations.MODID)
 @GameRegistry.ObjectHolder(NewCrimsonRevelations.MODID)
-public class CREvents {
+public class CommonEventHandler {
     @SubscribeEvent
     public static void onHarvestDrops(BlockEvent.HarvestDropsEvent event) {
         // Axe of Execution - Smelts wood chopped, also works with Fortune and gives experience.

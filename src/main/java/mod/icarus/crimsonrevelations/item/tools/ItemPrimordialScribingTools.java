@@ -3,7 +3,7 @@ package mod.icarus.crimsonrevelations.item.tools;
 import mod.icarus.crimsonrevelations.config.ConfigHandlerNCR;
 import mod.icarus.crimsonrevelations.registry.ModSoundEventsNCR;
 import mod.icarus.crimsonrevelations.item.base.ItemBase;
-import mod.icarus.crimsonrevelations.utils.ResearchHelperNCR;
+import mod.icarus.crimsonrevelations.utils.helpers.ResearchHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,7 +46,7 @@ public class ItemPrimordialScribingTools extends ItemBase implements IScribeTool
     @Override
     public ActionResult<ItemStack> onItemRightClick(@Nonnull World world, EntityPlayer player, @Nonnull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
-        ResearchCategory[] categories = ResearchHelperNCR.getResearchCategories();
+        ResearchCategory[] categories = ResearchHelper.getResearchCategories();
         int observationProgress = IPlayerKnowledge.EnumKnowledgeType.OBSERVATION.getProgression();
         int theoryProgress = IPlayerKnowledge.EnumKnowledgeType.THEORY.getProgression();
         IPlayerWarp warp = ThaumcraftCapabilities.getWarp(player);

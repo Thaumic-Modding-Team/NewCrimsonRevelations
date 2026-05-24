@@ -1,4 +1,4 @@
-package mod.icarus.crimsonrevelations.recipe;
+package mod.icarus.crimsonrevelations.recipe.crafting;
 
 import mod.icarus.crimsonrevelations.registry.ModItemsNCR;
 import net.minecraft.inventory.InventoryCrafting;
@@ -11,11 +11,11 @@ import thaumcraft.api.items.ItemsTC;
 
 import javax.annotation.Nonnull;
 
-public class VerdantRingToCharmRecipe extends ShapelessArcaneRecipe {
-    private static final Item ring = ModItemsNCR.VERDANT_RING;
+public class VerdantCharmToRingRecipe extends ShapelessArcaneRecipe {
+    private static final Item charm = ItemsTC.charmVerdant;
 
-    public VerdantRingToCharmRecipe() {
-        super(new ResourceLocation(""), "CR_VERDANT_BANDS", 50, new AspectList(), ItemStack.EMPTY, new Object[]{ring});
+    public VerdantCharmToRingRecipe() {
+        super(new ResourceLocation(""), "CR_VERDANT_BANDS", 50, new AspectList(), ItemStack.EMPTY, new Object[]{charm});
     }
 
     @Nonnull
@@ -26,7 +26,7 @@ public class VerdantRingToCharmRecipe extends ShapelessArcaneRecipe {
         for (int i = 0; i < var1.getSizeInventory(); i++) {
             ItemStack stack = var1.getStackInSlot(i);
 
-            if (!stack.isEmpty() && stack.getItem() == ring) {
+            if (!stack.isEmpty() && stack.getItem() == charm) {
                 item = stack;
             }
         }
@@ -35,7 +35,7 @@ public class VerdantRingToCharmRecipe extends ShapelessArcaneRecipe {
             return ItemStack.EMPTY;
         }
 
-        ItemStack result = new ItemStack(ItemsTC.charmVerdant);
+        ItemStack result = new ItemStack(ModItemsNCR.VERDANT_RING);
 
         if (item.getTagCompound() != null) {
             result.setTagCompound(item.getTagCompound());

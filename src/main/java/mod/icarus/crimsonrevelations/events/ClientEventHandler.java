@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @EventBusSubscriber(modid = NewCrimsonRevelations.MODID)
-public class CRClientEvents {
+public class ClientEventHandler {
     // Courtesy of NeRdTheNed
 
     @SideOnly(Side.CLIENT)

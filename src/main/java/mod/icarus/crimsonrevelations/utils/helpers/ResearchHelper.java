@@ -1,4 +1,4 @@
-package mod.icarus.crimsonrevelations.utils;
+package mod.icarus.crimsonrevelations.utils.helpers;
 
 import net.minecraftforge.fml.common.Loader;
 import thaumcraft.api.research.ResearchCategories;
@@ -8,7 +8,7 @@ import thecodex6824.thaumcraftfix.api.research.ResearchCategoryTheorycraftFilter
 import java.util.HashSet;
 import java.util.Set;
 
-public class ResearchHelperNCR {
+public class ResearchHelper {
     public static final boolean isThaumcraftFixLoaded = Loader.isModLoaded("thaumcraftfix");
 
     public static ResearchCategory[] getResearchCategories() {

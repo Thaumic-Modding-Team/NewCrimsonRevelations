@@ -2,7 +2,7 @@ package mod.icarus.crimsonrevelations.registry;
 
 import com.google.common.base.Preconditions;
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
-import mod.icarus.crimsonrevelations.recipe.DyeableItemRecipe;
+import mod.icarus.crimsonrevelations.recipe.crafting.DyeableItemRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
