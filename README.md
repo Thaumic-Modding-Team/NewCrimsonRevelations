@@ -2,6 +2,7 @@
 
 [![Requires MixinBooter](https://img.shields.io/badge/Requires-MixinBooter-B72F2F.svg?labelColor=3D1A1A&style=for-the-badge)](https://www.curseforge.com/minecraft/mc-mods/mixin-booter)
 [![Requires ConfigAnytime](https://img.shields.io/badge/Requires-ConfigAnytime-B72F2F.svg?labelColor=3D1A1A&style=for-the-badge)](https://www.curseforge.com/minecraft/mc-mods/configanytime)
+[![Requires ThaumicAPI](https://img.shields.io/badge/Requires-ThaumicAPI-B72F2F.svg?labelColor=3D1A1A&style=for-the-badge)](https://www.curseforge.com/minecraft/mc-mods/thaumicapi)
 
 ![All the Content](docs/mod_content.png)
 
