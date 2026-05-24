@@ -1,9 +1,8 @@
 package mod.icarus.crimsonrevelations;
 
-import mod.icarus.crimsonrevelations.init.*;
+import mod.icarus.crimsonrevelations.registry.*;
 import mod.icarus.crimsonrevelations.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.monster.*;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -29,7 +28,7 @@ public class NewCrimsonRevelations {
     public static final String CLIENT_PROXY = "mod.icarus.crimsonrevelations.proxy.ClientProxy";
     public static final String COMMON_PROXY = "mod.icarus.crimsonrevelations.proxy.CommonProxy";
 
-    public static final CreativeTabs tabCR = new CRCreativeTabs(CreativeTabs.CREATIVE_TAB_ARRAY.length, "CrimsonRevelationsTab");
+    public static final CreativeTabs tabCR = new CreativeTabsNCR(CreativeTabs.CREATIVE_TAB_ARRAY.length, "CrimsonRevelationsTab");
 
     @Mod.Instance(MODID)
     public static NewCrimsonRevelations instance;

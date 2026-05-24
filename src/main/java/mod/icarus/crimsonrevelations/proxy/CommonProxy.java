@@ -2,13 +2,13 @@ package mod.icarus.crimsonrevelations.proxy;
 
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.casters.foci.*;
-import mod.icarus.crimsonrevelations.compat.CRCompatHandler;
-import mod.icarus.crimsonrevelations.config.CRConfig;
-import mod.icarus.crimsonrevelations.config.CRConfigLists;
+import mod.icarus.crimsonrevelations.compat.CompatHandlerNCR;
+import mod.icarus.crimsonrevelations.config.ConfigHandlerNCR;
+import mod.icarus.crimsonrevelations.config.ConfigLists;
 import mod.icarus.crimsonrevelations.entity.EntityCultistArcher;
 import mod.icarus.crimsonrevelations.entity.boss.EntityOvergrownTaintacle;
-import mod.icarus.crimsonrevelations.init.*;
-import mod.icarus.crimsonrevelations.network.CRPacketHandler;
+import mod.icarus.crimsonrevelations.registry.*;
+import mod.icarus.crimsonrevelations.network.PacketHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
@@ -35,23 +35,23 @@ public class CommonProxy {
         this.registerFoci();
         this.registerGolemMaterials();
         this.registerResearch();
-        CRPacketHandler.init();
+        PacketHandler.init();
 
-        CREntities.registerDispenserBehavior();
+        ModEntitiesNCR.registerDispenserBehavior();
 
-        CRCompatHandler.init();
-        CRConfigLists.initLists();
-        CRLootTables.init();
+        CompatHandlerNCR.init();
+        ConfigLists.initLists();
+        ModLootTablesNCR.init();
 
-        CRRecipes.initArcaneCrafting();
-        CRRecipes.initCrucible();
-        CRRecipes.initInfusion();
+        ModRecipesNCR.initArcaneCrafting();
+        ModRecipesNCR.initCrucible();
+        ModRecipesNCR.initInfusion();
     }
 
     public void postInit() {
-        CREntities.registerEntitySpawns();
+        ModEntitiesNCR.registerEntitySpawns();
 
-        CRCompatHandler.postInit();
+        CompatHandlerNCR.postInit();
     }
 
     private void registerFoci() {
@@ -60,7 +60,7 @@ public class CommonProxy {
         FocusEngine.registerElement(FocusEffectPoison.class, new ResourceLocation(NewCrimsonRevelations.MODID, "textures/foci/poison.png"), 9039872);
         FocusEngine.registerElement(FocusEffectPunch.class, new ResourceLocation(NewCrimsonRevelations.MODID, "textures/foci/punch.png"), 16357381);
 
-        if (Loader.isModLoaded("thaumicaugmentation") && CRConfig.mod_integration_settings.enableTAIntegration) {
+        if (Loader.isModLoaded("thaumicaugmentation") && ConfigHandlerNCR.mod_integration_settings.enableTAIntegration) {
             FocusEngine.registerElement(FocusEffectTaintPoison.class, new ResourceLocation(NewCrimsonRevelations.MODID, "textures/foci/taint_poison.png"), 10354925);
         }
     }
@@ -69,7 +69,7 @@ public class CommonProxy {
         GolemMaterial.register(
                 new GolemMaterial("CR_CULT_PLATE", new String[]{"CR_GOLEM_MAT_CULT_PLATE"}, new ResourceLocation(NewCrimsonRevelations.MODID, "textures/entity/golem/mat_cult_plate.png"),
                         4342338, 22, 9, 3, // [Color, Health, Armor , Damage] - [1 = 0.5]
-                        new ItemStack(CRItems.CRIMSON_PLATE), new ItemStack(ItemsTC.mechanismSimple), // Base Component, Base Mechanism
+                        new ItemStack(ModItemsNCR.CRIMSON_PLATE), new ItemStack(ItemsTC.mechanismSimple), // Base Component, Base Mechanism
                         new EnumGolemTrait[]{EnumGolemTrait.LIGHT, EnumGolemTrait.FIREPROOF} // Starting Traits
                 )
         );
@@ -83,7 +83,7 @@ public class CommonProxy {
         GolemMaterial.register(
                 new GolemMaterial("CR_TALLOW", new String[]{"CR_GOLEM_MAT_TALLOW"}, new ResourceLocation(NewCrimsonRevelations.MODID, "textures/entity/golem/mat_tallow.png"),
                         12823156, 14, 4, 3, // [Color, Health, Armor , Damage] - [1 = 0.5]
-                        new ItemStack(CRBlocks.MAGIC_TALLOW_BLOCK), new ItemStack(ItemsTC.mechanismSimple), // Base Component, Base Mechanism
+                        new ItemStack(ModBlocksNCR.MAGIC_TALLOW_BLOCK), new ItemStack(ItemsTC.mechanismSimple), // Base Component, Base Mechanism
                         new EnumGolemTrait[]{} // Starting Traits
                 )
         );
@@ -103,20 +103,25 @@ public class CommonProxy {
 
         ThaumcraftApi.registerResearchLocation(new ResourceLocation(NewCrimsonRevelations.MODID, "research/compat/thaumcraft"));
 
-        if (CRConfig.distortion_pickaxe.enableDistortionPickaxe) ThaumcraftApi.registerResearchLocation(new ResourceLocation(NewCrimsonRevelations.MODID, "research/optional/distortion_pickaxe"));
-        if (CRConfig.ethereal_bloom.enableEtherealBloom) ThaumcraftApi.registerResearchLocation(new ResourceLocation(NewCrimsonRevelations.MODID, "research/optional/ethereal_bloom"));
-        if (CRConfig.nutrition_ring.enableNutritionRing) ThaumcraftApi.registerResearchLocation(new ResourceLocation(NewCrimsonRevelations.MODID, "research/optional/nutrition_ring"));
-        if (CRConfig.purifying_shovel.enablePurifyingShovel) ThaumcraftApi.registerResearchLocation(new ResourceLocation(NewCrimsonRevelations.MODID, "research/optional/purifying_shovel"));
-        if (CRConfig.thaumic_litmus_paper.enableThaumicLitmusPaper) ThaumcraftApi.registerResearchLocation(new ResourceLocation(NewCrimsonRevelations.MODID, "research/optional/litmus_paper"));
+        if (ConfigHandlerNCR.distortion_pickaxe.enableDistortionPickaxe)
+            ThaumcraftApi.registerResearchLocation(new ResourceLocation(NewCrimsonRevelations.MODID, "research/optional/distortion_pickaxe"));
+        if (ConfigHandlerNCR.ethereal_bloom.enableEtherealBloom)
+            ThaumcraftApi.registerResearchLocation(new ResourceLocation(NewCrimsonRevelations.MODID, "research/optional/ethereal_bloom"));
+        if (ConfigHandlerNCR.nutrition_ring.enableNutritionRing)
+            ThaumcraftApi.registerResearchLocation(new ResourceLocation(NewCrimsonRevelations.MODID, "research/optional/nutrition_ring"));
+        if (ConfigHandlerNCR.purifying_shovel.enablePurifyingShovel)
+            ThaumcraftApi.registerResearchLocation(new ResourceLocation(NewCrimsonRevelations.MODID, "research/optional/purifying_shovel"));
+        if (ConfigHandlerNCR.thaumic_litmus_paper.enableThaumicLitmusPaper)
+            ThaumcraftApi.registerResearchLocation(new ResourceLocation(NewCrimsonRevelations.MODID, "research/optional/litmus_paper"));
 
-        ScanningManager.addScannableThing(new ScanBlock("!CR_MANA_POD", CRBlocks.MANA_POD));
+        ScanningManager.addScannableThing(new ScanBlock("!CR_MANA_POD", ModBlocksNCR.MANA_POD));
 
         ScanningManager.addScannableThing(new ScanEntity("!CR_CRIMSON_ARCHER", EntityCultistArcher.class, true));
         ScanningManager.addScannableThing(new ScanEntity("!CR_CRIMSON_CLERIC", EntityCultistCleric.class, true));
         ScanningManager.addScannableThing(new ScanEntity("!CR_CRIMSON_KNIGHT", EntityCultistKnight.class, true));
         ScanningManager.addScannableThing(new ScanEntity("!CR_OVERGROWN_TAINTACLE", EntityOvergrownTaintacle.class, true));
 
-        if (Loader.isModLoaded("thaumicaugmentation") && CRConfig.mod_integration_settings.enableTAIntegration) {
+        if (Loader.isModLoaded("thaumicaugmentation") && ConfigHandlerNCR.mod_integration_settings.enableTAIntegration) {
             ThaumcraftApi.registerResearchLocation(new ResourceLocation(NewCrimsonRevelations.MODID, "research/compat/thaumic_augmentation"));
         }
     }

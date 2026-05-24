@@ -1,7 +1,7 @@
 package mod.icarus.crimsonrevelations.casters.foci;
 
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
-import mod.icarus.crimsonrevelations.init.CRSoundEvents;
+import mod.icarus.crimsonrevelations.registry.ModSoundEventsNCR;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.SoundCategory;
@@ -55,7 +55,7 @@ public class FocusEffectPunch extends FocusEffect {
     @Override
     public boolean execute(RayTraceResult target, Trajectory trajectory, float finalPower, int num) {
         PacketHandler.INSTANCE.sendToAllAround(new PacketFXFocusPartImpact(target.hitVec.x, target.hitVec.y, target.hitVec.z, new String[]{this.getKey()}), new NetworkRegistry.TargetPoint(this.getPackage().world.provider.getDimension(), target.hitVec.x, target.hitVec.y, target.hitVec.z, 64.0D));
-        this.getPackage().world.playSound(null, target.hitVec.x, target.hitVec.y, target.hitVec.z, CRSoundEvents.FOCUS_PUNCH_HIT, SoundCategory.PLAYERS, 0.33F, 1.0F + this.getPackage().world.rand.nextFloat() * 0.1F);
+        this.getPackage().world.playSound(null, target.hitVec.x, target.hitVec.y, target.hitVec.z, ModSoundEventsNCR.FOCUS_PUNCH_HIT, SoundCategory.PLAYERS, 0.33F, 1.0F + this.getPackage().world.rand.nextFloat() * 0.1F);
 
         if (target.typeOfHit == RayTraceResult.Type.ENTITY && target.entityHit != null) {
             float knockback = this.getSettingValue("knockback");
@@ -76,7 +76,7 @@ public class FocusEffectPunch extends FocusEffect {
 
     @Override
     public void onCast(Entity caster) {
-        caster.world.playSound(null, caster.getPosition().up(), CRSoundEvents.FOCUS_PUNCH_SHOOT, SoundCategory.PLAYERS, 0.9F, 1.0F + caster.world.rand.nextFloat() * 0.1F);
+        caster.world.playSound(null, caster.getPosition().up(), ModSoundEventsNCR.FOCUS_PUNCH_SHOOT, SoundCategory.PLAYERS, 0.9F, 1.0F + caster.world.rand.nextFloat() * 0.1F);
     }
 
     @Override

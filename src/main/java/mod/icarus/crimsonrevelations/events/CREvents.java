@@ -2,15 +2,15 @@ package mod.icarus.crimsonrevelations.events;
 
 import baubles.api.BaublesApi;
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
-import mod.icarus.crimsonrevelations.block.CRBlockManaPod;
-import mod.icarus.crimsonrevelations.config.CRConfig;
+import mod.icarus.crimsonrevelations.block.BlockManaPod;
+import mod.icarus.crimsonrevelations.config.ConfigHandlerNCR;
 import mod.icarus.crimsonrevelations.entity.boss.EntityOvergrownTaintacle;
-import mod.icarus.crimsonrevelations.init.CRItems;
-import mod.icarus.crimsonrevelations.init.CRRegistry;
-import mod.icarus.crimsonrevelations.init.CRSoundEvents;
-import mod.icarus.crimsonrevelations.item.CRItemManaBean;
-import mod.icarus.crimsonrevelations.item.armor.CRItemCometBoots;
-import mod.icarus.crimsonrevelations.item.armor.CRItemMeteorBoots;
+import mod.icarus.crimsonrevelations.registry.ModItemsNCR;
+import mod.icarus.crimsonrevelations.registry.RegistrarNCR;
+import mod.icarus.crimsonrevelations.registry.ModSoundEventsNCR;
+import mod.icarus.crimsonrevelations.item.armor.ItemCometBoots;
+import mod.icarus.crimsonrevelations.item.armor.ItemMeteorBoots;
+import mod.icarus.crimsonrevelations.item.misc.ItemManaBean;
 import mod.icarus.crimsonrevelations.world.WorldGenManaPods;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -65,7 +65,7 @@ public class CREvents {
     @SubscribeEvent
     public static void onHarvestDrops(BlockEvent.HarvestDropsEvent event) {
         // Axe of Execution - Smelts wood chopped, also works with Fortune and gives experience.
-        if (event.getHarvester() != null && (event.getHarvester().getHeldItemMainhand().getItem() == CRItems.EXECUTION_AXE)) {
+        if (event.getHarvester() != null && (event.getHarvester().getHeldItemMainhand().getItem() == ModItemsNCR.EXECUTION_AXE)) {
             if (event.getState().getBlock().canHarvestBlock(event.getWorld(), event.getPos(), event.getHarvester())) {
                 List<ItemStack> to_be_removed = new ArrayList<ItemStack>();
                 List<ItemStack> to_be_added = new ArrayList<ItemStack>();
@@ -106,7 +106,7 @@ public class CREvents {
         }
 
         // Shovel of the Purifier - Has a chance to convert harvested tainted blocks to flux crystals
-        if (event.getHarvester() != null && (event.getHarvester().getHeldItemMainhand().getItem() == CRItems.PURIFYING_SHOVEL)) {
+        if (event.getHarvester() != null && (event.getHarvester().getHeldItemMainhand().getItem() == ModItemsNCR.PURIFYING_SHOVEL)) {
             if (event.getState().getBlock().canHarvestBlock(event.getWorld(), event.getPos(), event.getHarvester())) {
                 List<ItemStack> to_be_removed = new ArrayList<ItemStack>();
                 List<ItemStack> to_be_added = new ArrayList<ItemStack>();
@@ -142,7 +142,7 @@ public class CREvents {
 
         // Overgrown Taintacles are immune to arrows
         if (entity instanceof EntityOvergrownTaintacle) {
-            if (damageSource.getImmediateSource() instanceof IProjectile && entity.getHealth() <= (entity.getMaxHealth() * CRConfig.overgrown_taintacle.projectileImmunityThreshold)) {
+            if (damageSource.getImmediateSource() instanceof IProjectile && entity.getHealth() <= (entity.getMaxHealth() * ConfigHandlerNCR.overgrown_taintacle.projectileImmunityThreshold)) {
                 event.setCanceled(true);
                 entity.world.playSound(null, entity.getPosition(), SoundEvents.ENTITY_ELDER_GUARDIAN_CURSE, SoundCategory.AMBIENT, 3.0F, 1.5F + entity.world.rand.nextFloat() / 2.0F);
                 PacketHandler.INSTANCE.sendToAllAround(new PacketFXShield(entity.getEntityId(), damageSource.getImmediateSource().getEntityId()), new NetworkRegistry.TargetPoint(event.getEntity().world.provider.getDimension(), event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, 32.0D));
@@ -153,7 +153,7 @@ public class CREvents {
             EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 
             // Ring of Nutriment - Starvation Immunity
-            if (BaublesApi.isBaubleEquipped(player, CRItems.NUTRITION_RING) >= 0) {
+            if (BaublesApi.isBaubleEquipped(player, ModItemsNCR.NUTRITION_RING) >= 0) {
 
                 // Prevents screen shaking and damage sound.
                 if (event.getSource() == DamageSource.STARVE) {
@@ -163,16 +163,16 @@ public class CREvents {
         }
 
         // Prevents screen shaking and damage sound.
-        if (boots.getItem() instanceof CRItemCometBoots) {
+        if (boots.getItem() instanceof ItemCometBoots) {
             if (event.getSource() == DamageSource.HOT_FLOOR) {
                 event.setCanceled(true);
-            } else if (event.getSource() == DamageSource.FALL && ((CRItemCometBoots) boots.getItem()).getAdjustedFallDamage(boots, event.getAmount()) <= 0) {
+            } else if (event.getSource() == DamageSource.FALL && ((ItemCometBoots) boots.getItem()).getAdjustedFallDamage(boots, event.getAmount()) <= 0) {
                 event.setCanceled(true);
             }
-        } else if (boots.getItem() instanceof CRItemMeteorBoots) {
+        } else if (boots.getItem() instanceof ItemMeteorBoots) {
             if (event.getSource() == DamageSource.HOT_FLOOR) {
                 event.setCanceled(true);
-            } else if (event.getSource() == DamageSource.FALL && ((CRItemMeteorBoots) boots.getItem()).getAdjustedFallDamage(boots, event.getAmount()) <= 0) {
+            } else if (event.getSource() == DamageSource.FALL && ((ItemMeteorBoots) boots.getItem()).getAdjustedFallDamage(boots, event.getAmount()) <= 0) {
                 event.setCanceled(true);
             }
         }
@@ -195,7 +195,7 @@ public class CREvents {
 
         // Overgrown Taintacles are immune to arrows
         if (entity instanceof EntityOvergrownTaintacle) {
-            if (damageSource.getImmediateSource() instanceof IProjectile && entity.getHealth() <= (entity.getMaxHealth() * CRConfig.overgrown_taintacle.projectileImmunityThreshold)) {
+            if (damageSource.getImmediateSource() instanceof IProjectile && entity.getHealth() <= (entity.getMaxHealth() * ConfigHandlerNCR.overgrown_taintacle.projectileImmunityThreshold)) {
                 event.setAmount(0.0F);
                 event.setCanceled(true);
             }
@@ -205,7 +205,7 @@ public class CREvents {
             EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 
             // Ring of Nutriment - Starvation Immunity
-            if (BaublesApi.isBaubleEquipped(player, CRItems.NUTRITION_RING) >= 0) {
+            if (BaublesApi.isBaubleEquipped(player, ModItemsNCR.NUTRITION_RING) >= 0) {
                 if (event.getSource() == DamageSource.STARVE) {
                     event.setAmount(0.0F);
                     event.setCanceled(true);
@@ -214,19 +214,19 @@ public class CREvents {
         }
 
         // Immune to these damage types.
-        if (boots.getItem() instanceof CRItemCometBoots) {
+        if (boots.getItem() instanceof ItemCometBoots) {
             if (event.getSource() == DamageSource.HOT_FLOOR) {
                 event.setAmount(0);
                 event.setCanceled(true);
-            } else if (event.getSource() == DamageSource.FALL && ((CRItemCometBoots) boots.getItem()).getAdjustedFallDamage(boots, event.getAmount()) <= 0) {
+            } else if (event.getSource() == DamageSource.FALL && ((ItemCometBoots) boots.getItem()).getAdjustedFallDamage(boots, event.getAmount()) <= 0) {
                 event.setAmount(0);
                 event.setCanceled(true);
             }
-        } else if (boots.getItem() instanceof CRItemMeteorBoots) {
+        } else if (boots.getItem() instanceof ItemMeteorBoots) {
             if (event.getSource() == DamageSource.HOT_FLOOR) {
                 event.setAmount(0);
                 event.setCanceled(true);
-            } else if (event.getSource() == DamageSource.FALL && ((CRItemMeteorBoots) boots.getItem()).getAdjustedFallDamage(boots, event.getAmount()) <= 0) {
+            } else if (event.getSource() == DamageSource.FALL && ((ItemMeteorBoots) boots.getItem()).getAdjustedFallDamage(boots, event.getAmount()) <= 0) {
                 event.setAmount(0);
                 event.setCanceled(true);
             }
@@ -239,11 +239,11 @@ public class CREvents {
         Aspect[] aspects = Aspect.getPrimalAspects().toArray(new Aspect[0]);
 
         // Pechs drop primal mana beans.
-        if (!entity.world.isRemote && CRConfig.mana_beans.pechLoot && entity instanceof EntityPech) {
+        if (!entity.world.isRemote && ConfigHandlerNCR.mana_beans.pechLoot && entity instanceof EntityPech) {
             for (int i = 0; i < 1 + event.getLootingLevel(); ++i) {
                 if (entity.getRNG().nextBoolean()) {
-                    ItemStack is = new ItemStack(CRItems.MANA_BEAN);
-                    ((CRItemManaBean) is.getItem()).setAspects(is, new AspectList().add(aspects[entity.getRNG().nextInt(aspects.length)], 1));
+                    ItemStack is = new ItemStack(ModItemsNCR.MANA_BEAN);
+                    ((ItemManaBean) is.getItem()).setAspects(is, new AspectList().add(aspects[entity.getRNG().nextInt(aspects.length)], 1));
                     event.getDrops().add(new EntityItem(entity.world, entity.posX, entity.posY, entity.posZ, is));
                 }
             }
@@ -260,15 +260,15 @@ public class CREvents {
         if (event.getSource() == DamageSource.FALL) {
             ItemStack boots = event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.FEET);
 
-            if (boots.getItem() instanceof CRItemCometBoots) {
-                float damage = ((CRItemCometBoots) boots.getItem()).getAdjustedFallDamage(boots, event.getAmount());
+            if (boots.getItem() instanceof ItemCometBoots) {
+                float damage = ((ItemCometBoots) boots.getItem()).getAdjustedFallDamage(boots, event.getAmount());
 
                 event.setAmount(damage);
                 if (damage == 0) {
                     event.setCanceled(true);
                 }
-            } else if (boots.getItem() instanceof CRItemMeteorBoots) {
-                float damage = ((CRItemMeteorBoots) boots.getItem()).getAdjustedFallDamage(boots, event.getAmount());
+            } else if (boots.getItem() instanceof ItemMeteorBoots) {
+                float damage = ((ItemMeteorBoots) boots.getItem()).getAdjustedFallDamage(boots, event.getAmount());
 
                 event.setAmount(damage);
                 if (damage == 0) {
@@ -280,7 +280,7 @@ public class CREvents {
         if (trueSource instanceof EntityLivingBase && trueSource != null) {
             Item heldItem = ((EntityLivingBase) trueSource).getHeldItemMainhand().getItem();
 
-            if (heldItem == CRItems.CRIMSON_SWORD) {
+            if (heldItem == ModItemsNCR.CRIMSON_SWORD) {
                 // Poison while cultist sword is equipped
                 entity.addPotionEffect(new PotionEffect(MobEffects.POISON, 6 * 20, 1));
             }
@@ -288,12 +288,12 @@ public class CREvents {
 
         if (entity instanceof EntityPlayer && trueSource instanceof EntityLivingBase && !world.isRemote) {
             EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-            int charge = CRRegistry.getRunicShielding(player);
+            int charge = RegistrarNCR.getRunicShielding(player);
 
             // Kinetic Girdle of Shielding - Explodes when the Runic Shielding is pierced (20 second cooldown).
             if (charge > 0) {
-                if (charge <= event.getAmount() && BaublesApi.isBaubleEquipped(player, CRItems.RUNIC_GIRDLE_KINETIC) > 2 && !(player.getCooldownTracker().hasCooldown(CRItems.RUNIC_GIRDLE_KINETIC))) {
-                    player.world.playSound(null, player.posX, player.posY, player.posZ, CRSoundEvents.RUNIC_BAUBLE_KINETIC, SoundCategory.PLAYERS, 0.8F, 1.0F);
+                if (charge <= event.getAmount() && BaublesApi.isBaubleEquipped(player, ModItemsNCR.RUNIC_GIRDLE_KINETIC) > 2 && !(player.getCooldownTracker().hasCooldown(ModItemsNCR.RUNIC_GIRDLE_KINETIC))) {
+                    player.world.playSound(null, player.posX, player.posY, player.posZ, ModSoundEventsNCR.RUNIC_BAUBLE_KINETIC, SoundCategory.PLAYERS, 0.8F, 1.0F);
                     player.world.createExplosion(player, player.posX, player.posY + player.height / 2.0F, player.posZ, 2.0F, false);
 
                     List<Entity> entities = player.world.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().grow(3.0D, 3.0D, 3.0D));
@@ -305,26 +305,26 @@ public class CREvents {
                         }
                     }
 
-                    player.addStat(Objects.requireNonNull(StatList.getObjectUseStats(CRItems.RUNIC_GIRDLE_KINETIC)));
-                    player.getCooldownTracker().setCooldown(CRItems.RUNIC_GIRDLE_KINETIC, 20 * 20);
+                    player.addStat(Objects.requireNonNull(StatList.getObjectUseStats(ModItemsNCR.RUNIC_GIRDLE_KINETIC)));
+                    player.getCooldownTracker().setCooldown(ModItemsNCR.RUNIC_GIRDLE_KINETIC, 20 * 20);
                 }
 
                 // Revitalizing Ring of Shielding - Gives 6 seconds of Regeneration II when the Runic Shielding is pierced (20 second cooldown).
-                if (charge <= event.getAmount() && BaublesApi.isBaubleEquipped(player, CRItems.RUNIC_RING_REGEN) > 0 && !(player.getCooldownTracker().hasCooldown(CRItems.RUNIC_RING_REGEN))) {
-                    player.world.playSound(null, player.posX, player.posY, player.posZ, CRSoundEvents.RUNIC_BAUBLE_REGEN, SoundCategory.PLAYERS, 1.5F, 1.0F);
+                if (charge <= event.getAmount() && BaublesApi.isBaubleEquipped(player, ModItemsNCR.RUNIC_RING_REGEN) > 0 && !(player.getCooldownTracker().hasCooldown(ModItemsNCR.RUNIC_RING_REGEN))) {
+                    player.world.playSound(null, player.posX, player.posY, player.posZ, ModSoundEventsNCR.RUNIC_BAUBLE_REGEN, SoundCategory.PLAYERS, 1.5F, 1.0F);
                     player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 6 * 20, 1, true, true));
 
-                    player.addStat(Objects.requireNonNull(StatList.getObjectUseStats(CRItems.RUNIC_RING_REGEN)));
-                    player.getCooldownTracker().setCooldown(CRItems.RUNIC_RING_REGEN, 20 * 20);
+                    player.addStat(Objects.requireNonNull(StatList.getObjectUseStats(ModItemsNCR.RUNIC_RING_REGEN)));
+                    player.getCooldownTracker().setCooldown(ModItemsNCR.RUNIC_RING_REGEN, 20 * 20);
                 }
 
                 // Amulet of Emergency Shielding - Gives 8 points of Absorption when the Runic Shielding is pierced (40 second cooldown).
-                if (charge <= event.getAmount() && BaublesApi.isBaubleEquipped(player, CRItems.RUNIC_AMULET_EMERGENCY) > -1 && !(player.getCooldownTracker().hasCooldown(CRItems.RUNIC_AMULET_EMERGENCY))) {
-                    player.world.playSound(null, player.posX, player.posY, player.posZ, CRSoundEvents.RUNIC_BAUBLE_EMERGENCY, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                if (charge <= event.getAmount() && BaublesApi.isBaubleEquipped(player, ModItemsNCR.RUNIC_AMULET_EMERGENCY) > -1 && !(player.getCooldownTracker().hasCooldown(ModItemsNCR.RUNIC_AMULET_EMERGENCY))) {
+                    player.world.playSound(null, player.posX, player.posY, player.posZ, ModSoundEventsNCR.RUNIC_BAUBLE_EMERGENCY, SoundCategory.PLAYERS, 1.0F, 1.0F);
                     player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 40 * 20, 1, true, true));
 
-                    player.addStat(Objects.requireNonNull(StatList.getObjectUseStats(CRItems.RUNIC_AMULET_EMERGENCY)));
-                    player.getCooldownTracker().setCooldown(CRItems.RUNIC_AMULET_EMERGENCY, 40 * 20);
+                    player.addStat(Objects.requireNonNull(StatList.getObjectUseStats(ModItemsNCR.RUNIC_AMULET_EMERGENCY)));
+                    player.getCooldownTracker().setCooldown(ModItemsNCR.RUNIC_AMULET_EMERGENCY, 40 * 20);
                 }
             }
         }
@@ -337,7 +337,7 @@ public class CREvents {
 
             // Ring of Nutriment boosts eaten foods: +1-4 Hunger and +0.5 Saturation
             if (event.getItem().getItem() instanceof ItemFood) {
-                if (BaublesApi.isBaubleEquipped(player, CRItems.NUTRITION_RING) >= 0) {
+                if (BaublesApi.isBaubleEquipped(player, ModItemsNCR.NUTRITION_RING) >= 0) {
                     int random = player.world.rand.nextInt(4);
                     player.getFoodStats().addStats(1 + random, 0.5F);
                     player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.PLAYERS, 1.0F, 0.5F);
@@ -351,7 +351,7 @@ public class CREvents {
         Item heldItem = event.getEntityPlayer().getHeldItemMainhand().getItem();
         BlockPos pos = event.getPos();
 
-        if (heldItem == CRItems.EXECUTION_AXE) {
+        if (heldItem == ModItemsNCR.EXECUTION_AXE) {
             World world = event.getEntityPlayer().world;
             double j = 1.3D;
 
@@ -363,7 +363,7 @@ public class CREvents {
         }
 
         // Pickaxe of Warped Distortion mines faster on harder blocks and mines slower on softer blocks
-        if (heldItem == CRItems.DISTORTION_PICKAXE) {
+        if (heldItem == ModItemsNCR.DISTORTION_PICKAXE) {
             EntityPlayer player = event.getEntityPlayer();
             World world = player.world;
             BlockPos pos1;
@@ -379,8 +379,8 @@ public class CREvents {
                             pos.getZ() + 0.5D + world.rand.nextDouble() * j - j / 2, 0.0D, 0.0D, 0.0D, 10, 0.3F + world.rand.nextFloat() * 0.3F, 0.0F, 0.7F + world.rand.nextFloat() * 0.3F, -0.05F);
                 }
 
-                if (player.isSwingInProgress && player.ticksExisted % 5 == 0 && CRConfig.distortion_pickaxe.miningSounds) {
-                    player.world.playSound(null, pos1.getX(), pos1.getY(), pos1.getZ(), CRSoundEvents.MISC_DISTORTION_PICKAXE_CLANK, SoundCategory.PLAYERS, 0.175F, 0.5F / (world.rand.nextFloat() * 0.4F + 0.8F));
+                if (player.isSwingInProgress && player.ticksExisted % 5 == 0 && ConfigHandlerNCR.distortion_pickaxe.miningSounds) {
+                    player.world.playSound(null, pos1.getX(), pos1.getY(), pos1.getZ(), ModSoundEventsNCR.MISC_DISTORTION_PICKAXE_CLANK, SoundCategory.PLAYERS, 0.175F, 0.5F / (world.rand.nextFloat() * 0.4F + 0.8F));
                 }
             } else {
                 for (int i = 0; i < 2; i++) {
@@ -388,8 +388,8 @@ public class CREvents {
                             pos.getZ() + 0.5D + world.rand.nextDouble() * j - j / 2, 0.0D, 0.0D, 0.0D, 10, 0.3F + world.rand.nextFloat() * 0.3F, 0.1F + world.rand.nextFloat() * 0.2F, 0.7F + world.rand.nextFloat() * 0.3F, -0.2F);
                 }
 
-                if (player.isSwingInProgress && player.ticksExisted % 5 == 0 && CRConfig.distortion_pickaxe.miningSounds) {
-                    player.world.playSound(null, pos1.getX(), pos1.getY(), pos1.getZ(), CRSoundEvents.MISC_DISTORTION_PICKAXE_CLANK, SoundCategory.PLAYERS, 0.175F, 0.75F / (world.rand.nextFloat() * 0.4F + 0.8F));
+                if (player.isSwingInProgress && player.ticksExisted % 5 == 0 && ConfigHandlerNCR.distortion_pickaxe.miningSounds) {
+                    player.world.playSound(null, pos1.getX(), pos1.getY(), pos1.getZ(), ModSoundEventsNCR.MISC_DISTORTION_PICKAXE_CLANK, SoundCategory.PLAYERS, 0.175F, 0.75F / (world.rand.nextFloat() * 0.4F + 0.8F));
                 }
             }
 
@@ -404,7 +404,7 @@ public class CREvents {
             }
         }
 
-        if (heldItem == CRItems.PURIFYING_SHOVEL) {
+        if (heldItem == ModItemsNCR.PURIFYING_SHOVEL) {
             World world = event.getEntityPlayer().world;
             BlockPos pos1;
             pos1 = pos.add(0, 0, 0);
@@ -423,7 +423,7 @@ public class CREvents {
     @SubscribeEvent
     public static void onUseBonemeal(BonemealEvent event) {
         // Prevent bonemeal from working on mana beans
-        if (event.getBlock().getBlock() instanceof CRBlockManaPod) {
+        if (event.getBlock().getBlock() instanceof BlockManaPod) {
             event.setCanceled(true);
         }
     }
@@ -433,7 +433,7 @@ public class CREvents {
         if (event.getWorld().getBiome(event.getPos()) instanceof BiomeGenMagicalForest) {
             WorldGenManaPods worldGenManaPods = new WorldGenManaPods();
 
-            for (int k = 0; k < CRConfig.mana_beans.generationFrequency; k++) {
+            for (int k = 0; k < ConfigHandlerNCR.mana_beans.generationFrequency; k++) {
                 int l = event.getPos().getX() + event.getWorld().rand.nextInt(16) + 8;
                 byte b0 = 64;
                 int i1 = event.getPos().getZ() + event.getWorld().rand.nextInt(16) + 8;

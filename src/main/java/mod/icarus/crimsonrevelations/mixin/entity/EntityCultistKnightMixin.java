@@ -1,6 +1,6 @@
 package mod.icarus.crimsonrevelations.mixin.entity;
 
-import mod.icarus.crimsonrevelations.init.CRItems;
+import mod.icarus.crimsonrevelations.registry.ModItemsNCR;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.DifficultyInstance;
@@ -39,7 +39,7 @@ public class EntityCultistKnightMixin extends EntityCultist {
                 this.setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
             }
         } else {
-            this.setHeldItem(this.getActiveHand(), new ItemStack(CRItems.CRIMSON_SWORD));
+            this.setHeldItem(this.getActiveHand(), new ItemStack(ModItemsNCR.CRIMSON_SWORD));
         }
     }
 }

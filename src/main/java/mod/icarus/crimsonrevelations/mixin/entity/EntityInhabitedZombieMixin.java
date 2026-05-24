@@ -1,6 +1,6 @@
 package mod.icarus.crimsonrevelations.mixin.entity;
 
-import mod.icarus.crimsonrevelations.init.CRItems;
+import mod.icarus.crimsonrevelations.registry.ModItemsNCR;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -23,9 +23,9 @@ public class EntityInhabitedZombieMixin extends EntityZombie {
     @Inject(method = "onInitialSpawn", at = @At(value = "HEAD"), cancellable = true)
     public IEntityLivingData crInitialSpawn(DifficultyInstance diff, IEntityLivingData data, CallbackInfoReturnable<EntityInhabitedZombie> ci) {
         ci.cancel();
-        this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(CRItems.ANCIENT_CRIMSON_HELMET));
-        this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(CRItems.ANCIENT_CRIMSON_CHESTPLATE));
-        this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(CRItems.ANCIENT_CRIMSON_LEGGINGS));
+        this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(ModItemsNCR.ANCIENT_CRIMSON_HELMET));
+        this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ModItemsNCR.ANCIENT_CRIMSON_CHESTPLATE));
+        this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ModItemsNCR.ANCIENT_CRIMSON_LEGGINGS));
 
         return super.onInitialSpawn(diff, data);
     }

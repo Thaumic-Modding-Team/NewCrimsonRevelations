@@ -1,6 +1,6 @@
 package mod.icarus.crimsonrevelations.entity;
 
-import mod.icarus.crimsonrevelations.init.CRItems;
+import mod.icarus.crimsonrevelations.registry.ModItemsNCR;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
@@ -90,9 +90,9 @@ public class EntityCultistArcher extends EntityCultist implements IRangedAttackM
 
     @Override
     protected void setLoot(DifficultyInstance diff) {
-        this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(CRItems.CRIMSON_ARCHER_HELMET));
-        this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(CRItems.CRIMSON_ARCHER_CHESTPLATE));
-        this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(CRItems.CRIMSON_ARCHER_LEGGINGS));
+        this.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(ModItemsNCR.CRIMSON_ARCHER_HELMET));
+        this.setItemStackToSlot(EntityEquipmentSlot.CHEST, new ItemStack(ModItemsNCR.CRIMSON_ARCHER_CHESTPLATE));
+        this.setItemStackToSlot(EntityEquipmentSlot.LEGS, new ItemStack(ModItemsNCR.CRIMSON_ARCHER_LEGGINGS));
         this.setItemStackToSlot(EntityEquipmentSlot.FEET, new ItemStack(ItemsTC.crimsonBoots));
         this.setHeldItem(this.getActiveHand(), new ItemStack(Items.BOW));
     }

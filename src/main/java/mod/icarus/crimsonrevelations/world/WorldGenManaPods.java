@@ -1,7 +1,7 @@
 package mod.icarus.crimsonrevelations.world;
 
-import mod.icarus.crimsonrevelations.init.CRBlocks;
-import mod.icarus.crimsonrevelations.tile.CRTileManaPod;
+import mod.icarus.crimsonrevelations.registry.ModBlocksNCR;
+import mod.icarus.crimsonrevelations.tile.TileManaPod;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -22,11 +22,11 @@ public class WorldGenManaPods extends WorldGenerator {
             BlockPos currentPos = new BlockPos(x, y, z);
 
             if (world.isAirBlock(currentPos) && world.isAirBlock(currentPos.down())) {
-                if (CRBlocks.MANA_POD.canPlaceBlockOnSide(world, currentPos, EnumFacing.DOWN)) {
-                    world.setBlockState(currentPos, CRBlocks.MANA_POD.withAge(2 + rand.nextInt(5)), 2);
+                if (ModBlocksNCR.MANA_POD.canPlaceBlockOnSide(world, currentPos, EnumFacing.DOWN)) {
+                    world.setBlockState(currentPos, ModBlocksNCR.MANA_POD.withAge(2 + rand.nextInt(5)), 2);
                     TileEntity tile = world.getTileEntity(currentPos);
-                    if (tile instanceof CRTileManaPod) {
-                        ((CRTileManaPod) tile).checkGrowth();
+                    if (tile instanceof TileManaPod) {
+                        ((TileManaPod) tile).checkGrowth();
                     }
                     return true;
                 }

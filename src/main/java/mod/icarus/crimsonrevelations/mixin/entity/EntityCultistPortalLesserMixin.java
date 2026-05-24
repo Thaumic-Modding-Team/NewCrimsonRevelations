@@ -1,9 +1,9 @@
 package mod.icarus.crimsonrevelations.mixin.entity;
 
 import mod.icarus.crimsonrevelations.entity.EntityCultistArcher;
-import mod.icarus.crimsonrevelations.init.CRLootTables;
-import mod.icarus.crimsonrevelations.network.CRPacketHandler;
-import mod.icarus.crimsonrevelations.network.packets.CRPacketFXCultistPortal;
+import mod.icarus.crimsonrevelations.registry.ModLootTablesNCR;
+import mod.icarus.crimsonrevelations.network.PacketHandler;
+import mod.icarus.crimsonrevelations.network.packets.PacketFXCultistPortal;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,7 +37,7 @@ public class EntityCultistPortalLesserMixin extends EntityMob {
     @Override
     @Nullable
     protected ResourceLocation getLootTable() {
-        return CRLootTables.LESSER_CULTIST_PORTAL;
+        return ModLootTablesNCR.LESSER_CULTIST_PORTAL;
     }
 
     @Redirect(method = "onUpdate", at = @At(value = "INVOKE",
@@ -68,7 +68,7 @@ public class EntityCultistPortalLesserMixin extends EntityMob {
         cultist.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(cultist.getPosition())), null);
 
         // Restores portal spawning particles from TC5
-        CRPacketHandler.INSTANCE.sendToAll(new CRPacketFXCultistPortal(cultist.posX, cultist.posY, cultist.posZ, cultist.width, cultist.height));
+        PacketHandler.INSTANCE.sendToAll(new PacketFXCultistPortal(cultist.posX, cultist.posY, cultist.posZ, cultist.width, cultist.height));
 
         this.world.spawnEntity(cultist);
         cultist.playSound(SoundsTC.wandfail, 1.0F, 1.0F);

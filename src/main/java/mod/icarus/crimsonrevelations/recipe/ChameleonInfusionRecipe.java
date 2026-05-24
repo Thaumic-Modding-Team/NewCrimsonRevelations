@@ -1,6 +1,6 @@
 package mod.icarus.crimsonrevelations.recipe;
 
-import mod.icarus.crimsonrevelations.config.CRConfigLists;
+import mod.icarus.crimsonrevelations.config.ConfigLists;
 import mod.icarus.crimsonrevelations.enchants.InfusionEnchantments;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -21,7 +21,7 @@ public class ChameleonInfusionRecipe extends InfusionEnchantmentRecipe {
 
     @Override
     public boolean matches(List<ItemStack> input, ItemStack central, World world, EntityPlayer player) {
-        boolean item = CRConfigLists.chameleonItems.contains(central.getItem());
+        boolean item = ConfigLists.chameleonItems.contains(central.getItem());
 
         //Blacklisted items will not have this infusion enchantment applied, in case there are any tools that have incompatibilities
         return !(item) && super.matches(input, central, world, player);

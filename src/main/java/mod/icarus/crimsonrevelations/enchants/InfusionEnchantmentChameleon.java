@@ -2,8 +2,8 @@ package mod.icarus.crimsonrevelations.enchants;
 
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.client.keybinds.KeyBindings;
-import mod.icarus.crimsonrevelations.network.CRPacketHandler;
-import mod.icarus.crimsonrevelations.network.packets.CRPacketCycleChameleon;
+import mod.icarus.crimsonrevelations.network.PacketHandler;
+import mod.icarus.crimsonrevelations.network.packets.PacketCycleChameleon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +27,7 @@ public class InfusionEnchantmentChameleon {
             if(!heldStack.isEmpty()) {
                 int chameleonLvl = EnumInfusionEnchantment.getInfusionEnchantmentLevel(heldStack, InfusionEnchantments.CHAMELEON);
                 if(chameleonLvl > 0 && KeyBindings.swapChameleonEnchants.isKeyDown()) {
-                    CRPacketHandler.INSTANCE.sendToServer(new CRPacketCycleChameleon());
+                    PacketHandler.INSTANCE.sendToServer(new PacketCycleChameleon());
                 }
             }
         }

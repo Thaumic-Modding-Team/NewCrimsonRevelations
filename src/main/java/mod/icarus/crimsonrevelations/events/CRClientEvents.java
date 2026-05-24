@@ -1,7 +1,7 @@
 package mod.icarus.crimsonrevelations.events;
 
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
-import mod.icarus.crimsonrevelations.item.CRItemBow;
+import mod.icarus.crimsonrevelations.item.base.ItemBowBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -27,7 +27,7 @@ public class CRClientEvents {
         final EntityPlayer eventPlayer = event.getEntity();
         final Item eventItem = eventPlayer.getActiveItemStack().getItem();
 
-        if (eventItem instanceof CRItemBow) {
+        if (eventItem instanceof ItemBowBase) {
             float finalFov = event.getFov();
             final float itemUseCount = eventItem.getMaxItemUseDuration(eventPlayer.getActiveItemStack()) - eventPlayer.getItemInUseCount();
 
@@ -64,7 +64,7 @@ public class CRClientEvents {
              * whatever drawTime is.
              */
 
-            float drawTime = 20.0F * ((CRItemBow) eventItem).drawTimeMult;
+            float drawTime = 20.0F * ((ItemBowBase) eventItem).drawTimeMult;
             float customBow = itemUseCount / drawTime;
 
             if (customBow > 1.0F) {
@@ -87,7 +87,7 @@ public class CRClientEvents {
         final Item eventItem = event.getItemStack().getItem();
 
         // Only handle rendering if we're in first person and drawing back a CustomBow.
-        if ((mc.gameSettings.thirdPersonView == 0) && mc.player.isHandActive() && (mc.player.getActiveHand() == event.getHand()) && (mc.player.getItemInUseCount() > 0) && (event.getItemStack().getItem() instanceof CRItemBow)) {
+        if ((mc.gameSettings.thirdPersonView == 0) && mc.player.isHandActive() && (mc.player.getActiveHand() == event.getHand()) && (mc.player.getItemInUseCount() > 0) && (event.getItemStack().getItem() instanceof ItemBowBase)) {
             // Cancel rendering so we can render instead
             event.setCanceled(true);
             GlStateManager.pushMatrix();
@@ -103,7 +103,7 @@ public class CRClientEvents {
             GlStateManager.rotate(handedSide * -9.785F, 0.0F, 0.0F, 1.0F);
 
             final float ticks = eventItem.getMaxItemUseDuration(event.getItemStack()) - ((mc.player.getItemInUseCount() - event.getPartialTicks()) + 1.0F);
-            float drawTime = 20.0F * ((CRItemBow) eventItem).drawTimeMult;
+            float drawTime = 20.0F * ((ItemBowBase) eventItem).drawTimeMult;
             float divTicks = ticks / drawTime;
             divTicks = ((divTicks * divTicks) + (divTicks * 2.0F)) / 3.0F;
 
