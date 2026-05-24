@@ -1,6 +1,7 @@
-           © 2025-2026 Elite Modding Team. All Rights Reserved.
+           © 2024-2026 Elite Modding Team. All Rights Reserved.
 
-All assets created specifically for New Crimson Revelations - the fork - are licensed under All Rights Reserved.
-No part of these assets may be reproduced, distributed, or modified without express permission
-from the copyright holder. All other assets, including those derived from Minecraft or
-third-party sources, remain the property of their respective owners.
+All assets created specifically for XYZ are licensed under All Rights Reserved.
+No part of these assets may be reproduced, distributed, or modified without
+express permission from the copyright holder. All other assets, including
+those derived from Minecraft or third-party sources, remain the property 
+of their respective owners.
