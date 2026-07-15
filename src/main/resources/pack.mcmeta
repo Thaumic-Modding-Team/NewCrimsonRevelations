@@ -1,6 +1,6 @@
 {
-  "pack": {
-    "pack_format": 3,
-    "description": "New Crimson Revelations resources"
-  }
+	"pack": {
+		"description": "${mod_name} Resources",
+		"pack_format": 3
+	}
 }

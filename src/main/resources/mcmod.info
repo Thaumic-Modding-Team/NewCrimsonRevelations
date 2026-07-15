@@ -1,19 +1,12 @@
-[
-  {
-    "modid": "crimsonrevelations",
-    "name": "New Crimson Revelations",
-    "description": "A Thaumcraft addon that allows you to research more about the Crimson Cult.",
-    "version": "${version}",
-    "logoFile": "logo.png",
-    "mcversion": "${mcversion}",
-    "url": "https://github.com/Thaumic-Modding-Team/NewCrimsonRevelations",
-    "authorList": [
-      "IcarussOne",
-      "J. Carver"
-    ],
-    "credits": "\n \u00A7eMain Developers:\n [*] IcarussOne - Lead Developer & Writer\n [*] J. Carver - Artist & Lore Enthusiast\n \u00A76Special Thanks:\n [*] MobiusFlip - Originally creating Crimson Revelations (licensed under MIT) and setting up interesting lore for it, which this addon continues from\n [*] Mr. Damien Hazard - Crimson Archer, Crimson Paladin, and Crimson Ranger armor models, these models also appeared in Thaumic Dyes and Crimson Cult Armory\n [*] J. Carver - Massively helping with the lore and providing excellent new models\n [*] ACGaming - Being a huge help with the mod and implementing features like the Mana Bean generation\n [*] Invadermonky - Being a huge help with the mod and implementing features like the Chameleon and Vis Attunement infusion enchantments\n [*] PessiMysterio - CTM textures for the Magic Tallow Block and other bits of feedback\n [*] xJon - Giving general feedback to early versions of the mod\n [*] fakeginkgo - Art contributions to early versions of the mod\n [*] keletu66666 - Code contributions to early versions of the mod\n \u00A7dTranslators:\n [*] fakeginkgo - Simplified Chinese",
-    "dependencies": [
-      "thaumcraft"
-    ]
-  }
-]
+[{
+	"modid": "${mod_id}",
+	"name": "${mod_name}",
+	"version": "${mod_version}",
+	"mcversion": "1.12.2",
+	"description": "${mod_description}",
+	"authorList": ["${mod_authors}"],
+	"credits": "${mod_credits}",
+	"url": "${mod_url}",
+	"updateJSON": "${mod_update_json}",
+	"logoFile": "${mod_logo_path}"
+}]
