@@ -29,8 +29,7 @@ import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class EntityPrimalArrow extends EntityArrow implements IEntityAdditionalSpawnData {
     private static final DataParameter<Integer> ARROW_TYPE = EntityDataManager.createKey(EntityPrimalArrow.class, DataSerializers.VARINT);
@@ -78,7 +77,7 @@ public class EntityPrimalArrow extends EntityArrow implements IEntityAdditionalS
     }
 
     @Override
-    protected ItemStack getArrowStack() {
+    protected @NotNull ItemStack getArrowStack() {
         return new ItemStack(item, 1, 0);
     }
 
@@ -358,7 +357,7 @@ public class EntityPrimalArrow extends EntityArrow implements IEntityAdditionalS
     }
 
     @Override
-    protected void arrowHit(EntityLivingBase living) {
+    protected void arrowHit(@NotNull EntityLivingBase living) {
         super.arrowHit(living);
         switch (this.getArrowType()) {
             case 1:
@@ -377,13 +376,13 @@ public class EntityPrimalArrow extends EntityArrow implements IEntityAdditionalS
     }
 
     @Override
-    public void writeEntityToNBT(@Nonnull NBTTagCompound compound) {
+    public void writeEntityToNBT(@NotNull NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setInteger("arrowType", getArrowType());
     }
 
     @Override
-    public void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
+    public void readEntityFromNBT(@NotNull NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         setArrowType(compound.getInteger("arrowType"));
     }

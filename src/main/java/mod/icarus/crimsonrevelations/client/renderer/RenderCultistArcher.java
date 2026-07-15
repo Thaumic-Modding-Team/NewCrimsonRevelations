@@ -8,10 +8,9 @@ import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.Thaumcraft;
 import thaumcraft.common.entities.monster.cult.EntityCultist;
-
-import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
 public class RenderCultistArcher extends RenderBiped<EntityCultist> {
@@ -24,7 +23,7 @@ public class RenderCultistArcher extends RenderBiped<EntityCultist> {
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(@Nonnull EntityCultist entity) {
+    protected @NotNull ResourceLocation getEntityTexture(@NotNull EntityCultist entity) {
         return TEXTURES;
     }
 }

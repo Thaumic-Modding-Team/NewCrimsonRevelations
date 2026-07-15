@@ -31,13 +31,13 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.blocks.BlocksTC;
 import thaumcraft.api.internal.WorldCoordinates;
 import vazkii.botania.api.item.IHornHarvestable;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Objects;
@@ -71,7 +71,7 @@ public class BlockManaPod extends Block implements IGrowable, IHarvestableCrop, 
     }
 
     @Override
-    protected BlockStateContainer createBlockState() {
+    protected @NotNull BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, AGE);
     }
 
@@ -88,12 +88,12 @@ public class BlockManaPod extends Block implements IGrowable, IHarvestableCrop, 
     }
 
     @Override
-    public IBlockState getStateFromMeta(int meta) {
+    public @NotNull IBlockState getStateFromMeta(int meta) {
         return this.withAge(meta);
     }
 
     @Override
-    public int getMetaFromState(@Nonnull IBlockState state) {
+    public int getMetaFromState(@NotNull IBlockState state) {
         return this.getAge(state);
     }
 
@@ -103,28 +103,28 @@ public class BlockManaPod extends Block implements IGrowable, IHarvestableCrop, 
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getRenderLayer() {
+    public @NotNull BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
     @Override
-    public boolean isFullCube(@Nonnull IBlockState state) {
+    public boolean isFullCube(@NotNull IBlockState state) {
         return false;
     }
 
     @Override
-    public boolean isOpaqueCube(@Nonnull IBlockState state) {
+    public boolean isOpaqueCube(@NotNull IBlockState state) {
         return false;
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+    public AxisAlignedBB getCollisionBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos) {
         getBoundingBox(state, world, pos);
         return super.getCollisionBoundingBox(state, world, pos);
     }
 
     @Override
-    public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
+    public @NotNull AxisAlignedBB getBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
         int l = getMetaFromState(state);
 
         switch (l) {
@@ -151,13 +151,13 @@ public class BlockManaPod extends Block implements IGrowable, IHarvestableCrop, 
 
     @SideOnly(Side.CLIENT)
     @Override
-    public AxisAlignedBB getSelectedBoundingBox(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos) {
+    public @NotNull AxisAlignedBB getSelectedBoundingBox(@NotNull IBlockState state, @NotNull World world, @NotNull BlockPos pos) {
         getBoundingBox(state, world, pos);
         return super.getSelectedBoundingBox(state, world, pos);
     }
 
     @Override
-    public void updateTick(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand) {
+    public void updateTick(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull Random rand) {
         if (!canBlockStay(world, pos, state)) {
             dropBlockAsItem(world, pos, state, 0);
             world.setBlockToAir(pos);
@@ -186,7 +186,7 @@ public class BlockManaPod extends Block implements IGrowable, IHarvestableCrop, 
     }
 
     @Override
-    public boolean canPlaceBlockOnSide(World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing) {
+    public boolean canPlaceBlockOnSide(World world, @NotNull BlockPos pos, @NotNull EnumFacing facing) {
         Biome biome = world.getBiome(pos);
         boolean magicBiome = biome != null && BiomeDictionary.hasType(biome, BiomeDictionary.Type.MAGICAL);
         Block blockAbove = world.getBlockState(pos.up()).getBlock();
@@ -195,12 +195,12 @@ public class BlockManaPod extends Block implements IGrowable, IHarvestableCrop, 
     }
 
     @Override
-    public int getLightValue(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+    public int getLightValue(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos) {
         return getMetaFromState(state);
     }
 
     @Override
-    public void neighborChanged(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull Block block, @Nonnull BlockPos fromPos) {
+    public void neighborChanged(@NotNull IBlockState state, @NotNull World world, @NotNull BlockPos pos, @NotNull Block block, @NotNull BlockPos fromPos) {
         if (!canBlockStay(world, pos, state)) {
             dropBlockAsItem(world, pos, state, 0);
             world.setBlockToAir(pos);
@@ -208,7 +208,7 @@ public class BlockManaPod extends Block implements IGrowable, IHarvestableCrop, 
     }
 
     @Override
-    public void breakBlock(World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+    public void breakBlock(World world, @NotNull BlockPos pos, @NotNull IBlockState state) {
         TileEntity tile = world.getTileEntity(pos);
 
         if (tile instanceof TileManaPod && ((TileManaPod) tile).aspect != null) {
@@ -219,7 +219,7 @@ public class BlockManaPod extends Block implements IGrowable, IHarvestableCrop, 
     }
 
     @Override
-    public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
+    public void getDrops(@NotNull NonNullList<ItemStack> drops, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull IBlockState state, int fortune) {
         int metadata = getMetaFromState(state);
 
         if (metadata >= 2) {
@@ -253,42 +253,42 @@ public class BlockManaPod extends Block implements IGrowable, IHarvestableCrop, 
 
     @SideOnly(Side.CLIENT)
     @Override
-    public ItemStack getItem(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+    public @NotNull ItemStack getItem(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState state) {
         return ModItemsNCR.MANA_BEAN.getDefaultInstance();
     }
 
     @Override
-    public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
+    public @NotNull Item getItemDropped(@NotNull IBlockState state, @NotNull Random rand, int fortune) {
         return Item.getItemById(0);
     }
 
     @Override
-    public boolean isPassable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+    public boolean isPassable(@NotNull IBlockAccess world, @NotNull BlockPos pos) {
         return true;
     }
 
     @Override
-    public boolean hasTileEntity(@Nonnull IBlockState state) {
+    public boolean hasTileEntity(@NotNull IBlockState state) {
         return true;
     }
 
     @Override
-    public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
+    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
         return new TileManaPod();
     }
 
     @Override
-    public boolean canGrow(@Nonnull World world, @Nonnull BlockPos pos, IBlockState iBlockState, boolean b) {
+    public boolean canGrow(@NotNull World world, @NotNull BlockPos pos, IBlockState iBlockState, boolean b) {
         return iBlockState.getValue(AGE) < 8;
     }
 
     @Override
-    public boolean canUseBonemeal(@Nonnull World world, @Nonnull Random random, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+    public boolean canUseBonemeal(@NotNull World world, @NotNull Random random, @NotNull BlockPos pos, @NotNull IBlockState state) {
         return false;
     }
 
     @Override
-    public void grow(World world, @Nonnull Random random, @Nonnull BlockPos pos, IBlockState state) {
+    public void grow(World world, @NotNull Random random, @NotNull BlockPos pos, IBlockState state) {
         world.setBlockState(pos, state.withProperty(AGE, state.getValue(AGE) + 1), 8);
     }
 
@@ -326,9 +326,8 @@ public class BlockManaPod extends Block implements IGrowable, IHarvestableCrop, 
         return cropPos;
     }
 
-    @Nonnull
     @Override
-    public HarvestResult getHarvestResult(World world, BlockPos pos) {
+    public @NotNull HarvestResult getHarvestResult(World world, BlockPos pos) {
         IBlockState state = world.getBlockState(pos);
         if (state.getBlock() instanceof IHarvestableCrop) {
             return this.getAge(state) >= 8 ? HarvestResult.HARVEST : HarvestResult.CLAIM;
@@ -336,9 +335,8 @@ public class BlockManaPod extends Block implements IGrowable, IHarvestableCrop, 
         return HarvestResult.PASS;
     }
 
-    @Nonnull
     @Override
-    public NonNullList<ItemStack> harvestCrop(@Nullable EntityPlayer entityPlayer, World world, BlockPos pos, boolean silkTouch, int fortune) {
+    public @NotNull NonNullList<ItemStack> harvestCrop(@Nullable EntityPlayer entityPlayer, World world, BlockPos pos, boolean silkTouch, int fortune) {
         IBlockState state = world.getBlockState(pos);
         NonNullList<ItemStack> drops = NonNullList.create();
         if (state.getBlock() instanceof IHarvestableCrop && ((IHarvestableCrop) state.getBlock()).getHarvestResult(world, pos) == HarvestResult.HARVEST) {

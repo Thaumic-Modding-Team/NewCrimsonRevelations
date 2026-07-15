@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.capabilities.IPlayerWarp;
 import thaumcraft.api.capabilities.IPlayerWarp.EnumWarpType;
@@ -29,7 +30,6 @@ import thaumcraft.client.fx.FXDispatcher;
 import thaumcraft.common.lib.SoundsTC;
 import thaumcraft.common.lib.potions.PotionWarpWard;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class ItemSanitationScribingTools extends ItemBase implements IScribeTool
         this.setHasSubtypes(false);
         this.addPropertyOverride(new ResourceLocation("depleted"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
-            public float apply(@Nonnull ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity) {
+            public float apply(@NotNull ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity) {
                 if (stack.getItemDamage() >= stack.getMaxDamage() && !getDepletedState(stack)) {
                     return 1.0F;
                 } else if (stack.getItemDamage() >= stack.getMaxDamage() && getDepletedState(stack)) {
@@ -66,7 +66,7 @@ public class ItemSanitationScribingTools extends ItemBase implements IScribeTool
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(@Nonnull World world, EntityPlayer player, @Nonnull EnumHand hand) {
+    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World world, EntityPlayer player, @NotNull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         IPlayerWarp warp = ThaumcraftCapabilities.getWarp(player);
 
@@ -109,7 +109,7 @@ public class ItemSanitationScribingTools extends ItemBase implements IScribeTool
     }
 
     @Override
-    public boolean isBookEnchantable(@Nonnull ItemStack stack, @Nonnull ItemStack book) {
+    public boolean isBookEnchantable(@NotNull ItemStack stack, @NotNull ItemStack book) {
         return false;
     }
 
@@ -121,7 +121,7 @@ public class ItemSanitationScribingTools extends ItemBase implements IScribeTool
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flag) {
+    public void addInformation(ItemStack stack, @Nullable World world, @NotNull List<String> tooltip, @NotNull ITooltipFlag flag) {
         if (stack.getItemDamage() >= stack.getMaxDamage() && !getDepletedState(stack)) {
             tooltip.add(new TextComponentTranslation("tooltip.crimsonrevelations.scribing_tools.active").getFormattedText());
         } else if (stack.getItemDamage() >= stack.getMaxDamage() && getDepletedState(stack)) {

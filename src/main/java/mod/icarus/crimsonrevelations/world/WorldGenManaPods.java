@@ -7,13 +7,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class WorldGenManaPods extends WorldGenerator {
     @Override
-    public boolean generate(World world, @Nonnull Random rand, BlockPos pos) {
+    public boolean generate(World world, @NotNull Random rand, BlockPos pos) {
         int x = pos.getX();
         int z = pos.getZ();
         int y = pos.getY();

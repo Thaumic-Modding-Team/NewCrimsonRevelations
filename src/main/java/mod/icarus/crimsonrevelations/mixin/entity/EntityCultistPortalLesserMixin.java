@@ -11,6 +11,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,7 +21,6 @@ import thaumcraft.common.entities.monster.cult.EntityCultistKnight;
 import thaumcraft.common.entities.monster.cult.EntityCultistPortalLesser;
 import thaumcraft.common.lib.SoundsTC;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 @Mixin(value = EntityCultistPortalLesser.class, remap = false)
@@ -30,7 +30,7 @@ public class EntityCultistPortalLesserMixin extends EntityMob {
     }
 
     @Override
-    protected int getExperiencePoints(@Nonnull EntityPlayer player) {
+    protected int getExperiencePoints(@NotNull EntityPlayer player) {
         return 40;
     }
 

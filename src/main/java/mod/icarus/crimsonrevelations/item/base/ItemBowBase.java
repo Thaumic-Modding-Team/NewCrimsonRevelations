@@ -16,8 +16,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.event.ForgeEventFactory;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class ItemBowBase extends ItemBow {
@@ -52,7 +52,7 @@ public class ItemBowBase extends ItemBow {
     }
 
     @Override
-    public void onPlayerStoppedUsing(@Nonnull ItemStack stack, @Nonnull World world, @Nonnull EntityLivingBase entity, int timeInUse) {
+    public void onPlayerStoppedUsing(@NotNull ItemStack stack, @NotNull World world, @NotNull EntityLivingBase entity, int timeInUse) {
         if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
             boolean isInfinityEnchant = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
@@ -127,18 +127,18 @@ public class ItemBowBase extends ItemBow {
         }
     }
 
-    public Item setRarity(@Nonnull IRarity rarity) {
+    public Item setRarity(@NotNull IRarity rarity) {
         this.rarity = rarity;
         return this;
     }
 
     @Override
-    public IRarity getForgeRarity(@Nonnull ItemStack stack) {
+    public @NotNull IRarity getForgeRarity(@NotNull ItemStack stack) {
         return this.rarity;
     }
 
     @Override
-    public boolean getIsRepairable(@Nonnull ItemStack toRepair, @Nonnull ItemStack repair) {
+    public boolean getIsRepairable(@NotNull ItemStack toRepair, @NotNull ItemStack repair) {
         return repairMaterial.test(repair) || super.getIsRepairable(toRepair, repair);
     }
 }

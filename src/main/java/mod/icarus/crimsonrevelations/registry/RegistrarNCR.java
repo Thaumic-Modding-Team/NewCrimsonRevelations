@@ -35,12 +35,12 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.Thaumcraft;
 import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.lib.events.PlayerEvents;
 
-import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -119,13 +119,11 @@ public class RegistrarNCR {
         registry.register(new DyeableItemRecipe().setRegistryName(new ResourceLocation(NewCrimsonRevelations.MODID, "dyeable_item")));
     }
 
-    @Nonnull
-    public static <T extends IForgeRegistryEntry> T setup(@Nonnull final T entry, @Nonnull final String name) {
+    public static <T extends IForgeRegistryEntry> T setup(@NotNull final T entry, @NotNull final String name) {
         return setup(entry, new ResourceLocation(NewCrimsonRevelations.MODID, name));
     }
 
-    @Nonnull
-    public static <T extends IForgeRegistryEntry> T setup(@Nonnull final T entry, @Nonnull final ResourceLocation registryName) {
+    public static <T extends IForgeRegistryEntry> T setup(@NotNull final T entry, @NotNull final ResourceLocation registryName) {
         Preconditions.checkNotNull(entry, "Entry to setup must not be null!");
         Preconditions.checkNotNull(registryName, "Registry name to assign must not be null!");
 

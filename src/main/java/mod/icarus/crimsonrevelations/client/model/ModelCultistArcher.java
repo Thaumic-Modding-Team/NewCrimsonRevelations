@@ -10,8 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class ModelCultistArcher extends ModelBiped {
     public ModelCultistArcher() {
@@ -40,7 +39,7 @@ public class ModelCultistArcher extends ModelBiped {
     }
 
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, @Nonnull Entity entity) {
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, @NotNull Entity entity) {
         super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entity);
         ItemStack stack = ((EntityLivingBase) entity).getHeldItemMainhand();
         EntityCultistArcher marksman = (EntityCultistArcher) entity;
@@ -70,7 +69,7 @@ public class ModelCultistArcher extends ModelBiped {
     }
 
     @Override
-    public void postRenderArm(float scale, @Nonnull EnumHandSide hand) {
+    public void postRenderArm(float scale, @NotNull EnumHandSide hand) {
         float f = hand == EnumHandSide.RIGHT ? 1.0F : -1.0F;
         ModelRenderer render = this.getArmForSide(hand);
         render.rotationPointX += f;

@@ -25,12 +25,12 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.common.util.Constants.NBT;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.items.IRechargable;
 import thaumcraft.api.items.IVisDiscountGear;
 import thaumcraft.api.items.RechargeHelper;
 import thaumcraft.common.lib.SoundsTC;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
@@ -86,7 +86,7 @@ public class ItemMeteorBoots extends ItemArmor implements ISpecialArmor, IRechar
     }
 
     @Override
-    public void damageArmor(EntityLivingBase entity, @Nonnull ItemStack stack, DamageSource source, int damage, int slot) {
+    public void damageArmor(EntityLivingBase entity, @NotNull ItemStack stack, DamageSource source, int damage, int slot) {
         if (source != DamageSource.FALL || source != DamageSource.HOT_FLOOR || source != DamageSource.IN_FIRE
                 || source != DamageSource.ON_FIRE) {
             stack.damageItem(damage, entity);
@@ -99,7 +99,7 @@ public class ItemMeteorBoots extends ItemArmor implements ISpecialArmor, IRechar
     }
 
     @Override
-    public int getArmorDisplay(EntityPlayer player, @Nonnull ItemStack stack, int slot) {
+    public int getArmorDisplay(EntityPlayer player, @NotNull ItemStack stack, int slot) {
         return 0;
     }
 
@@ -109,12 +109,12 @@ public class ItemMeteorBoots extends ItemArmor implements ISpecialArmor, IRechar
     }
 
     @Override
-    public String getArmorTexture(@Nonnull ItemStack stack, @Nonnull Entity entity, @Nonnull EntityEquipmentSlot slot, @Nonnull String type) {
+    public String getArmorTexture(@NotNull ItemStack stack, @NotNull Entity entity, @NotNull EntityEquipmentSlot slot, @NotNull String type) {
         return TEXTURE_PATH;
     }
 
     @Override
-    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list) {
+    public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> list) {
         if (tab == NewCrimsonRevelations.tabCR || tab == CreativeTabs.SEARCH) {
             ItemStack base = new ItemStack(this, 1, 0);
             list.add(base);
@@ -125,13 +125,13 @@ public class ItemMeteorBoots extends ItemArmor implements ISpecialArmor, IRechar
     }
 
     @Override
-    public IRarity getForgeRarity(@Nonnull ItemStack stack) {
+    public @NotNull IRarity getForgeRarity(@NotNull ItemStack stack) {
         return ModRaritiesNCR.RARITY_FIREY;
     }
 
     // TODO: Make damage affected by fall distance?
     @Override
-    public void onArmorTick(@Nonnull World world, EntityPlayer player, @Nonnull ItemStack stack) {
+    public void onArmorTick(@NotNull World world, EntityPlayer player, @NotNull ItemStack stack) {
         boolean hasCharge = RechargeHelper.getCharge(stack) > 1;
         double motion = Math.abs(player.motionX) + Math.abs(player.motionZ) + Math.abs(player.motionY);
 

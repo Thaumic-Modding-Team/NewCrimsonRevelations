@@ -16,11 +16,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.Thaumcraft;
 import thaumcraft.api.items.IVisDiscountGear;
 import thaumcraft.api.items.IWarpingGear;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class ItemAncientCultistArmor extends ItemArmor implements IVisDiscountGear, IWarpingGear {
@@ -37,7 +37,7 @@ public class ItemAncientCultistArmor extends ItemArmor implements IVisDiscountGe
 
     @SideOnly(Side.CLIENT)
     @Override
-    public ModelBiped getArmorModel(@Nonnull EntityLivingBase entity, @Nonnull ItemStack stack, @Nonnull EntityEquipmentSlot slot, @Nonnull ModelBiped bipedModel) {
+    public ModelBiped getArmorModel(@NotNull EntityLivingBase entity, @NotNull ItemStack stack, @NotNull EntityEquipmentSlot slot, @NotNull ModelBiped bipedModel) {
         if (this.model1 == null) {
             this.model1 = new ModelCultistKnightArmor(0.5F);
         }
@@ -52,12 +52,12 @@ public class ItemAncientCultistArmor extends ItemArmor implements IVisDiscountGe
     }
 
     @Override
-    public String getArmorTexture(@Nonnull ItemStack stack, @Nonnull Entity entity, @Nonnull EntityEquipmentSlot slot, @Nonnull String type) {
+    public String getArmorTexture(@NotNull ItemStack stack, @NotNull Entity entity, @NotNull EntityEquipmentSlot slot, @NotNull String type) {
         return TEXTURE_PATH;
     }
 
     @Override
-    public IRarity getForgeRarity(@Nonnull ItemStack stack) {
+    public @NotNull IRarity getForgeRarity(@NotNull ItemStack stack) {
         return EnumRarity.RARE;
     }
 

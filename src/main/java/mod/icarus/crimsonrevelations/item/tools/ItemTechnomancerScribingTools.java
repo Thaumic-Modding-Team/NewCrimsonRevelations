@@ -11,11 +11,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.items.IRechargable;
 import thaumcraft.api.items.IScribeTools;
 import thaumcraft.api.items.RechargeHelper;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 // As Scribing Tools mainly check for durability, we'll need to have it be affected by vis charge.
@@ -27,7 +27,7 @@ public class ItemTechnomancerScribingTools extends ItemBase implements IScribeTo
         this.setHasSubtypes(false);
         this.addPropertyOverride(new ResourceLocation("depleted"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
-            public float apply(@Nonnull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+            public float apply(@NotNull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
                 if (RechargeHelper.getCharge(stack) > 0) {
                     return 1.0F;
                 } else if (RechargeHelper.getCharge(stack) <= 0) {
@@ -40,7 +40,7 @@ public class ItemTechnomancerScribingTools extends ItemBase implements IScribeTo
     }
 
     @Override
-    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
+    public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> items) {
         if (isInCreativeTab(tab)) {
             ItemStack base = new ItemStack(this);
             base.setItemDamage(base.getMaxDamage());
@@ -52,7 +52,7 @@ public class ItemTechnomancerScribingTools extends ItemBase implements IScribeTo
     }
 
     @Override
-    public void setDamage(@Nonnull ItemStack stack, int meta) {
+    public void setDamage(@NotNull ItemStack stack, int meta) {
         super.setDamage(stack, meta);
 
         if (!stack.hasTagCompound()) {
@@ -80,7 +80,7 @@ public class ItemTechnomancerScribingTools extends ItemBase implements IScribeTo
     }
 
     @Override
-    public int getRGBDurabilityForDisplay(@Nonnull ItemStack stack) {
+    public int getRGBDurabilityForDisplay(@NotNull ItemStack stack) {
         return 0x39BDFF;
     }
 }

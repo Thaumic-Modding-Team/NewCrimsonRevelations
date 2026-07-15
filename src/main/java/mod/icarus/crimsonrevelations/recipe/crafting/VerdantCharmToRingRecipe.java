@@ -5,11 +5,10 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.ShapelessArcaneRecipe;
 import thaumcraft.api.items.ItemsTC;
-
-import javax.annotation.Nonnull;
 
 public class VerdantCharmToRingRecipe extends ShapelessArcaneRecipe {
     private static final Item charm = ItemsTC.charmVerdant;
@@ -18,9 +17,8 @@ public class VerdantCharmToRingRecipe extends ShapelessArcaneRecipe {
         super(new ResourceLocation(""), "CR_VERDANT_BANDS", 50, new AspectList(), ItemStack.EMPTY, new Object[]{charm});
     }
 
-    @Nonnull
     @Override
-    public ItemStack getCraftingResult(@Nonnull InventoryCrafting var1) {
+    public @NotNull ItemStack getCraftingResult(InventoryCrafting var1) {
         ItemStack item = ItemStack.EMPTY;
 
         for (int i = 0; i < var1.getSizeInventory(); i++) {
@@ -49,9 +47,8 @@ public class VerdantCharmToRingRecipe extends ShapelessArcaneRecipe {
         return true;
     }
 
-    @Nonnull
     @Override
-    public ItemStack getRecipeOutput() {
+    public @NotNull ItemStack getRecipeOutput() {
         return ItemStack.EMPTY;
     }
 }

@@ -17,15 +17,14 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.common.lib.SoundsTC;
-
-import javax.annotation.Nonnull;
 
 @EventBusSubscriber(modid = NewCrimsonRevelations.MODID)
 public class ModEntitiesNCR {
     public static void registerDispenserBehavior() {
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(ModItemsNCR.AER_ARROW, new BehaviorProjectileDispense() {
-            protected IProjectile getProjectileEntity(@Nonnull World world, @Nonnull IPosition position, @Nonnull ItemStack stack) {
+            protected @NotNull IProjectile getProjectileEntity(@NotNull World world, @NotNull IPosition position, @NotNull ItemStack stack) {
                 EntityPrimalArrow entity = new EntityPrimalArrow(world, position.getX(), position.getY(), position.getZ(), ModItemsNCR.AER_ARROW);
                 entity.pickupStatus = EntityPrimalArrow.PickupStatus.ALLOWED;
                 entity.setArrowType(0);
@@ -35,7 +34,7 @@ public class ModEntitiesNCR {
         });
 
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(ModItemsNCR.AQUA_ARROW, new BehaviorProjectileDispense() {
-            protected IProjectile getProjectileEntity(@Nonnull World world, @Nonnull IPosition position, @Nonnull ItemStack stack) {
+            protected @NotNull IProjectile getProjectileEntity(@NotNull World world, @NotNull IPosition position, @NotNull ItemStack stack) {
                 EntityPrimalArrow entity = new EntityPrimalArrow(world, position.getX(), position.getY(), position.getZ(), ModItemsNCR.AQUA_ARROW);
                 entity.pickupStatus = EntityPrimalArrow.PickupStatus.ALLOWED;
                 entity.setArrowType(1);
@@ -45,7 +44,7 @@ public class ModEntitiesNCR {
         });
 
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(ModItemsNCR.IGNIS_ARROW, new BehaviorProjectileDispense() {
-            protected IProjectile getProjectileEntity(@Nonnull World world, @Nonnull IPosition position, @Nonnull ItemStack stack) {
+            protected @NotNull IProjectile getProjectileEntity(@NotNull World world, @NotNull IPosition position, @NotNull ItemStack stack) {
                 EntityPrimalArrow entity = new EntityPrimalArrow(world, position.getX(), position.getY(), position.getZ(), ModItemsNCR.IGNIS_ARROW);
                 entity.pickupStatus = EntityPrimalArrow.PickupStatus.ALLOWED;
                 entity.setArrowType(2);
@@ -55,7 +54,7 @@ public class ModEntitiesNCR {
         });
 
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(ModItemsNCR.ORDO_ARROW, new BehaviorProjectileDispense() {
-            protected IProjectile getProjectileEntity(@Nonnull World world, @Nonnull IPosition position, @Nonnull ItemStack stack) {
+            protected @NotNull IProjectile getProjectileEntity(@NotNull World world, @NotNull IPosition position, @NotNull ItemStack stack) {
                 EntityPrimalArrow entity = new EntityPrimalArrow(world, position.getX(), position.getY(), position.getZ(), ModItemsNCR.ORDO_ARROW);
                 entity.pickupStatus = EntityPrimalArrow.PickupStatus.ALLOWED;
                 entity.setArrowType(3);
@@ -65,7 +64,7 @@ public class ModEntitiesNCR {
         });
 
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(ModItemsNCR.PERDITIO_ARROW, new BehaviorProjectileDispense() {
-            protected IProjectile getProjectileEntity(@Nonnull World world, @Nonnull IPosition position, @Nonnull ItemStack stack) {
+            protected @NotNull IProjectile getProjectileEntity(@NotNull World world, @NotNull IPosition position, @NotNull ItemStack stack) {
                 EntityPrimalArrow entity = new EntityPrimalArrow(world, position.getX(), position.getY(), position.getZ(), ModItemsNCR.PERDITIO_ARROW);
                 entity.pickupStatus = EntityPrimalArrow.PickupStatus.ALLOWED;
                 entity.setArrowType(4);
@@ -75,7 +74,7 @@ public class ModEntitiesNCR {
         });
 
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(ModItemsNCR.TERRA_ARROW, new BehaviorProjectileDispense() {
-            protected IProjectile getProjectileEntity(@Nonnull World world, @Nonnull IPosition position, @Nonnull ItemStack stack) {
+            protected @NotNull IProjectile getProjectileEntity(@NotNull World world, @NotNull IPosition position, @NotNull ItemStack stack) {
                 EntityPrimalArrow entity = new EntityPrimalArrow(world, position.getX(), position.getY(), position.getZ(), ModItemsNCR.TERRA_ARROW);
                 entity.pickupStatus = EntityPrimalArrow.PickupStatus.ALLOWED;
                 entity.setArrowType(5);

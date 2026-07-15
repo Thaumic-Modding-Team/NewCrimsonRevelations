@@ -11,11 +11,11 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.capabilities.IPlayerWarp;
 import thaumcraft.api.capabilities.ThaumcraftCapabilities;
 import thaumcraft.common.lib.SoundsTC;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class ItemLitmusPaper extends ItemBase {
@@ -24,7 +24,7 @@ public class ItemLitmusPaper extends ItemBase {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+    public @NotNull ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @NotNull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         IPlayerWarp warp = ThaumcraftCapabilities.getWarp(player);
         int permWarp = warp.get(IPlayerWarp.EnumWarpType.PERMANENT);

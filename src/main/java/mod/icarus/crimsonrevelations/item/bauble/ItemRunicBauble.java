@@ -8,9 +8,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.util.NonNullList;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.common.lib.SoundsTC;
-
-import javax.annotation.Nonnull;
 
 public class ItemRunicBauble extends ItemBaubleBase implements IBauble {
     BaubleType type;
@@ -34,7 +33,7 @@ public class ItemRunicBauble extends ItemBaubleBase implements IBauble {
     }
 
     @Override
-    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list) {
+    public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> list) {
         if (this.isInCreativeTab(tab)) {
             ItemStack stack = new ItemStack(this);
             stack.setTagInfo("TC.RUNIC", new NBTTagByte((byte) amount));

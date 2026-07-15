@@ -18,6 +18,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.entities.ITaintedMob;
 import thaumcraft.api.items.ItemsTC;
@@ -27,7 +28,6 @@ import thaumcraft.common.entities.monster.tainted.EntityTaintacle;
 import thaumcraft.common.lib.SoundsTC;
 import thaumcraft.common.lib.utils.EntityUtils;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class EntityOvergrownTaintacle extends EntityTaintacle implements ITaintedMob {
@@ -57,13 +57,13 @@ public class EntityOvergrownTaintacle extends EntityTaintacle implements ITainte
     }
 
     @Override
-    public void removeTrackingPlayer(@Nonnull EntityPlayerMP player) {
+    public void removeTrackingPlayer(@NotNull EntityPlayerMP player) {
         super.removeTrackingPlayer(player);
         if (ConfigHandlerNCR.overgrown_taintacle.bossBar) this.bossInfo.removePlayer(player);
     }
 
     @Override
-    public void addTrackingPlayer(@Nonnull EntityPlayerMP player) {
+    public void addTrackingPlayer(@NotNull EntityPlayerMP player) {
         super.addTrackingPlayer(player);
         if (ConfigHandlerNCR.overgrown_taintacle.bossBar) this.bossInfo.addPlayer(player);
     }
@@ -142,14 +142,14 @@ public class EntityOvergrownTaintacle extends EntityTaintacle implements ITainte
     }
 
     @Override
-    public IEntityLivingData onInitialSpawn(@Nonnull DifficultyInstance diff, @Nullable IEntityLivingData data) {
+    public IEntityLivingData onInitialSpawn(@NotNull DifficultyInstance diff, @Nullable IEntityLivingData data) {
         this.makeChampion();
         this.bossInfo.setName(this.getDisplayName());
         return super.onInitialSpawn(diff, data);
     }
 
     @Override
-    public void setCustomNameTag(@Nonnull String name) {
+    public void setCustomNameTag(@NotNull String name) {
         super.setCustomNameTag(name);
         this.bossInfo.setName(this.getDisplayName());
     }
@@ -161,7 +161,7 @@ public class EntityOvergrownTaintacle extends EntityTaintacle implements ITainte
 
     // Immune to all effects like the Ender Dragon and the Wither
     @Override
-    public boolean isPotionApplicable(@Nonnull PotionEffect effect) {
+    public boolean isPotionApplicable(@NotNull PotionEffect effect) {
         return false;
     }
 

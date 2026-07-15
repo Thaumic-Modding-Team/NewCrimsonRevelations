@@ -14,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.ThaumcraftMaterials;
 import thaumcraft.api.blocks.BlocksTC;
 import thaumcraft.api.items.ItemsTC;
@@ -24,15 +25,13 @@ import thaumcraft.common.lib.SoundsTC;
 import thaumcraft.common.lib.potions.PotionInfectiousVisExhaust;
 import thaumcraft.common.lib.potions.PotionThaumarhia;
 
-import javax.annotation.Nonnull;
-
 public class ItemPurifyingShovel extends ItemShovelBase {
     public ItemPurifyingShovel(String unlocName) {
         super(unlocName, ThaumcraftMaterials.TOOLMAT_ELEMENTAL);
     }
 
     @Override
-    public float getDestroySpeed(@Nonnull ItemStack stack, IBlockState state) {
+    public float getDestroySpeed(@NotNull ItemStack stack, IBlockState state) {
         if (state.getMaterial() == ThaumcraftMaterials.MATERIAL_TAINT) {
             return efficiency * 1.5F;
         }
@@ -41,12 +40,12 @@ public class ItemPurifyingShovel extends ItemShovelBase {
     }
 
     @Override
-    public boolean getIsRepairable(@Nonnull ItemStack stack1, ItemStack stack2) {
+    public boolean getIsRepairable(@NotNull ItemStack stack1, ItemStack stack2) {
         return stack2.isItemEqual(new ItemStack(ItemsTC.ingots, 1, 0)) || super.getIsRepairable(stack1, stack2);
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(@Nonnull World world, EntityPlayer player, @Nonnull EnumHand hand) {
+    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World world, EntityPlayer player, @NotNull EnumHand hand) {
         if (player.isSneaking() && ConfigHandlerNCR.purifying_shovel.enableSpecial && (player.isPotionActive(PotionFluxTaint.instance) || player.isPotionActive(PotionInfectiousVisExhaust.instance) ||
                 player.isPotionActive(PotionThaumarhia.instance) || player.isPotionActive(PotionVisExhaust.instance))) {
             player.swingArm(hand);
@@ -76,14 +75,14 @@ public class ItemPurifyingShovel extends ItemShovelBase {
             player.getHeldItem(hand).damageItem(ConfigHandlerNCR.purifying_shovel.specialCost, player);
             player.getCooldownTracker().setCooldown(this, 10 * 20);
             world.playSound(null, player.posX, player.posY, player.posZ, ModSoundEventsNCR.MISC_PURIFYING_SHOVEL_PURIFY, SoundCategory.PLAYERS, 1.0F, 1.0F);
-            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
+            return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
         }
 
-        return new ActionResult<ItemStack>(EnumActionResult.PASS, player.getHeldItem(hand));
+        return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(hand));
     }
 
     @Override
-    public EnumActionResult onItemUse(@Nonnull EntityPlayer player, @Nonnull World world, BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public @NotNull EnumActionResult onItemUse(@NotNull EntityPlayer player, @NotNull World world, BlockPos pos, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
         int purified = 0;
 
         for (int ex = pos.getX() - 5; ex < pos.getX() + 6; ex++) {

@@ -2,7 +2,6 @@ package mod.icarus.crimsonrevelations.block;
 
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.tile.TileEtherealBloom;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -17,11 +16,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
+@SuppressWarnings("deprecation")
 public class BlockEtherealBloom extends BlockBush {
     protected static final AxisAlignedBB BUSH_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 1.125D, 0.7D);
 
@@ -35,7 +35,7 @@ public class BlockEtherealBloom extends BlockBush {
     }
 
     @Override
-    public void onBlockPlacedBy(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityLivingBase placer, @Nonnull ItemStack stack) {
+    public void onBlockPlacedBy(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityLivingBase placer, @NotNull ItemStack stack) {
         super.onBlockPlacedBy(world, pos, state, placer, stack);
         TileEtherealBloom tile = (TileEtherealBloom) world.getTileEntity(pos);
 
@@ -55,48 +55,43 @@ public class BlockEtherealBloom extends BlockBush {
     }
 
     @Override
-    public boolean hasTileEntity(@Nonnull IBlockState state) {
+    public boolean hasTileEntity(@NotNull IBlockState state) {
         return true;
     }
 
     @Override
-    public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
+    public TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
         return new TileEtherealBloom();
     }
 
     @Override
-    public EnumPlantType getPlantType(@Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+    public @NotNull EnumPlantType getPlantType(@NotNull IBlockAccess world, @NotNull BlockPos pos) {
         return EnumPlantType.Cave;
     }
 
     @Override
-    public EnumBlockRenderType getRenderType(@Nonnull IBlockState state) {
+    public @NotNull EnumBlockRenderType getRenderType(@NotNull IBlockState state) {
         return EnumBlockRenderType.INVISIBLE;
     }
 
     @Override
-    public Block.EnumOffsetType getOffsetType() {
-        return Block.EnumOffsetType.NONE;
-    }
-
-    @Override
-    public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos) {
+    public @NotNull AxisAlignedBB getBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
         return BUSH_AABB;
     }
 
     @Override
     @Nullable
-    public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+    public AxisAlignedBB getCollisionBoundingBox(@NotNull IBlockState state, @NotNull IBlockAccess world, @NotNull BlockPos pos) {
         return NULL_AABB;
     }
 
     @Override
-    public boolean isOpaqueCube(@Nonnull IBlockState state) {
+    public boolean isOpaqueCube(@NotNull IBlockState state) {
         return false;
     }
 
     @Override
-    public boolean isFullCube(@Nonnull IBlockState state) {
+    public boolean isFullCube(@NotNull IBlockState state) {
         return false;
     }
 }

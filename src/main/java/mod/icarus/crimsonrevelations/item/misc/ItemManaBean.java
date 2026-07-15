@@ -31,6 +31,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -39,7 +40,6 @@ import thaumcraft.api.blocks.BlocksTC;
 import thaumcraft.api.capabilities.IPlayerKnowledge;
 import thaumcraft.api.research.ResearchCategory;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 import java.util.Random;
 
@@ -72,13 +72,13 @@ public class ItemManaBean extends ItemFood implements IEssentiaContainerItem {
     }
 
     @Override
-    public int getMaxItemUseDuration(@Nonnull ItemStack stack) {
+    public int getMaxItemUseDuration(@NotNull ItemStack stack) {
         return this.itemUseDuration;
     }
 
     // Apply various random effects from a configurable list after eating
     @Override
-    protected void onFoodEaten(@Nonnull ItemStack stack, World world, @Nonnull EntityPlayer player) {
+    protected void onFoodEaten(@NotNull ItemStack stack, World world, @NotNull EntityPlayer player) {
         if (!world.isRemote) {
             Potion effect = ConfigLists.manaBeanEffects.get(world.rand.nextInt(ConfigLists.manaBeanEffects.size()));
 
@@ -104,7 +104,7 @@ public class ItemManaBean extends ItemFood implements IEssentiaContainerItem {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list) {
+    public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> list) {
         if (tab == NewCrimsonRevelations.tabCR || tab == CreativeTabs.SEARCH) {
 
             for (Aspect tag : Aspect.aspects.values()) {
@@ -128,7 +128,7 @@ public class ItemManaBean extends ItemFood implements IEssentiaContainerItem {
 
     // Add aspect count to our beans (5 by default)
     @Override
-    public void onUpdate(@Nonnull ItemStack stack, World world, @Nonnull Entity entity, int itemSlot, boolean isSelected) {
+    public void onUpdate(@NotNull ItemStack stack, World world, @NotNull Entity entity, int itemSlot, boolean isSelected) {
         if (!world.isRemote && !stack.hasTagCompound()) {
             setAspects(stack, (new AspectList()).add(displayAspects[this.rand.nextInt(displayAspects.length)], ConfigHandlerNCR.mana_beans.aspectCount));
         }
@@ -137,7 +137,7 @@ public class ItemManaBean extends ItemFood implements IEssentiaContainerItem {
     }
 
     @Override
-    public void onCreated(ItemStack stack, @Nonnull World world, @Nonnull EntityPlayer player) {
+    public void onCreated(ItemStack stack, @NotNull World world, @NotNull EntityPlayer player) {
         if (!stack.hasTagCompound()) {
             setAspects(stack, (new AspectList()).add(displayAspects[this.rand.nextInt(displayAspects.length)], ConfigHandlerNCR.mana_beans.aspectCount));
         }
@@ -170,13 +170,13 @@ public class ItemManaBean extends ItemFood implements IEssentiaContainerItem {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+    public @NotNull String getItemStackDisplayName(@NotNull ItemStack stack) {
         return (getAspects(stack) != null && !(getAspects(stack)).aspects.isEmpty()) ?
                 (String.format(super.getItemStackDisplayName(stack), getAspects(stack).getAspects()[0].getName())) : I18n.format(getTranslationKey(stack) + ".default.name");
     }
 
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public @NotNull EnumActionResult onItemUse(EntityPlayer player, @NotNull World world, @NotNull BlockPos pos, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!player.canPlayerEdit(pos, facing, player.getHeldItem(hand)) || facing.getIndex() != 0) {
             return EnumActionResult.FAIL;
         }

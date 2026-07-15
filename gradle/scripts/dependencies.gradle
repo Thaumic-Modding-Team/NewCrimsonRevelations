@@ -38,6 +38,7 @@ dependencies {
     runtimeOnly 'com.cleanroommc:strip-latest-forge-requirements:1.0'
     // Include OSXNarratorBlocker by default for the dev env, for M1+ Macs
     runtimeOnly 'com.cleanroommc:osxnarratorblocker:1.0'
+    compileOnly 'org.jetbrains:annotations:24.1.0'
 
     // Had Enough Items
     implementation rfg.deobf('curse.maven:had-enough-items-557549:7515497')

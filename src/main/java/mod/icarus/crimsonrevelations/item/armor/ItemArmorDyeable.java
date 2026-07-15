@@ -22,8 +22,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
@@ -36,7 +36,7 @@ public class ItemArmorDyeable extends ItemArmor implements IDyeableGear {
         this.setCreativeTab(NewCrimsonRevelations.tabCR);
         this.addPropertyOverride(new ResourceLocation("dyed"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
-            public float apply(@Nonnull ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity) {
+            public float apply(@NotNull ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity) {
                 if (getDyedColor(stack) != getDefaultDyedColorForMeta(stack.getMetadata())) {
                     return 1.0F;
                 }
@@ -74,27 +74,27 @@ public class ItemArmorDyeable extends ItemArmor implements IDyeableGear {
     }
 
     @Override
-    public boolean hasColor(@Nonnull ItemStack stack) {
+    public boolean hasColor(@NotNull ItemStack stack) {
         return this.getDyedColor(stack) != getDefaultDyedColorForMeta(stack.getMetadata()) ? true : false;
     }
 
     @Override
-    public int getColor(@Nonnull ItemStack stack) {
+    public int getColor(@NotNull ItemStack stack) {
         return getDyedColor(stack);
     }
 
     @Override
-    public void removeColor(@Nonnull ItemStack stack) {
+    public void removeColor(@NotNull ItemStack stack) {
         setDyedColor(stack, getDefaultDyedColorForMeta(stack.getMetadata()));
     }
 
     @Override
-    public void setColor(@Nonnull ItemStack stack, int color) {
+    public void setColor(@NotNull ItemStack stack, int color) {
         setDyedColor(stack, color);
     }
 
     @Override
-    public EnumActionResult onItemUseFirst(EntityPlayer player, World world, @Nonnull BlockPos pos, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ, @Nonnull EnumHand hand) {
+    public @NotNull EnumActionResult onItemUseFirst(EntityPlayer player, World world, @NotNull BlockPos pos, @NotNull EnumFacing side, float hitX, float hitY, float hitZ, @NotNull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         IBlockState state = world.getBlockState(pos);
 
@@ -111,7 +111,7 @@ public class ItemArmorDyeable extends ItemArmor implements IDyeableGear {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> list, @Nonnull ITooltipFlag tooltip) {
+    public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> list, @NotNull ITooltipFlag tooltip) {
         int color = getDyedColor(stack);
 
         // If it's dyed, show it on the tooltip

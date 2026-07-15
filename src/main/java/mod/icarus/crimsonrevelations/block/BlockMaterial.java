@@ -9,8 +9,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class BlockMaterial extends Block {
@@ -31,7 +31,7 @@ public class BlockMaterial extends Block {
     }
 
     @Override
-    public boolean isFireSource(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing side) {
+    public boolean isFireSource(@NotNull World world, @NotNull BlockPos pos, @NotNull EnumFacing side) {
         return this == ModBlocksNCR.MAGIC_TALLOW_BLOCK;
     }
 }

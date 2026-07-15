@@ -16,10 +16,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.items.IVisDiscountGear;
 import thaumcraft.api.items.IWarpingGear;
-
-import javax.annotation.Nonnull;
 
 public class ItemCultistPaladinArmor extends ItemArmorDyeable implements IVisDiscountGear, IWarpingGear {
     protected static final String TEXTURE_PATH = new ResourceLocation(NewCrimsonRevelations.MODID, "textures/models/armor/cultist_paladin_armor.png").toString();
@@ -34,7 +33,7 @@ public class ItemCultistPaladinArmor extends ItemArmorDyeable implements IVisDis
 
     @SideOnly(Side.CLIENT)
     @Override
-    public ModelBiped getArmorModel(@Nonnull EntityLivingBase entity, @Nonnull ItemStack stack, @Nonnull EntityEquipmentSlot slot, @Nonnull ModelBiped bipedModel) {
+    public ModelBiped getArmorModel(@NotNull EntityLivingBase entity, @NotNull ItemStack stack, @NotNull EntityEquipmentSlot slot, @NotNull ModelBiped bipedModel) {
         if (this.model1 == null) {
             this.model1 = new ModelCultistPaladinArmor(0.5F);
         }
@@ -49,7 +48,7 @@ public class ItemCultistPaladinArmor extends ItemArmorDyeable implements IVisDis
     }
 
     @Override
-    public String getArmorTexture(@Nonnull ItemStack stack, @Nonnull Entity entity, @Nonnull EntityEquipmentSlot slot, @Nonnull String type) {
+    public String getArmorTexture(@NotNull ItemStack stack, @NotNull Entity entity, @NotNull EntityEquipmentSlot slot, @NotNull String type) {
         // If dye is never used on it, it'll use a dyeless texture instead with the original crimson cult colors
         if (this.getDyedColor(stack) != getDefaultDyedColorForMeta(stack.getMetadata())) {
             return type == null ? TEXTURE_PATH_DYED : TEXTURE_PATH_DYED_OVERLAY;
@@ -59,7 +58,7 @@ public class ItemCultistPaladinArmor extends ItemArmorDyeable implements IVisDis
     }
 
     @Override
-    public IRarity getForgeRarity(@Nonnull ItemStack stack) {
+    public @NotNull IRarity getForgeRarity(@NotNull ItemStack stack) {
         return EnumRarity.RARE;
     }
 

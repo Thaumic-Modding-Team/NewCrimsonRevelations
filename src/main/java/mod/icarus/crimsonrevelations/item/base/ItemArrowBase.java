@@ -14,9 +14,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IRarity;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.common.lib.SoundsTC;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class ItemArrowBase extends net.minecraft.item.ItemArrow {
@@ -29,18 +29,18 @@ public class ItemArrowBase extends net.minecraft.item.ItemArrow {
         this.setRarity(EnumRarity.COMMON);
     }
 
-    public Item setRarity(@Nonnull IRarity rarity) {
+    public Item setRarity(@NotNull IRarity rarity) {
         this.rarity = rarity;
         return this;
     }
 
     @Override
-    public IRarity getForgeRarity(@Nonnull ItemStack stack) {
+    public @NotNull IRarity getForgeRarity(@NotNull ItemStack stack) {
         return this.rarity;
     }
 
     @Override
-    public EntityArrow createArrow(@Nonnull World world, @Nonnull ItemStack stack, @Nonnull EntityLivingBase shooter) {
+    public @NotNull EntityArrow createArrow(@NotNull World world, @NotNull ItemStack stack, @NotNull EntityLivingBase shooter) {
         if (this == ModItemsNCR.AER_ARROW) {
             EntityPrimalArrow aerArrow = new EntityPrimalArrow(world, shooter, ModItemsNCR.AER_ARROW);
             aerArrow.setArrowType(0);
@@ -77,7 +77,7 @@ public class ItemArrowBase extends net.minecraft.item.ItemArrow {
     }
 
     @Override
-    public boolean isInfinite(@Nonnull ItemStack stack, @Nonnull ItemStack item, @Nonnull EntityPlayer player) {
+    public boolean isInfinite(@NotNull ItemStack stack, @NotNull ItemStack item, @NotNull EntityPlayer player) {
         int enchantLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, item);
 
         if (this == ModItemsNCR.AER_ARROW ||

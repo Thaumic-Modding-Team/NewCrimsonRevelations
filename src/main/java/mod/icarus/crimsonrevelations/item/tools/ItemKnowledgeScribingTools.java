@@ -22,6 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.capabilities.IPlayerKnowledge;
 import thaumcraft.api.items.IScribeTools;
@@ -30,7 +31,6 @@ import thaumcraft.api.research.ResearchCategory;
 import thaumcraft.client.fx.FXDispatcher;
 import thaumcraft.common.lib.SoundsTC;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -42,7 +42,7 @@ public class ItemKnowledgeScribingTools extends ItemBase implements IScribeTools
         this.setHasSubtypes(false);
         this.addPropertyOverride(new ResourceLocation("depleted"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
-            public float apply(@Nonnull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+            public float apply(@NotNull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
                 if (stack.getItemDamage() >= stack.getMaxDamage() && !getDepletedState(stack)) {
                     return 1.0F;
                 } else if (stack.getItemDamage() >= stack.getMaxDamage() && getDepletedState(stack)) {
@@ -67,7 +67,7 @@ public class ItemKnowledgeScribingTools extends ItemBase implements IScribeTools
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(@Nonnull World world, EntityPlayer player, @Nonnull EnumHand hand) {
+    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World world, EntityPlayer player, @NotNull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         ResearchCategory[] categories = ResearchHelper.getResearchCategories();
         int observationProgress = IPlayerKnowledge.EnumKnowledgeType.OBSERVATION.getProgression();
@@ -114,7 +114,7 @@ public class ItemKnowledgeScribingTools extends ItemBase implements IScribeTools
     }
 
     @Override
-    public boolean isBookEnchantable(@Nonnull ItemStack stack, @Nonnull ItemStack book) {
+    public boolean isBookEnchantable(@NotNull ItemStack stack, @NotNull ItemStack book) {
         return false;
     }
 
@@ -126,7 +126,7 @@ public class ItemKnowledgeScribingTools extends ItemBase implements IScribeTools
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flag) {
+    public void addInformation(ItemStack stack, @Nullable World world, @NotNull List<String> tooltip, @NotNull ITooltipFlag flag) {
         if (stack.getItemDamage() >= stack.getMaxDamage() && !getDepletedState(stack)) {
             tooltip.add(new TextComponentTranslation("tooltip.crimsonrevelations.scribing_tools.active").getFormattedText());
         } else if (stack.getItemDamage() >= stack.getMaxDamage() && getDepletedState(stack)) {

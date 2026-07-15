@@ -25,12 +25,12 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.items.ItemsTC;
 import thaumcraft.common.entities.ai.combat.AICultistHurtByTarget;
 import thaumcraft.common.entities.monster.EntityEldritchGuardian;
 import thaumcraft.common.entities.monster.cult.EntityCultist;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class EntityCultistArcher extends EntityCultist implements IRangedAttackMob {
@@ -136,7 +136,7 @@ public class EntityCultistArcher extends EntityCultist implements IRangedAttackM
     }
 
     @Override
-    public void attackEntityWithRangedAttack(@Nonnull EntityLivingBase target, float distanceFactor) {
+    public void attackEntityWithRangedAttack(@NotNull EntityLivingBase target, float distanceFactor) {
         EntityArrow entityarrow = this.getArrow(distanceFactor);
 
         if (this.getHeldItemMainhand().getItem() instanceof ItemBow) {
@@ -165,7 +165,7 @@ public class EntityCultistArcher extends EntityCultist implements IRangedAttackM
     }
 
     @Override
-    public void setItemStackToSlot(@Nonnull EntityEquipmentSlot slot, @Nonnull ItemStack stack) {
+    public void setItemStackToSlot(@NotNull EntityEquipmentSlot slot, @NotNull ItemStack stack) {
         super.setItemStackToSlot(slot, stack);
 
         if (!this.world.isRemote && slot == EntityEquipmentSlot.MAINHAND) {

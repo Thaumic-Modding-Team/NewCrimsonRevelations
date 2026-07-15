@@ -6,8 +6,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.IRarity;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class ItemShovelBase extends ItemSpade {
@@ -21,13 +21,13 @@ public class ItemShovelBase extends ItemSpade {
         this.setRarity(EnumRarity.COMMON);
     }
 
-    public Item setRarity(@Nonnull IRarity rarity) {
+    public Item setRarity(@NotNull IRarity rarity) {
         this.rarity = rarity;
         return this;
     }
 
     @Override
-    public IRarity getForgeRarity(@Nonnull ItemStack stack) {
+    public @NotNull IRarity getForgeRarity(@NotNull ItemStack stack) {
         return this.rarity;
     }
 }

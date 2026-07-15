@@ -14,10 +14,9 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.ThaumcraftMaterials;
 import thaumcraft.common.lib.enchantment.EnumInfusionEnchantment;
-
-import javax.annotation.Nonnull;
 
 public class ItemExecutionAxe extends ItemAxeBase {
     public ItemExecutionAxe(String unlocName) {
@@ -25,7 +24,7 @@ public class ItemExecutionAxe extends ItemAxeBase {
     }
 
     @Override
-    public boolean onBlockDestroyed(@Nonnull ItemStack stack, @Nonnull World world, @Nonnull IBlockState state, @Nonnull BlockPos pos, @Nonnull EntityLivingBase entity) {
+    public boolean onBlockDestroyed(@NotNull ItemStack stack, @NotNull World world, @NotNull IBlockState state, @NotNull BlockPos pos, @NotNull EntityLivingBase entity) {
         if (entity instanceof EntityPlayer && state.getBlock().canHarvestBlock(world, pos, (EntityPlayer) entity)) {
             double j = 1.2D;
 
@@ -42,7 +41,7 @@ public class ItemExecutionAxe extends ItemAxeBase {
 
 
     @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase target, @Nonnull EntityLivingBase attacker) {
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, @NotNull EntityLivingBase attacker) {
         int timer = 10; // In seconds
         int fire_aspect = 5 * EnchantmentHelper.getFireAspectModifier(attacker); // Fire Aspect
 
@@ -52,13 +51,13 @@ public class ItemExecutionAxe extends ItemAxeBase {
     }
 
     @Override
-    public boolean getIsRepairable(@Nonnull ItemStack stack1, ItemStack stack2) {
+    public boolean getIsRepairable(@NotNull ItemStack stack1, ItemStack stack2) {
         return stack2.isItemEqual(new ItemStack(Items.BLAZE_POWDER)) || super.getIsRepairable(stack1, stack2);
     }
 
 
     @Override
-    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list) {
+    public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> list) {
         if (this.isInCreativeTab(tab)) {
             ItemStack stack = new ItemStack(this);
 

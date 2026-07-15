@@ -21,11 +21,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.items.IRechargable;
 import thaumcraft.api.items.RechargeHelper;
 import thaumcraft.api.potions.PotionFluxTaint;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
@@ -41,7 +41,7 @@ public class ItemVerdantRing extends Item implements IBauble, IRechargable {
         this.setMaxDamage(0);
         addPropertyOverride(new ResourceLocation("type"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
-            public float apply(@Nonnull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+            public float apply(@NotNull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
                 if (stack.getItem() instanceof ItemVerdantRing && stack.hasTagCompound()) {
                     return stack.getTagCompound().getByte("type");
                 }
@@ -51,7 +51,7 @@ public class ItemVerdantRing extends Item implements IBauble, IRechargable {
     }
 
     @Override
-    public IRarity getForgeRarity(@Nonnull ItemStack stack) {
+    public @NotNull IRarity getForgeRarity(@NotNull ItemStack stack) {
         return EnumRarity.RARE;
     }
 
@@ -61,7 +61,7 @@ public class ItemVerdantRing extends Item implements IBauble, IRechargable {
     }
 
     @Override
-    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list) {
+    public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> list) {
         if (tab == NewCrimsonRevelations.tabCR || tab == CreativeTabs.SEARCH) {
             list.add(new ItemStack(this));
             ItemStack ring1 = new ItemStack(this);
@@ -75,7 +75,7 @@ public class ItemVerdantRing extends Item implements IBauble, IRechargable {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flag) {
+    public void addInformation(ItemStack stack, World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flag) {
         if (stack.hasTagCompound() && stack.getTagCompound().getByte("type") == 1) {
             tooltip.add(TextFormatting.GOLD + new TextComponentTranslation("item.verdant_charm.life.text").getFormattedText());
         }
