@@ -36,7 +36,7 @@ public class EntityPrimalArrow extends EntityArrow implements IEntityAdditionalS
     private Item item;
 
     private int knockbackStrength;
-    private int ticksInGround = 0;
+    public int ticksInGround = 0;
     private int xTile = -1;
     private int yTile = -1;
     private int zTile = -1;
@@ -164,8 +164,14 @@ public class EntityPrimalArrow extends EntityArrow implements IEntityAdditionalS
             this.posX += this.motionX;
             this.posY += this.motionY;
             this.posZ += this.motionZ;
-            this.rotationYaw = (float) (MathHelper.atan2(this.motionX, this.motionZ) * (180D / Math.PI));
 
+            float f4 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+            this.rotationYaw = (float) (MathHelper.atan2(this.motionX, this.motionZ) * (180D / Math.PI));
+            this.rotationPitch = (float) (MathHelper.atan2(this.motionY, f4) * (180D / Math.PI));
+
+            while (this.rotationPitch - this.prevRotationPitch < -180.0F) {
+                this.prevRotationPitch -= 360.0F;
+            }
             while (this.rotationPitch - this.prevRotationPitch >= 180.0F) {
                 this.prevRotationPitch += 360.0F;
             }
@@ -278,7 +284,7 @@ public class EntityPrimalArrow extends EntityArrow implements IEntityAdditionalS
 
         if (entity != null) {
             int fireDuration = this.getFireDuration();
-            if (fireDuration > 0 && !(entity instanceof EntityEnderman)) {
+            if (fireDuration > 0 && !(entity instanceof EntityEnderman) && !entity.isOnSameTeam(this.shootingEntity)) {
                 entity.setFire(fireDuration);
             }
 

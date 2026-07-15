@@ -1,5 +1,6 @@
 package mod.icarus.crimsonrevelations.entity;
 
+import mod.icarus.crimsonrevelations.entity.projectile.EntityPrimalArrow;
 import mod.icarus.crimsonrevelations.registry.ModItemsNCR;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,10 +11,10 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.AbstractIllager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.entity.projectile.EntityTippedArrow;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,13 +31,16 @@ import thaumcraft.api.items.ItemsTC;
 import thaumcraft.common.entities.ai.combat.AICultistHurtByTarget;
 import thaumcraft.common.entities.monster.EntityEldritchGuardian;
 import thaumcraft.common.entities.monster.cult.EntityCultist;
+import thaumcraft.common.lib.SoundsTC;
 
 import javax.annotation.Nullable;
 
 public class EntityCultistArcher extends EntityCultist implements IRangedAttackMob {
+    private static final DataParameter<Integer> ARROW_TYPE;
     private static final DataParameter<Boolean> SWINGING_ARMS;
 
     static {
+        ARROW_TYPE = EntityDataManager.createKey(EntityCultistArcher.class, DataSerializers.VARINT);
         SWINGING_ARMS = EntityDataManager.createKey(EntityCultistArcher.class, DataSerializers.BOOLEAN);
     }
 
@@ -85,6 +89,7 @@ public class EntityCultistArcher extends EntityCultist implements IRangedAttackM
     @Override
     protected void entityInit() {
         super.entityInit();
+        this.dataManager.register(ARROW_TYPE, 0);
         this.dataManager.register(SWINGING_ARMS, false);
     }
 
@@ -104,6 +109,11 @@ public class EntityCultistArcher extends EntityCultist implements IRangedAttackM
         this.setEquipmentBasedOnDifficulty(difficulty);
         this.setEnchantmentBasedOnDifficulty(difficulty);
         this.setCombatTask();
+
+        if (!this.world.isRemote) {
+            this.setArrowType(this.rand.nextInt(6));
+        }
+
         return data;
     }
 
@@ -152,15 +162,46 @@ public class EntityCultistArcher extends EntityCultist implements IRangedAttackM
         this.world.spawnEntity(entityarrow);
     }
 
-    protected EntityArrow getArrow(float p_190726_1_) {
-        EntityTippedArrow entitytippedarrow = new EntityTippedArrow(this.world, this);
-        entitytippedarrow.setEnchantmentEffectsFromEntity(this, p_190726_1_);
-        return entitytippedarrow;
+    protected EntityArrow getArrow(float distanceFactor) {
+        int type = this.getArrowType();
+        Item arrowItem = getArrowItemFromType(type);
+        EntityPrimalArrow primalArrow = new EntityPrimalArrow(this.world, this, arrowItem);
+        primalArrow.setArrowType(type);
+        primalArrow.setEnchantmentEffectsFromEntity(this, distanceFactor);
+        this.world.playSound(null, this.posX, this.posY, this.posZ, SoundsTC.hhoff, this.getSoundCategory(), 0.6F, 0.8F / (this.rand.nextFloat() * 0.4F + 0.8F));
+        return primalArrow;
+    }
+
+    private Item getArrowItemFromType(int type) {
+        switch (type) {
+            case 1:
+                return ModItemsNCR.AQUA_ARROW;
+            case 2:
+                return ModItemsNCR.IGNIS_ARROW;
+            case 3:
+                return ModItemsNCR.ORDO_ARROW;
+            case 4:
+                return ModItemsNCR.PERDITIO_ARROW;
+            case 5:
+                return ModItemsNCR.TERRA_ARROW;
+            case 0:
+            default:
+                return ModItemsNCR.AER_ARROW;
+        }
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        compound.setInteger("ArrowType", this.getArrowType());
     }
 
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
+        if (compound.hasKey("ArrowType", 99)) {
+            this.setArrowType(compound.getInteger("ArrowType"));
+        }
         this.setCombatTask();
     }
 
@@ -171,6 +212,14 @@ public class EntityCultistArcher extends EntityCultist implements IRangedAttackM
         if (!this.world.isRemote && slot == EntityEquipmentSlot.MAINHAND) {
             this.setCombatTask();
         }
+    }
+
+    public int getArrowType() {
+        return this.dataManager.get(ARROW_TYPE);
+    }
+
+    public void setArrowType(int type) {
+        this.dataManager.set(ARROW_TYPE, type);
     }
 
     public boolean isSwingingArms() {
