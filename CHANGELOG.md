@@ -4,12 +4,15 @@
 - The smash attack from the Boots of the Meteor will now scale depending on how far you fall down with them
 - Crimson Archers now fire Primal Arrows instead of normal arrows (the aspect type they fire will be random per spawn)
 - Restored original Primal Arrow particles from Thaumcraft 4 and 5
+- Crimson Fabric and Crimson Plates are now dropped more plentifully from cultists
 ### Fixed
 - Fixed odd behavior with the Primordial Scribing Tools
 - Fixed Boots of the Meteor activating the smash attack when climbing stairs
 - Fixed Boots of the Meteor sometimes not displaying particles when the smash attack is activated
 - Fixed Boots of the Meteor not protecting from fall damage
 - Fixed buggy Primal Arrow physics
+### Removed
+- Removed the Gold Nugget drop from the cultist loot table
 ---
 ## 1.5.3
 ### Update Notes

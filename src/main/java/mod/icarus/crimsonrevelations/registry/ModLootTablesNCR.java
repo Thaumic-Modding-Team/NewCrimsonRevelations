@@ -49,20 +49,34 @@ public class ModLootTablesNCR {
 
         // Crimson Cultists
         if (event.getName().equals(new ResourceLocation(Thaumcraft.MODID, "cultist"))) {
-            LootPool crimson_material_pool = event.getTable().getPool("crimson_material");
+            LootPool crimson_main_pool = event.getTable().getPool("main");
+            LootPool crimson_cloth_material_pool = event.getTable().getPool("cloth_material");
+            LootPool crimson_plate_material_pool = event.getTable().getPool("plate_material");
 
-            if (crimson_material_pool == null) {
-                crimson_material_pool = new LootPool(new LootEntry[0], new LootCondition[0], new RandomValueRange(1, 1), new RandomValueRange(1, 1), "crimson_material");
-                event.getTable().addPool(crimson_material_pool);
+            if (crimson_main_pool != null) {
+                crimson_main_pool.removeEntry("minecraft:gold_nugget");
             }
 
-            if (crimson_material_pool != null) {
-                crimson_material_pool.addEntry(new LootEntryItem(new ItemStack(ModItemsNCR.CRIMSON_FABRIC).getItem(), 1, 0,
-                        new LootFunction[]{new SetCount(new LootCondition[]{new KilledByPlayer(false)}, new RandomValueRange(0, 1)),
+            if (crimson_cloth_material_pool == null) {
+                crimson_cloth_material_pool = new LootPool(new LootEntry[0], new LootCondition[0], new RandomValueRange(1, 1), new RandomValueRange(1, 1), "cloth_material");
+                event.getTable().addPool(crimson_cloth_material_pool);
+            }
+
+            if (crimson_cloth_material_pool != null) {
+                crimson_cloth_material_pool.addEntry(new LootEntryItem(new ItemStack(ModItemsNCR.CRIMSON_FABRIC).getItem(), 1, 0,
+                        new LootFunction[]{new SetCount(new LootCondition[]{new KilledByPlayer(false)}, new RandomValueRange(0, 2)),
                                 new LootingEnchantBonus(new LootCondition[0], new RandomValueRange(0, 1), 3)},
                         new LootCondition[0], "crimsonrevelations:crimson_fabric"));
-                crimson_material_pool.addEntry(new LootEntryItem(new ItemStack(ModItemsNCR.CRIMSON_PLATE).getItem(), 1, 0,
-                        new LootFunction[]{new SetCount(new LootCondition[]{new KilledByPlayer(false)}, new RandomValueRange(0, 1)),
+            }
+
+            if (crimson_plate_material_pool == null) {
+                crimson_plate_material_pool = new LootPool(new LootEntry[0], new LootCondition[0], new RandomValueRange(1, 1), new RandomValueRange(1, 1), "plate_material");
+                event.getTable().addPool(crimson_plate_material_pool);
+            }
+
+            if (crimson_plate_material_pool != null) {
+                crimson_plate_material_pool.addEntry(new LootEntryItem(new ItemStack(ModItemsNCR.CRIMSON_PLATE).getItem(), 1, 0,
+                        new LootFunction[]{new SetCount(new LootCondition[]{new KilledByPlayer(false)}, new RandomValueRange(0, 2)),
                                 new LootingEnchantBonus(new LootCondition[0], new RandomValueRange(0, 1), 3)},
                         new LootCondition[0], "crimsonrevelations:crimson_plate"));
             }
