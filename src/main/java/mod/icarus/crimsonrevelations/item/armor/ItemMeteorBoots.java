@@ -12,6 +12,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
@@ -129,14 +130,15 @@ public class ItemMeteorBoots extends ItemArmor implements ISpecialArmor, IRechar
         return ModRaritiesNCR.RARITY_FIREY;
     }
 
-    // TODO: Make damage affected by fall distance?
     @Override
     public void onArmorTick(@NotNull World world, EntityPlayer player, @NotNull ItemStack stack) {
         boolean hasCharge = RechargeHelper.getCharge(stack) > 1;
         double motion = Math.abs(player.motionX) + Math.abs(player.motionZ) + Math.abs(player.motionY);
+        BlockPos playerPos = new BlockPos(player.posX, player.posY, player.posZ);
+        boolean isActuallyInAir = world.isAirBlock(playerPos.down()) && world.isAirBlock(playerPos.down().down());
 
         // Activate smash state once the sneak key is pressed. Do not activate while flying.
-        if (player.isSneaking() && !player.capabilities.isFlying && !player.isElytraFlying() && player.fallDistance > 0.0F && hasCharge) {
+        if (player.isSneaking() && !player.capabilities.isFlying && !player.isElytraFlying() && !player.onGround && isActuallyInAir && player.fallDistance > 0.5F && hasCharge) {
             if (!getSmashingState(stack) && !(player.getCooldownTracker().hasCooldown(ModItemsNCR.METEOR_BOOTS))) {
                 setSmashingState(stack, true);
                 player.playSound(SoundsTC.rumble, 1.0F, 0.8F + (float) player.getEntityWorld().rand.nextGaussian() * 0.05F);
@@ -148,6 +150,16 @@ public class ItemMeteorBoots extends ItemArmor implements ISpecialArmor, IRechar
         if (getSmashingState(stack) && !player.capabilities.isFlying && !player.isElytraFlying() && hasCharge) {
             player.motionY -= 0.4D;
 
+            float currentFall = player.fallDistance;
+            if (!stack.hasTagCompound()) {
+                stack.setTagCompound(new NBTTagCompound());
+            }
+
+            float maxFall = stack.getTagCompound().getFloat("smashFallDistance");
+            if (currentFall > maxFall) {
+                stack.getTagCompound().setFloat("smashFallDistance", currentFall);
+            }
+
             if (player.ticksExisted % 4 == 0) {
                 player.playSound(SoundsTC.rumble, 0.4F, 3.0F);
             }
@@ -158,23 +170,43 @@ public class ItemMeteorBoots extends ItemArmor implements ISpecialArmor, IRechar
             }
 
             // Explode on ground impact and reset smash state.
-            if (player.fallDistance <= 0.0F && player.onGround) {
-                int radius = 4;
+            if (player.onGround) {
+                float fallDist = stack.hasTagCompound() ? stack.getTagCompound().getFloat("smashFallDistance") : 0.0F;
+                if (fallDist <= 0.0F) {
+                    fallDist = player.fallDistance;
+                }
+
+                if (stack.hasTagCompound()) {
+                    stack.getTagCompound().removeTag("smashFallDistance");
+                }
+
+                int radius = Math.min(8, 4 + (int) (fallDist / 5.0F));
+                float damage = 12.0F + (fallDist * 3.0F) + (float) world.rand.nextInt(6);
+
                 AxisAlignedBB area = new AxisAlignedBB(player.posX - radius, player.posY - radius, player.posZ - radius, player.posX + radius, player.posY + radius, player.posZ + radius);
                 setSmashingState(stack, false);
 
                 for (EntityLivingBase nearbyLivingEntity : world.getEntitiesWithinAABB(EntityLivingBase.class, area, EntitySelectors.IS_ALIVE)) {
                     if (nearbyLivingEntity != player && !nearbyLivingEntity.isOnSameTeam(player)) {
-                        nearbyLivingEntity.setFire(5 + (world.rand.nextInt(5)));
-                        nearbyLivingEntity.knockBack(player, 1.0F, player.posX - nearbyLivingEntity.posX, player.posZ - nearbyLivingEntity.posZ);
-                        nearbyLivingEntity.attackEntityFrom(DamageSource.ON_FIRE, 12.0F + (float) world.rand.nextInt(12));
+                        nearbyLivingEntity.setFire(5 + (int) (fallDist / 3.0F) + (world.rand.nextInt(5)));
+                        float knockback = 1.0F + (fallDist * 0.05F);
+                        nearbyLivingEntity.knockBack(player, knockback, player.posX - nearbyLivingEntity.posX, player.posZ - nearbyLivingEntity.posZ);
+                        nearbyLivingEntity.attackEntityFrom(DamageSource.ON_FIRE, damage);
                     }
                 }
 
                 if (!world.isRemote) {
-                    int particleAmount = 40;
-                    double particleDistance = 2.0D;
-                    IBlockState state = world.getBlockState(new BlockPos(player.posX, player.posY, player.posZ).down());
+                    int particleAmount = Math.min(80, 40 + (int) (fallDist * 3.0F));
+                    double particleDistance = 2.0D + (fallDist * 0.1D);
+
+                    BlockPos landPos = new BlockPos(player.posX, player.posY, player.posZ).down();
+                    IBlockState state = world.getBlockState(landPos);
+                    if (state.getBlock().isAir(state, world, landPos)) {
+                        state = world.getBlockState(landPos.down());
+                    }
+                    if (state.getBlock().isAir(state, world, landPos.down())) {
+                        state = Blocks.STONE.getDefaultState();
+                    }
                     int blockId = Block.getStateId(state);
 
                     ((WorldServer) world).spawnParticle(EnumParticleTypes.LAVA, player.posX, player.posY, player.posZ, particleAmount, particleDistance, 0.0D, particleDistance, 0.0D);
@@ -182,7 +214,8 @@ public class ItemMeteorBoots extends ItemArmor implements ISpecialArmor, IRechar
                     ((WorldServer) world).spawnParticle(EnumParticleTypes.BLOCK_DUST, player.posX, player.posY, player.posZ, particleAmount * 2, particleDistance, 0.0D, particleDistance, 1.0D, blockId);
                 }
 
-                player.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, 4.0F, (1.0F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F) * 0.7F);
+                float soundVolume = Math.min(8.0F, 4.0F + (fallDist * 0.1F));
+                player.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE, soundVolume, (1.0F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F) * 0.7F);
                 player.getCooldownTracker().setCooldown(ModItemsNCR.METEOR_BOOTS, 5 * 20);
             }
         }
@@ -235,7 +268,7 @@ public class ItemMeteorBoots extends ItemArmor implements ISpecialArmor, IRechar
     }
 
     public float getAdjustedFallDamage(ItemStack bootStack, float damage) {
-        if (bootStack.getItem() == ModItemsNCR.COMET_BOOTS && RechargeHelper.getCharge(bootStack) > 0) {
+        if (bootStack.getItem() == ModItemsNCR.METEOR_BOOTS && RechargeHelper.getCharge(bootStack) > 0) {
             damage = Math.max(0, damage / 5.0F - 1.0F);
         }
         return damage;

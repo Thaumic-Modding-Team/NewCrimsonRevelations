@@ -1,7 +1,12 @@
 # New Crimson Revelations Changelog
 ## 1.6.0
+### Changed
+- The smash attack from the Boots of the Meteor will now scale depending on how far you fall down with them
 ### Fixed
 - Fixed odd behavior with the Primordial Scribing Tools
+- Fixed Boots of the Meteor activating the smash attack when climbing stairs
+- Fixed Boots of the Meteor sometimes not displaying particles when the smash attack is activated
+- Fixed Boots of the Meteor not protecting from fall damage
 ## 1.5.3
 ### Update Notes
 This update cleans up and reworks a lot of code in the mod to prepare for the next major update. [ThaumicAPI](https://www.curseforge.com/minecraft/mc-mods/thaumicapi) was also integrated and is now required going forward.
