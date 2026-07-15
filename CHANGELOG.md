@@ -11,6 +11,7 @@
 - Fixed Boots of the Meteor sometimes not displaying particles when the smash attack is activated
 - Fixed Boots of the Meteor not protecting from fall damage
 - Fixed buggy Primal Arrow physics
+- Fixed cult armor sets bugging out on armor stands when a player with the same armor sneaks in third person
 ### Removed
 - Removed the Gold Nugget drop from the cultist loot table
 ---
