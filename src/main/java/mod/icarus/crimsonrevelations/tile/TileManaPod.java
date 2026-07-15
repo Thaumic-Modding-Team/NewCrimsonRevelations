@@ -13,6 +13,7 @@ import thaumcraft.common.tiles.TileThaumcraft;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("deprecation")
 public class TileManaPod extends TileThaumcraft implements IAspectContainer {
     public Aspect aspect = null;
 
