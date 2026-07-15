@@ -1,4 +1,7 @@
 # New Crimson Revelations Changelog
+## 1.6.0
+### Fixed
+- Fixed odd behavior with the Primordial Scribing Tools
 ## 1.5.3
 ### Update Notes
 This update cleans up and reworks a lot of code in the mod to prepare for the next major update. [ThaumicAPI](https://www.curseforge.com/minecraft/mc-mods/thaumicapi) was also integrated and is now required going forward.

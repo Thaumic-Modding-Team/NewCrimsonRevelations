@@ -100,7 +100,7 @@ public class ItemPrimordialScribingTools extends ItemBase implements IScribeTool
             player.addPotionEffect(new PotionEffect(PotionWarpWard.instance, ConfigHandlerNCR.primordial_tools.warpWardDuration * 1200, 0, false, false));
 
             player.sendStatusMessage(new TextComponentTranslation("message.crimsonrevelations.scribing_tools.primordial").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
-            this.setDamage(stack, -this.getMaxDamage(stack)); // Won't restore on Creative mode but I guess that's normal behavior...?
+            this.setDamage(stack, 0); // Won't restore on Creative mode but I guess that's normal behavior...?
             return new ActionResult<>(EnumActionResult.SUCCESS, stack);
         } else {
             return new ActionResult<>(EnumActionResult.FAIL, stack);
