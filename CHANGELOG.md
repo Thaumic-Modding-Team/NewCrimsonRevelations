@@ -5,6 +5,9 @@
 - Crimson Archers now fire Primal Arrows instead of normal arrows (the aspect type they fire will be random per spawn)
 - Restored original Primal Arrow particles from Thaumcraft 4 and 5
 - Crimson Fabric and Crimson Plates are now dropped more plentifully from cultists
+- Updated Ethereal Bloom animations and rendering
+- Ethereal Bloom particles are now brighter and more visible
+- Ethereal Bloom will now help reduce flux within the area
 ### Fixed
 - Fixed odd behavior with the Primordial Scribing Tools
 - Fixed Boots of the Meteor activating the smash attack when climbing stairs
@@ -12,6 +15,7 @@
 - Fixed Boots of the Meteor not protecting from fall damage
 - Fixed buggy Primal Arrow physics
 - Fixed cult armor sets bugging out on armor stands when a player with the same armor sneaks in third person
+- Fixed a few issues with how the Ethereal Bloom cleanses taint
 ### Removed
 - Removed the Gold Nugget drop from the cultist loot table
 ---

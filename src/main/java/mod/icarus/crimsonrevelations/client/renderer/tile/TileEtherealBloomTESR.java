@@ -3,6 +3,7 @@ package mod.icarus.crimsonrevelations.client.renderer.tile;
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.tile.TileEtherealBloom;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -20,6 +21,7 @@ public class TileEtherealBloomTESR extends TileEntitySpecialRenderer<TileEtherea
     public static final ResourceLocation texture = new ResourceLocation(NewCrimsonRevelations.MODID, "textures/misc/nodes.png");
     private final ModelCube model = new ModelCube();
 
+    @Override
     public void render(TileEtherealBloom tile, double x, double y, double z, float pt, int ds, float alpha) {
         int a;
         float rc1;
@@ -52,39 +54,59 @@ public class TileEtherealBloomTESR extends TileEntitySpecialRenderer<TileEtherea
         }
 
         float scale1 = rc1 / 100.0F;
-        float scale2 = rc2 / 60.0f + 0.17F;
+        float scale2 = rc2 / 60.0F + 0.17F;
         float scale3 = rc3 / 33.0F;
         float scale4 = rc4 / 33.0F * 0.7F;
+
         GlStateManager.pushMatrix();
         GlStateManager.alphaFunc(516, 0.004F);
         GlStateManager.enableBlend();
-        GlStateManager.blendFunc(770, 1);
+        GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
 
-        GlStateManager.pushMatrix();
-        GlStateManager.translate(x + 0.5F - (scale4 / 8.0F), y + scale1 - (scale4 / 6.0F), z + 0.5F - (scale4 / 8.0F));
-        GlStateManager.scale(scale4 / 4.0F, scale4 / 3.0F, scale4 / 4.0F);
-        this.bindTexture(tx1);
-        this.model.render();
-        GlStateManager.popMatrix();
-
-        //
         GlStateManager.pushMatrix();
         GlStateManager.depthMask(false);
         GlStateManager.disableCull();
+
         int i = tile.counter % 32;
         this.bindTexture(texture);
-        UtilsFX.renderFacingQuad((double) tile.getPos().getX() + 0.5D, (float) tile.getPos().getY() + scale1, (double) tile.getPos().getZ() + 0.5D, 32, 32, 192 + i, scale1, 0xAADDFF, scale1, 1, pt);
+        float bloomScale = scale1 * 1.3F;
+
+        UtilsFX.renderFacingQuad((double) tile.getPos().getX() + 0.5D, (float) tile.getPos().getY() + scale1,
+                (double) tile.getPos().getZ() + 0.5D, 32, 32, 192 + i, bloomScale, 11197951, scale1, 1, pt
+        );
+
+        UtilsFX.renderFacingQuad((double) tile.getPos().getX() + 0.5D, (float) tile.getPos().getY() + scale1,
+                (double) tile.getPos().getZ() + 0.5D, 32, 32, 192 + i, bloomScale * 0.7F, 16777215, scale1 * 0.4F, 1, pt
+        );
+
         GlStateManager.enableCull();
-        GlStateManager.enableAlpha();
         GlStateManager.depthMask(true);
         GlStateManager.popMatrix();
-        //
+        GlStateManager.pushMatrix();
 
+        float pulse = MathHelper.sin(((float) tile.counter + pt) / 24.0F) * 0.08F;
+        float adjustedHeadX = scale4 * (1.0F + pulse);
+        float adjustedHeadY = scale4 * (1.0F + pulse * 0.5F);
+        float adjustedHeadZ = scale4 * (1.0F + pulse);
+
+        GlStateManager.translate(x + 0.5D - (adjustedHeadX / 8.0F), y + scale1 - (adjustedHeadY / 6.0F), z + 0.5D - (adjustedHeadZ / 8.0F));
+        GlStateManager.scale(adjustedHeadX / 4.0F, adjustedHeadY / 3.0F, adjustedHeadZ / 4.0F);
+        GlStateManager.disableLighting();
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
+        this.bindTexture(tx1);
+        float adjustedAlpha = 0.75F + (pulse * 1.5F);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, MathHelper.clamp(adjustedAlpha, 0.6F, 0.9F));
+        this.model.render();
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, OpenGlHelper.lastBrightnessX, OpenGlHelper.lastBrightnessY);
+        GlStateManager.enableLighting();
+        GlStateManager.popMatrix();
         GlStateManager.disableBlend();
+
         float r1 = MathHelper.sin(((float) tile.counter + pt) / 12.0F) * 2.0F;
         float r2 = MathHelper.sin(((float) tile.counter + pt) / 11.0F) * 2.0F;
+
         GlStateManager.pushMatrix();
-        GlStateManager.translate(x + 0.5F, y + 0.25F, z + 0.5F);
+        GlStateManager.translate(x + 0.5D, y + 0.25D, z + 0.5D);
         GlStateManager.rotate(90.0F, 0.0F, 0.0F, 1.0F);
         GlStateManager.rotate(180.0F, 1.0F, 0.0F, 0.0F);
 
@@ -100,7 +122,7 @@ public class TileEtherealBloomTESR extends TileEntitySpecialRenderer<TileEtherea
 
         GlStateManager.popMatrix();
         GlStateManager.pushMatrix();
-        GlStateManager.translate(x + 0.5F, y + 0.6F, z + 0.5F);
+        GlStateManager.translate(x + 0.5D, y + 0.6D, z + 0.5D);
         GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(90.0F, 0.0F, 0.0F, 1.0F);
         GlStateManager.rotate(180.0F, 1.0F, 0.0F, 0.0F);
@@ -117,7 +139,7 @@ public class TileEtherealBloomTESR extends TileEntitySpecialRenderer<TileEtherea
 
         GlStateManager.popMatrix();
         GlStateManager.pushMatrix();
-        GlStateManager.translate(x + 0.5F, y, z + 0.5F);
+        GlStateManager.translate(x + 0.5D, y, z + 0.5D);
         GlStateManager.rotate(90.0F, 0.0F, 0.0F, 1.0F);
         GlStateManager.rotate(180.0F, 1.0F, 0.0F, 0.0F);
 
