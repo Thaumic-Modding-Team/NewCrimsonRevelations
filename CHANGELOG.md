@@ -1,5 +1,7 @@
 # New Crimson Revelations Changelog
 ## 1.6.0
+### Added
+- Added Primal Mana Beans to treasure bag, urn, and crate loot tables
 ### Changed
 - The smash attack from the Boots of the Meteor will now scale depending on how far you fall down with them
 - Crimson Archers now fire Primal Arrows instead of normal arrows (the aspect type they fire will be random per spawn)
@@ -8,6 +10,11 @@
 - Updated Ethereal Bloom animations and rendering
 - Ethereal Bloom particles are now brighter and more visible
 - Ethereal Bloom will now help reduce flux within the area
+- Mana Beans can now be planted anywhere and are no longer restricted to `MAGICAL` type biomes, this will not change natural generation which is still restricted to Magical Forests
+- Mana Beans now play a sound when planting them
+- Mana Beans no longer have a chance to give instant effects when eaten by default
+- Updated Mana Pod block sounds
+- Mana Pods can now be broken instantly
 ### Fixed
 - Fixed odd behavior with the Primordial Scribing Tools
 - Fixed Boots of the Meteor activating the smash attack when climbing stairs
@@ -16,8 +23,10 @@
 - Fixed buggy Primal Arrow physics
 - Fixed cult armor sets bugging out on armor stands when a player with the same armor sneaks in third person
 - Fixed a few issues with how the Ethereal Bloom cleanses taint
+- Fixed Mana Pods giving you a random aspect when using pick block
 ### Removed
 - Removed the Gold Nugget drop from the cultist loot table
+- Removed `Herba` Mana Pod spawns from Magical Forests, Primal Mana Pods should now be easier to find 
 ---
 ## 1.5.3
 ### Update Notes

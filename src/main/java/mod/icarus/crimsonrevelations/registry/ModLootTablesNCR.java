@@ -1,6 +1,8 @@
 package mod.icarus.crimsonrevelations.registry;
 
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
+import mod.icarus.crimsonrevelations.config.ConfigHandlerNCR;
+import mod.icarus.crimsonrevelations.item.misc.ItemManaBean;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,6 +20,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import thaumcraft.Thaumcraft;
 import thaumcraft.api.ThaumcraftApi;
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
 
 @EventBusSubscriber(modid = NewCrimsonRevelations.MODID)
 public class ModLootTablesNCR {
@@ -38,6 +42,15 @@ public class ModLootTablesNCR {
         ThaumcraftApi.addLootBagItem(new ItemStack(ModItemsNCR.CRIMSON_PLATE), 10, 0);
         ThaumcraftApi.addLootBagItem(new ItemStack(ModItemsNCR.CRIMSON_PLATE), 50, 1, 2);
         ThaumcraftApi.addLootBagItem(shieldedRing, 5, 0, 1, 2);
+
+        ItemManaBean beanItem = ModItemsNCR.MANA_BEAN;
+        int beanCount = ConfigHandlerNCR.mana_beans.aspectCount;
+        for (Aspect aspect : Aspect.getPrimalAspects()) {
+            ItemStack bean = new ItemStack(ModItemsNCR.MANA_BEAN);
+            beanItem.setAspects(bean, new AspectList().add(aspect, beanCount));
+            // Add all primal aspect beans to all bag types
+            ThaumcraftApi.addLootBagItem(bean, 40, 0, 1, 2);
+        }
     }
 
     @SubscribeEvent

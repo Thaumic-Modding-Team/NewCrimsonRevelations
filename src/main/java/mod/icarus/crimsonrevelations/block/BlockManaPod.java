@@ -10,6 +10,7 @@ import mod.icarus.crimsonrevelations.tile.TileManaPod;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -25,8 +26,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
@@ -66,8 +65,8 @@ public class BlockManaPod extends Block implements IGrowable, IHarvestableCrop, 
         this.setTranslationKey(Objects.requireNonNull(this.getRegistryName()).toString());
         this.setCreativeTab(NewCrimsonRevelations.tabCR);
         this.setDefaultState(this.blockState.getBaseState().withProperty(this.getAgeProperty(), 0));
-        setTickRandomly(true);
-        this.setHardness(0.5F);
+        this.setSoundType(SoundType.PLANT);
+        this.setTickRandomly(true);
     }
 
     @Override
@@ -158,7 +157,7 @@ public class BlockManaPod extends Block implements IGrowable, IHarvestableCrop, 
 
     @Override
     public void updateTick(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull Random rand) {
-        if (!canBlockStay(world, pos, state)) {
+        if (canBlockStay(world, pos)) {
             dropBlockAsItem(world, pos, state, 0);
             world.setBlockToAir(pos);
         } else if (world.rand.nextInt(30) == 0) {
@@ -172,26 +171,16 @@ public class BlockManaPod extends Block implements IGrowable, IHarvestableCrop, 
         }
     }
 
-    public boolean canBlockStay(World world, BlockPos pos, IBlockState state) {
-        Biome biome = world.getBiome(pos);
-        boolean magicBiome = false;
-
-        if (biome != null) {
-            magicBiome = BiomeDictionary.hasType(biome, BiomeDictionary.Type.MAGICAL);
-        }
-
-        Block i1 = world.getBlockState(pos.up()).getBlock();
-
-        return (magicBiome && (i1 instanceof BlockLog || i1 == BlocksTC.logGreatwood || i1 == BlocksTC.logSilverwood));
+    public boolean canBlockStay(World world, BlockPos pos) {
+        Block blockAbove = world.getBlockState(pos.up()).getBlock();
+        return (!(blockAbove instanceof BlockLog) && blockAbove != BlocksTC.logGreatwood && blockAbove != BlocksTC.logSilverwood);
     }
 
     @Override
     public boolean canPlaceBlockOnSide(World world, @NotNull BlockPos pos, @NotNull EnumFacing facing) {
-        Biome biome = world.getBiome(pos);
-        boolean magicBiome = biome != null && BiomeDictionary.hasType(biome, BiomeDictionary.Type.MAGICAL);
         Block blockAbove = world.getBlockState(pos.up()).getBlock();
         boolean isLog = blockAbove instanceof BlockLog || blockAbove == BlocksTC.logGreatwood || blockAbove == BlocksTC.logSilverwood;
-        return facing == EnumFacing.DOWN && isLog && magicBiome;
+        return facing == EnumFacing.DOWN && isLog;
     }
 
     @Override
@@ -201,7 +190,7 @@ public class BlockManaPod extends Block implements IGrowable, IHarvestableCrop, 
 
     @Override
     public void neighborChanged(@NotNull IBlockState state, @NotNull World world, @NotNull BlockPos pos, @NotNull Block block, @NotNull BlockPos fromPos) {
-        if (!canBlockStay(world, pos, state)) {
+        if (canBlockStay(world, pos)) {
             dropBlockAsItem(world, pos, state, 0);
             world.setBlockToAir(pos);
         }
@@ -251,10 +240,29 @@ public class BlockManaPod extends Block implements IGrowable, IHarvestableCrop, 
         }
     }
 
+    @Override
+    public @NotNull ItemStack getPickBlock(@NotNull IBlockState state, net.minecraft.util.math.@NotNull RayTraceResult target, @NotNull World world, @NotNull BlockPos pos, EntityPlayer player) {
+        return getManaBeanWithAspect(world, pos);
+    }
+
+    @Deprecated
     @SideOnly(Side.CLIENT)
     @Override
     public @NotNull ItemStack getItem(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState state) {
-        return ModItemsNCR.MANA_BEAN.getDefaultInstance();
+        return getManaBeanWithAspect(world, pos);
+    }
+
+    private @NotNull ItemStack getManaBeanWithAspect(@NotNull World world, @NotNull BlockPos pos) {
+        ItemStack beanStack = new ItemStack(ModItemsNCR.MANA_BEAN);
+        TileEntity tile = world.getTileEntity(pos);
+
+        Aspect aspect = Aspect.PLANT;
+        if (tile instanceof TileManaPod && ((TileManaPod) tile).aspect != null) {
+            aspect = ((TileManaPod) tile).aspect;
+        }
+
+        ((ItemManaBean) beanStack.getItem()).setAspects(beanStack, new AspectList().add(aspect, ConfigHandlerNCR.mana_beans.aspectCount));
+        return beanStack;
     }
 
     @Override

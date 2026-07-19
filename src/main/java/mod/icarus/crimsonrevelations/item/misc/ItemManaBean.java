@@ -14,21 +14,17 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
@@ -181,17 +177,6 @@ public class ItemManaBean extends ItemFood implements IEssentiaContainerItem {
             return EnumActionResult.FAIL;
         }
 
-        Biome biome = world.getBiome(pos);
-        boolean magicBiome = false;
-
-        if (biome != null) {
-            magicBiome = BiomeDictionary.hasType(biome, BiomeDictionary.Type.MAGICAL);
-        }
-
-        if (!magicBiome) {
-            return EnumActionResult.FAIL;
-        }
-
         Block block = world.getBlockState(pos).getBlock();
 
         if (block instanceof BlockLog || block == BlocksTC.logGreatwood || block == BlocksTC.logSilverwood) {
@@ -200,6 +185,7 @@ public class ItemManaBean extends ItemFood implements IEssentiaContainerItem {
             if (world.isAirBlock(pos1)) {
                 IBlockState state = ModBlocksNCR.MANA_POD.getStateForPlacement(world, pos1, facing, hitX, hitY, hitZ, 0, player);
                 world.setBlockState(pos1, state, 2);
+                world.playSound(player, pos1, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 TileEntity tile = world.getTileEntity(pos1);
 
                 if (tile instanceof TileManaPod && getAspects(player.getHeldItem(hand)) != null && getAspects(player.getHeldItem(hand)).size() > 0) {

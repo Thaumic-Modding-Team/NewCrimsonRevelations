@@ -2,9 +2,12 @@ package mod.icarus.crimsonrevelations.tile;
 
 import mod.icarus.crimsonrevelations.registry.ModBlocksNCR;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.IAspectContainer;
@@ -29,6 +32,25 @@ public class TileManaPod extends TileThaumcraft implements IAspectContainer {
         }
 
         return compound;
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+        this.readSyncNBT(packet.getNbtCompound());
+    }
+
+    @Override
+    public @NotNull NBTTagCompound getUpdateTag() {
+        NBTTagCompound nbt = super.getUpdateTag();
+        this.writeSyncNBT(nbt);
+        return nbt;
+    }
+
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        NBTTagCompound nbt = new NBTTagCompound();
+        this.writeSyncNBT(nbt);
+        return new SPacketUpdateTileEntity(this.pos, 1, nbt);
     }
 
     public void checkGrowth() {
@@ -91,12 +113,12 @@ public class TileManaPod extends TileThaumcraft implements IAspectContainer {
             }
 
             if (this.aspect == null) {
-                if (this.world.rand.nextInt(8) == 0) {
+                /*if (this.world.rand.nextInt(8) == 0) {
                     this.aspect = Aspect.PLANT;
-                } else {
+                } else {*/
                     ArrayList<Aspect> outlist = Aspect.getPrimalAspects();
                     this.aspect = outlist.get(this.world.rand.nextInt(outlist.size()));
-                }
+                //}
 
                 markDirty();
             }
