@@ -114,7 +114,7 @@ public class ItemBowBase extends ItemBow {
                     world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + arrowVelocity * 0.5F);
 
                     if (!arrowInfinite && !player.capabilities.isCreativeMode) {
-                        stack.shrink(1);
+                        ammo.shrink(1);
 
                         if (stack.isEmpty()) {
                             player.inventory.deleteStack(ammo);
