@@ -24,6 +24,7 @@
 - Fixed cult armor sets bugging out on armor stands when a player with the same armor sneaks in third person
 - Fixed a few issues with how the Ethereal Bloom cleanses taint
 - Fixed Mana Pods giving you a random aspect when using pick block
+- Fixed a critical issue where the Bow of Bone disappears after firing once
 ### Removed
 - Removed the Gold Nugget drop from the cultist loot table
 - Removed `Herba` Mana Pod spawns from Magical Forests, Primal Mana Pods should now be easier to find 
