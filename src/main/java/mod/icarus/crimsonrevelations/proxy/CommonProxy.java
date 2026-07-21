@@ -9,9 +9,11 @@ import mod.icarus.crimsonrevelations.entity.EntityCultistArcher;
 import mod.icarus.crimsonrevelations.entity.boss.EntityOvergrownTaintacle;
 import mod.icarus.crimsonrevelations.registry.*;
 import mod.icarus.crimsonrevelations.network.PacketHandler;
+import mod.icarus.crimsonrevelations.world.village.ThaumaturgeTowerManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import thaumcraft.Thaumcraft;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
@@ -29,6 +31,9 @@ import thaumcraft.common.entities.monster.cult.EntityCultistKnight;
 
 public class CommonProxy {
     public void preInit() {
+        if (ConfigHandlerNCR.villagers.enableVillagers) {
+            VillagerRegistry.instance().registerVillageCreationHandler(new ThaumaturgeTowerManager());
+        }
     }
 
     public void init() {
