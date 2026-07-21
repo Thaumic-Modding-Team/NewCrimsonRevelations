@@ -2,6 +2,7 @@
 ## 1.6.0
 ### Added
 - Added Primal Mana Beans to treasure bag, urn, and crate loot tables
+- Added a new villager type with four different professions, they offer a variety of Thaumcraft items
 ### Changed
 - The smash attack from the Boots of the Meteor will now scale depending on how far you fall down with them
 - Crimson Archers now fire Primal Arrows instead of normal arrows (the aspect type they fire will be random per spawn)
@@ -221,8 +222,8 @@ Thaumcraft Fix is now a required dependency.
 ---
 ## 1.2.0
 ### Added
-- Added Runic Baubles, a set of returning baubles from Thaumcraft 4 and 5 that grants runic shielding. These will immediately be available upon learning Runic Shielding.
-- Added Specialized Runic Baubles, an upgraded set of runic baubles returning from Thaumcraft 4 and 5. Thanks to keletu for originally porting these into the now discontinued Thaumisc mod, which this mod has used a bit of the code from as a base before improving them heavily and adding back the Charged Ring of Runic Shielding with new mechanics.
+- Added Runic Baubles, a set of returning baubles from Thaumcraft 4 and 5 that grants runic shielding.
+- Added Specialized Runic Baubles, an upgraded set of runic baubles returning from Thaumcraft 4 and 5.
 - The Ring of Protection returns from Thaumcraft 4 and 5 with a new texture. You'll be able to find it in certain loot chests.
 - Several new scribing tools were added to further help with making research less frustrating. This includes the Scribing Tools of Knowledge which provides theories, observations, and curios, the Scribing Tools of Sanitation which helps remove warp, and the Primordial Scribing Tools which has infinite uses and retains the benefits of the other two scribing tools.
 - Introduced the Boots of the Meteor, a returning item from Thaumcraft 2. The functionality is quite identical to the original, you will also need Thaumic Augmentation installed for them to be enabled.
