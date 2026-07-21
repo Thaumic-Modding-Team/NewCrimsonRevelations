@@ -55,6 +55,9 @@ public class ConfigHandlerNCR {
     @Config.Comment("Thaumic Litmus Paper")
     public static ThaumicLitmusPaperSettings thaumic_litmus_paper = new ThaumicLitmusPaperSettings();
 
+    @Config.Comment("Villagers")
+    public static VillagerSettings villagers = new VillagerSettings();
+
     public static class CometBootsSettings {
         @Config.Name("Jump Boost")
         @Config.Comment("The boost applied when the wearer jumps, this is added to the base jump height of the player. [default: 0.3]")
@@ -366,6 +369,13 @@ public class ConfigHandlerNCR {
         @Config.Name("Enable Thaumic Litmus Paper")
         @Config.Comment("Enables the Thaumic Litmus Paper. [default: true]")
         public boolean enableThaumicLitmusPaper = true;
+    }
+
+    public static class VillagerSettings {
+        @Config.Name("Enable Villagers")
+        @Config.Comment("Enables new villagers added by New Crimson Revelations. [default: true]")
+        @Config.RequiresMcRestart
+        public boolean enableVillagers = true;
     }
 
     // ConfigAnytime is needed to ensure mixins can be toggleable with config settings

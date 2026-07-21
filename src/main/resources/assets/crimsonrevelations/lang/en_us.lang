@@ -2,6 +2,11 @@
 itemGroup.CrimsonRevelationsTab=New Crimson Revelations
 
 # Entities
+entity.Villager.astronomer=Astronomer
+entity.Villager.thaumaturge=Thaumaturge
+entity.Villager.theorist=Theorist
+entity.Villager.wellness_coach=Wellness Coach
+
 entity.crimsonrevelations.cultist_archer.name=Crimson Archer
 entity.crimsonrevelations.overgrown_taintacle.name=Overgrown Taintacle
 

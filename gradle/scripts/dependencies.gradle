@@ -41,7 +41,7 @@ dependencies {
     compileOnly 'org.jetbrains:annotations:24.1.0'
 
     // Had Enough Items
-    implementation rfg.deobf('curse.maven:had-enough-items-557549:7515497')
+    implementation rfg.deobf('curse.maven:had-enough-items-557549:8405357')
     implementation rfg.deobf('curse.maven:just-enough-resources-jer-240630:4440936')
     implementation rfg.deobf('curse.maven:just-enough-magiculture-940521:5796192')
 
@@ -49,15 +49,15 @@ dependencies {
     implementation rfg.deobf('com.cleanroommc:configanytime:3.0')
 
     // Thaumic API
-    implementation rfg.deobf('curse.maven:thaumicapi-1533287:8066628')
+    implementation rfg.deobf('curse.maven:thaumicapi-1533287:8473028')
 
     // Thaumcraft, Baubles, and addons
     implementation rfg.deobf('curse.maven:thaumcraft-223628:2629023')
     implementation rfg.deobf('curse.maven:baubles-227083:2518667')
     implementation rfg.deobf('curse.maven:thaumic-augmentation-319441:6047659')
-    implementation rfg.deobf('curse.maven:thaumcraftfix-1069346:7288369')
-    implementation rfg.deobf('curse.maven:thaumictweaker-1341797:7523519')
-    implementation rfg.deobf('curse.maven:magiculture-integrations-1064613:8120899')
+    implementation rfg.deobf('curse.maven:thaumcraftfix-1069346:8150308')
+    implementation rfg.deobf('curse.maven:thaumictweaker-1341797:8456304')
+    implementation rfg.deobf('curse.maven:magiculture-integrations-1064613:8139658')
 
     // Botania
     compileOnly rfg.deobf('curse.maven:botania-225643:3330934')
