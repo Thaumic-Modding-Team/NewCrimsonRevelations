@@ -11,9 +11,12 @@ entity.crimsonrevelations.cultist_archer.name=Crimson Archer
 entity.crimsonrevelations.overgrown_taintacle.name=Overgrown Taintacle
 
 # Blocks
+tile.crimsonrevelations:eldritch_totem_head.name=Eldritch Totem Head
+tile.crimsonrevelations:eldritch_totem_pole.name=Eldritch Totem Pole
 tile.crimsonrevelations:ethereal_bloom.name=Ethereal Bloom
 tile.crimsonrevelations:magic_tallow_block.name=Magic Tallow Block
 tile.crimsonrevelations:mana_pod.name=Mana Pod
+tile.crimsonrevelations:obsidian_tile.name=Obsidian Tile
 
 # Items
 item.crimsonrevelations:aer_arrow.name=Aer Arrow
@@ -274,6 +277,10 @@ enchantment.infusion.BEHEADING=Beheading
 enchantment.infusion.CHAMELEON=Chameleon
 enchantment.infusion.VIS_ATTUNEMENT=Vis Attuned
 
+tooltip.crimsonrevelations.eldritch_totem_deity=Mah-Yl
+tooltip.crimsonrevelations.eldritch_totem_guardian=K'thos
+tooltip.crimsonrevelations.eldritch_totem_wisdom=Zor
+tooltip.crimsonrevelations.eldritch_totem_wrath=K'narth
 tooltip.crimsonrevelations.scribing_tools.active=Right-click to absorb its power.
 tooltip.crimsonrevelations.scribing_tools.inactive=Depleted
 
