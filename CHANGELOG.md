@@ -4,7 +4,7 @@
 - Added Primal Mana Beans to treasure bag, urn, and crate loot tables
 - Added a new villager type with four different professions, they offer a variety of Thaumcraft items
 - Added a new villager structure for the new villager, it also contains a loot chest containing Thaumcraft items
-- Obsidian Totems are now back from previous Thaumcraft versions, you'll see them uncommonly dotted around the landscape
+- Obsidian Totems (AKA Eldritch Totems) and Hilltop Stones (with loot and Wisps!) are now back from previous Thaumcraft versions, you'll see them uncommonly dotted around the landscape
 ### Changed
 - The smash attack from the Boots of the Meteor will now scale depending on how far you fall down with them
 - Crimson Archers now fire Primal Arrows instead of normal arrows (the aspect type they fire will be random per spawn)

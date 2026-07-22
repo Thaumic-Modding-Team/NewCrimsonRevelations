@@ -9,7 +9,7 @@ import mod.icarus.crimsonrevelations.entity.EntityCultistArcher;
 import mod.icarus.crimsonrevelations.entity.boss.EntityOvergrownTaintacle;
 import mod.icarus.crimsonrevelations.registry.*;
 import mod.icarus.crimsonrevelations.network.PacketHandler;
-import mod.icarus.crimsonrevelations.world.WorldGenObsidianTotem;
+import mod.icarus.crimsonrevelations.world.WorldGenEldritchRuins;
 import mod.icarus.crimsonrevelations.world.village.ThaumaturgeTowerManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -50,7 +50,8 @@ public class CommonProxy {
         ConfigLists.initLists();
         ModLootTablesNCR.init();
 
-        GameRegistry.registerWorldGenerator(new WorldGenObsidianTotem(), 0);
+        // TODO: Make this configurable
+        GameRegistry.registerWorldGenerator(new WorldGenEldritchRuins(), 0);
     }
 
     public void postInit() {
