@@ -1,6 +1,5 @@
 package mod.icarus.crimsonrevelations.registry;
 
-import com.google.common.base.Preconditions;
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.block.BlockManaPod;
 import mod.icarus.crimsonrevelations.client.renderer.tile.TileEtherealBloomTESR;
@@ -34,8 +33,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
-import org.jetbrains.annotations.NotNull;
 import thaumcraft.Thaumcraft;
 import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
@@ -117,22 +114,6 @@ public class RegistrarNCR {
         registry.register(new ShapelessOreRecipe(new ResourceLocation(Thaumcraft.MODID, "inkwell"), ModItemsNCR.SANITATION_SCRIBING_TOOLS, new ItemStack(ModItemsNCR.SANITATION_SCRIBING_TOOLS, 1, OreDictionary.WILDCARD_VALUE),
                 ThaumcraftApiHelper.makeCrystal(Aspect.MIND)).setRegistryName(NewCrimsonRevelations.MODID, "sanitation_scribing_tools_refill"));
         registry.register(new DyeableItemRecipe().setRegistryName(new ResourceLocation(NewCrimsonRevelations.MODID, "dyeable_item")));
-    }
-
-    public static <T extends IForgeRegistryEntry> T setup(@NotNull final T entry, @NotNull final String name) {
-        return setup(entry, new ResourceLocation(NewCrimsonRevelations.MODID, name));
-    }
-
-    public static <T extends IForgeRegistryEntry> T setup(@NotNull final T entry, @NotNull final ResourceLocation registryName) {
-        Preconditions.checkNotNull(entry, "Entry to setup must not be null!");
-        Preconditions.checkNotNull(registryName, "Registry name to assign must not be null!");
-
-        entry.setRegistryName(registryName);
-        if (entry instanceof Block)
-            ((Block) entry).setTranslationKey(registryName.getNamespace() + "." + registryName.getPath()).setCreativeTab(NewCrimsonRevelations.tabCR);
-        if (entry instanceof Item)
-            ((Item) entry).setTranslationKey(registryName.getNamespace() + "." + registryName.getPath()).setCreativeTab(NewCrimsonRevelations.tabCR);
-        return entry;
     }
 
     // Gets biomes from selected entity.
