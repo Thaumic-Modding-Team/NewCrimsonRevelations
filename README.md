@@ -125,7 +125,7 @@ Requires Thaumic Augmentation to also be installed to access.
 
 ## Licensing
 
-Code from this mod is licensed under All Rights Reserved.
+Code from this mod is licensed under All Rights Reserved (see LICENSE.txt).
 
 Assets specifically made for this mod are licensed as All Rights Reserved (see LICENSE-ASSETS.txt). Other assets such as ported content from older Thaumcraft versions belong to their respective creators.
 
