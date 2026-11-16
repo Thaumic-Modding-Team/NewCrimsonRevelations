@@ -1,4 +1,4 @@
-package mod.icarus.crimsonrevelations.events;
+package mod.icarus.crimsonrevelations.events.client;
 
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.item.base.ItemBowBase;
@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @EventBusSubscriber(modid = NewCrimsonRevelations.MODID)
-public class ClientEventHandler {
+public class BowFOVEvent {
     // Courtesy of NeRdTheNed
 
     @SideOnly(Side.CLIENT)
