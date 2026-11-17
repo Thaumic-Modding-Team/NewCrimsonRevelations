@@ -47,7 +47,7 @@ public class ItemCultistArcherArmor extends ItemArmorDyeable {
     @Override
     public String getArmorTexture(@NotNull ItemStack stack, @NotNull Entity entity, @NotNull EntityEquipmentSlot slot, @NotNull String type) {
         // If dye is never used on it, it'll use a dyeless texture instead with the original crimson cult colors
-        if (this.getDyedColor(stack) != getDefaultDyedColorForMeta(stack.getMetadata())) {
+        if (this.getDyedColor(stack) != getDefaultDyedColor(stack)) {
             return type == null ? TEXTURE_PATH_DYED : TEXTURE_PATH_DYED_OVERLAY;
         }
 

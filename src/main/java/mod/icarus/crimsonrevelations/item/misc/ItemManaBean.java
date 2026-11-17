@@ -1,12 +1,12 @@
 package mod.icarus.crimsonrevelations.item.misc;
 
+import com.invadermonky.thaumicapi.utils.helpers.ResearchHelper;
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
 import mod.icarus.crimsonrevelations.config.ConfigHandlerNCR;
 import mod.icarus.crimsonrevelations.config.ConfigLists;
 import mod.icarus.crimsonrevelations.registry.ModBlocksNCR;
 import mod.icarus.crimsonrevelations.registry.ModItemsNCR;
 import mod.icarus.crimsonrevelations.tile.TileManaPod;
-import mod.icarus.crimsonrevelations.utils.helpers.ResearchHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;

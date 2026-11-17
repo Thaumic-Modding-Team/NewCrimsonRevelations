@@ -1,8 +1,8 @@
 package mod.icarus.crimsonrevelations.item.tools;
 
+import com.invadermonky.thaumicapi.utils.helpers.ResearchHelper;
 import mod.icarus.crimsonrevelations.config.ConfigHandlerNCR;
 import mod.icarus.crimsonrevelations.item.base.ItemBase;
-import mod.icarus.crimsonrevelations.utils.helpers.ResearchHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;

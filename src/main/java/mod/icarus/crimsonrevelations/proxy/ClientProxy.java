@@ -1,10 +1,10 @@
 package mod.icarus.crimsonrevelations.proxy;
 
+import com.invadermonky.thaumicapi.api.item.IDyeableItem;
 import mod.icarus.crimsonrevelations.client.keybinds.KeyBindings;
 import mod.icarus.crimsonrevelations.registry.ModItemsNCR;
 import mod.icarus.crimsonrevelations.registry.ModRenderRegistryNCR;
 import mod.icarus.crimsonrevelations.item.misc.ItemManaBean;
-import mod.icarus.crimsonrevelations.item.IDyeableGear;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
@@ -27,8 +27,8 @@ public class ClientProxy extends CommonProxy {
 
     private void registerColorHandlers() {
         IItemColor itemColorHandler = (stack, tintIndex) -> {
-            if (tintIndex == 1 && stack.getItem() instanceof IDyeableGear) {
-                return ((IDyeableGear) stack.getItem()).getDyedColor(stack);
+            if (tintIndex == 1 && stack.getItem() instanceof IDyeableItem) {
+                return ((IDyeableItem) stack.getItem()).getDyedColor(stack);
             } else {
                 return -1;
             }

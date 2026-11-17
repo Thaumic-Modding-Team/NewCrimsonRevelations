@@ -1,7 +1,7 @@
 package mod.icarus.crimsonrevelations.item.armor;
 
+import com.invadermonky.thaumicapi.api.item.IDyeableItem;
 import mod.icarus.crimsonrevelations.NewCrimsonRevelations;
-import mod.icarus.crimsonrevelations.item.IDyeableGear;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -14,11 +14,13 @@ import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -28,7 +30,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-public class ItemArmorDyeable extends ItemArmor implements IDyeableGear {
+@SuppressWarnings("CosntantConditions")
+public class ItemArmorDyeable extends ItemArmor implements IDyeableItem {
     public ItemArmorDyeable(String unlocName, ArmorMaterial material, int renderIndex, EntityEquipmentSlot equipmentSlot) {
         super(material, renderIndex, equipmentSlot);
         this.setRegistryName(NewCrimsonRevelations.MODID, unlocName);
@@ -37,7 +40,7 @@ public class ItemArmorDyeable extends ItemArmor implements IDyeableGear {
         this.addPropertyOverride(new ResourceLocation("dyed"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
             public float apply(@NotNull ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity) {
-                if (getDyedColor(stack) != getDefaultDyedColorForMeta(stack.getMetadata())) {
+                if (getDyedColor(stack) != getDefaultDyedColor(stack)) {
                     return 1.0F;
                 }
 
@@ -48,14 +51,11 @@ public class ItemArmorDyeable extends ItemArmor implements IDyeableGear {
 
     @Override
     public int getDyedColor(ItemStack stack) {
-        if (!stack.hasTagCompound()) {
-            stack.setTagCompound(new NBTTagCompound());
+        if (stack.getTagCompound() == null || !stack.getTagCompound().hasKey("color", Constants.NBT.TAG_INT)) {
+            stack.setTagInfo("color", new NBTTagInt(this.getDefaultDyedColor(stack)));
         }
 
-        if (!stack.getTagCompound().hasKey("color", NBT.TAG_INT)) {
-            stack.getTagCompound().setInteger("color", getDefaultDyedColorForMeta(stack.getMetadata()));
-        }
-
+        assert stack.getTagCompound() != null;
         return stack.getTagCompound().getInteger("color");
     }
 
@@ -65,17 +65,18 @@ public class ItemArmorDyeable extends ItemArmor implements IDyeableGear {
             stack.setTagCompound(new NBTTagCompound());
         }
 
+        assert stack.getTagCompound() != null;
         stack.getTagCompound().setInteger("color", color);
     }
 
     @Override
-    public int getDefaultDyedColorForMeta(int meta) {
+    public int getDefaultDyedColor(ItemStack stack) {
         return 8399402;
     }
 
     @Override
     public boolean hasColor(@NotNull ItemStack stack) {
-        return this.getDyedColor(stack) != getDefaultDyedColorForMeta(stack.getMetadata()) ? true : false;
+        return this.getDyedColor(stack) != getDefaultDyedColor(stack);
     }
 
     @Override
@@ -85,7 +86,7 @@ public class ItemArmorDyeable extends ItemArmor implements IDyeableGear {
 
     @Override
     public void removeColor(@NotNull ItemStack stack) {
-        setDyedColor(stack, getDefaultDyedColorForMeta(stack.getMetadata()));
+        setDyedColor(stack, getDefaultDyedColor(stack));
     }
 
     @Override
@@ -99,8 +100,8 @@ public class ItemArmorDyeable extends ItemArmor implements IDyeableGear {
         IBlockState state = world.getBlockState(pos);
 
         // Right-clicking a filled cauldron with the dyed item will wash it out
-        if (state.getBlock() == Blocks.CAULDRON && state.getValue(BlockCauldron.LEVEL) > 0 && getDyedColor(stack) != getDefaultDyedColorForMeta(stack.getMetadata())) {
-            setDyedColor(stack, getDefaultDyedColorForMeta(stack.getMetadata()));
+        if (state.getBlock() == Blocks.CAULDRON && state.getValue(BlockCauldron.LEVEL) > 0 && getDyedColor(stack) != getDefaultDyedColor(stack)) {
+            setDyedColor(stack, getDefaultDyedColor(stack));
             world.setBlockState(pos, state.withProperty(BlockCauldron.LEVEL, state.getValue(BlockCauldron.LEVEL) - 1));
             world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 0.5F, 1.0F);
             return EnumActionResult.SUCCESS;
@@ -111,16 +112,18 @@ public class ItemArmorDyeable extends ItemArmor implements IDyeableGear {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<String> list, @NotNull ITooltipFlag tooltip) {
+    public void addInformation(@NotNull ItemStack stack, @Nullable World world, @NotNull List<String> list, @NotNull ITooltipFlag tooltip) {
         int color = getDyedColor(stack);
 
         // If it's dyed, show it on the tooltip
-        if (color != getDefaultDyedColorForMeta(stack.getMetadata())) {
+        if (color != getDefaultDyedColor(stack)) {
             if (tooltip.isAdvanced())
                 list.add(new TextComponentTranslation("item.color", TextFormatting.GRAY + String.format("#%06X", color)).getFormattedText());
             else {
                 list.add(TextFormatting.ITALIC + new TextComponentTranslation("item.dyed").getFormattedText());
             }
         }
+
+        super.addInformation(stack, world, list, tooltip);
     }
 }

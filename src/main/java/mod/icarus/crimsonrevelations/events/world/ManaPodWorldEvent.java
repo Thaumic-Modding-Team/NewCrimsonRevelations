@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import thaumcraft.common.world.biomes.BiomeGenMagicalForest;
 
+@SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = NewCrimsonRevelations.MODID)
 public class ManaPodWorldEvent {
     @SubscribeEvent
